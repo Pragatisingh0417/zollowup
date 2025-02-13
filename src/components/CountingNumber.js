@@ -7,7 +7,7 @@ const stats = [
   { icon: "fa-calendar-alt", target: 3, label: "Years of Experience" },
   { icon: "fa-users", target: 150, label: "Domestic Clients" },
   { icon: "fa-user", target: 100, label: "Man Power" },
-  { icon: "fa-smile", target: 98, label: "Positive Feedbacks" },
+  { icon: "fa-smile", target: 99, label: "Positive Feedbacks" },
 ];
 
 const CountingNumber = () => {
