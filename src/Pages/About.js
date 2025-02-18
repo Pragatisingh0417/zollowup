@@ -13,32 +13,22 @@ import ExitIntentPopup from "../components/ExitIntentPopup";
 const About = () => {
   return (
     <div className="bg-gray-100">
-            <ExitIntentPopup />
+      <ExitIntentPopup />
 
       {/* Hero Section */}
 
-      <div
-        className="relative sm:h-[500px] h-[400px] bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://img.freepik.com/free-vector/silhouettes-modern-background_1048-3022.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid')",
-        }}
-      >
+      
+        <div className="relative w-full sm:h-[500px] h-[300px] bg-cover bg-center" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/armchair-green-living-room-with-copy-space_43614-910.jpg?t=st=1739900181~exp=1739903781~hmac=6d6589c93229962edbad81c6912c8c3fdbc51d6e8dda8ffdba178507335c3e4c&w=740')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white px-6 sm:px-12 md:px-16 lg:px-20 xl:px-24">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
-            About Us{" "}
-          </h1>
-          <p className="mt-4 text-base sm:text-lg md:text-xl">
-            Enjoy Tasty Dishes Cooked by Our Skilled Cooking Maids. Satisfy Your
-            Taste Buds with Flavorful Meals Prepared by Our Expert Cooking
-            Maids. Experience Delicious and Exquisite Dishes Right at Your
-            Dining Table.
-          </p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">About</h1>
+          <p className="mt-4 text-base sm:text-lg md:text-xl">Enjoy Tasty Dishes Cooked by Our Skilled Cooking Maids Dining Table.</p>
+
         </div>
       </div>
+      
 
       {/* About Section */}
-      <div className="flex flex-wrap items-center py-10 px-6 md:px-20 lg:px-40">
+      <div className="flex flex-wrap items-center py-10 px-6  ">
         {/* Left Image Section */}
         <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
           <div className="flex flex-wrap justify-center lg:justify-start">
@@ -50,7 +40,7 @@ const About = () => {
             >
               <div className="rounded-2xl overflow-hidden">
                 <img
-                  src="https://tidytheme.xyz/blackgallery/tidid/html/images/about1.jpg"
+                  src="https://i.pinimg.com/736x/0f/2b/ce/0f2bcec1c5a8786dde181af44f50efa2.jpg"
                   alt="Child on Carpet"
                   className="w-full h-auto object-cover"
                   loading="lazy"
@@ -65,7 +55,7 @@ const About = () => {
             >
               <div className="rounded-2xl overflow-hidden relative border-8 border-white lg:left-[-50px] lg:mt-[50px]">
                 <img
-                  src="https://tidytheme.xyz/blackgallery/tidid/html/images/about2.jpg"
+                  src="https://i.pinimg.com/736x/bd/f5/da/bdf5da4c4682affb69628d4333bd86cf.jpg"
                   alt="Cleaning Lady"
                   className="w-full h-auto object-cover"
                   loading="lazy"
@@ -116,7 +106,7 @@ const About = () => {
               </li>
             </ul>
             <ul className="space-y-1">
-             
+
               <li className="text-gray-800 flex items-center justify-center sm:justify-start">
                 <span className="text-blue-500 mr-2">-</span> Satisfaction
                 Guaranteed
@@ -162,7 +152,7 @@ const About = () => {
           in simplifying home management. With a rigorous vetting process,
           real-time scheduling, and customer-first approach, we ensure that you
           get the best service providers for your needs. Whether it’s a quick
-          fix, a deep clean, or elderly care, we connect you with trained 
+          fix, a deep clean, or elderly care, we connect you with trained
           experts who prioritize your comfort and satisfaction. Life gets busy,
           and finding reliable, professional, and affordable home services can
           be challenging. That’s where we come in <b> Zollowup </b> was created
