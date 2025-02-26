@@ -35,7 +35,7 @@ const HeroSection = () => {
         {/* Left Section */}
         <div className="flex-1 text-center md:text-left" data-aos="fade-right">
           <h1 className="text-4xl font-bold text-blue-900 leading-snug font-poppins">
-            Expert Help for Your Home – Anytime 
+            Expert Help for Your Home – Anytime Anywhere
           </h1>
           <p className="mt-4 text-lg text-slate-800 font-roboto">
             Effortless home services are just a click away – book now and enjoy seamless home management with expert care!
