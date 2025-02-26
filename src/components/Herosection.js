@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
-import Button from "./Button";
+// import Button from "./Button";
 
 const HeroSection = () => {
   useEffect(() => {
@@ -27,20 +27,20 @@ const HeroSection = () => {
     <div className="bg-white py-10 px-2 md:px-16">
       {/* Top Heading */}
       <div className="text-center mb-12" data-aos="fade-up">
-        <h2 className="text-4xl font-bold text-gray-900 font-poppins">Our Features</h2>
+        <h2 className="text-4xl font-bold text-black font-poppins">Our Features</h2>
       </div>
 
       {/* Main Content */}
       <div className="flex flex-col md:flex-row items-center md:items-start" data-aos="fade-up">
         {/* Left Section */}
         <div className="flex-1 text-center md:text-left" data-aos="fade-right">
-          <h1 className="text-4xl font-bold text-gray-900 leading-snug font-poppins">
-            Expert Help for Your Home – Anytime, <br /> Anywhere
+          <h1 className="text-4xl font-bold text-blue-900 leading-snug font-poppins">
+            Expert Help for Your Home – Anytime 
           </h1>
-          <p className="mt-4 text-lg text-black font-roboto">
+          <p className="mt-4 text-lg text-slate-800 font-roboto">
             Effortless home services are just a click away – book now and enjoy seamless home management with expert care!
           </p>
-          <p className="mt-4 text-lg text-black font-roboto">
+          <p className="mt-4 text-lg text-slate-800 font-roboto">
             Say goodbye to household worries! Book now and experience smooth, stress-free home management with us.
           </p>
           <button
