@@ -68,20 +68,20 @@ const About = () => {
         {/* Right Text Section */}
         <div className="lg:w-1/2 w-full px-5 text-center lg:text-left">
           <h2 className="text-3xl font-semibold text-blue-900  font-poppins mt-5">
-            -About us
+          <span className="text-blue-600 font-[Lobster] italic">About Us</span>
           </h2>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 font-roboto text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 font-roboto">
             We Can Make Your Place Sparkle
           </h2>
 
-          <p className="text-gray-600  leading-7 font-roboto">
+          <p className="text-gray-600  leading-6 font-roboto text-sm">
             At Zollowup Services, we are dedicated to providing top-quality home
             and business services that bring convenience and reliability to your
             doorstep. From experienced maids and professional cleaners to
             skilled plumbers, electricians, we ensure every
             service is delivered with excellence and trust.
           </p>
-          <p className="text-gray-600 mb-6 leading-7 font-roboto">
+          <p className="text-gray-600 mb-6 leading-6 font-roboto text-sm">
             With a commitment to quality, affordability, and customer
             satisfaction, we simplify home management by connecting you with
             verified professionals. Whether you need routine cleaning, emergency
@@ -89,9 +89,8 @@ const About = () => {
             hassle-free booking.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-roboto items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-roboto items-start text-sm">
             <ul className="space-y-1">
-
               <li className="text-gray-800 flex items-center justify-center sm:justify-start">
                 <span className="text-blue-500 mr-2">-</span> House Cleaning
                 Service
@@ -186,7 +185,7 @@ const About = () => {
           <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150  duration-700 right-20 -top-6 bg-orange-500"></div>
           <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8   rounded-full group-hover:scale-150  duration-700 right-32 top-6 bg-pink-500"></div>
           <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4   rounded-full group-hover:scale-150  duration-700 right-2 top-12 bg-red-600"></div>
-          <p class="z-10 absolute bottom-5 left-10">Get Started</p>
+          <p class="relative z-20 text-xl font-roboto">Get Started</p>
         </button>
       </div>
       {/* Call to Action Section */}

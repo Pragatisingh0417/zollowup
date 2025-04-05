@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
+
 // import Button from "./Button";
 
 const HeroSection = () => {
@@ -24,36 +26,32 @@ const HeroSection = () => {
   ];
 
   return (
-    <div className="bg-white py-10 px-2 md:px-16">
+    <div className="bg-[#F8FBFF] py-10 px-2 md:px-16">
       {/* Top Heading */}
       <div className="text-center mb-12" data-aos="fade-up">
         <h2 className="text-4xl font-bold text-black font-poppins">Our Features</h2>
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row items-center md:items-start" data-aos="fade-up">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col md:flex-row items-center" data-aos="fade-up">
         {/* Left Section */}
-        <div className="flex-1 text-center md:text-left" data-aos="fade-right">
-          <h1 className="text-4xl font-bold text-blue-900 leading-snug font-poppins">
-            Expert Help for Your Home – Anytime Anywhere
+        <div className="md:w-1/2 text-center md:text-left">
+          <h1 className="text-3xl md:text-4xl font-bold text-black leading-snug font-poppins">
+          Expert Help for
+             Your  Home<br />
+            <span className="text-blue-600 font-[Lobster] italic">Doorstep</span>
           </h1>
-          <p className="mt-4 text-lg text-slate-800 font-roboto">
-            Effortless home services are just a click away – book now and enjoy seamless home management with expert care!
+          <p className="mt-4 text-gray-600 font-roboto">
+            We provide professional, reliable, and efficient home services tailored to meet all your needs. 
+            Whether it’s plumbing, electrical repairs, cleaning, or handyman services, our team of experts is ready to help.
           </p>
-          <p className="mt-4 text-lg text-slate-800 font-roboto">
-            Say goodbye to household worries! Book now and experience smooth, stress-free home management with us.
-          </p>
-          <button
-            onClick={() => navigate("/maid")}
-            className="border text-gray-50 mt-5 duration-300 relative group cursor-pointer overflow-hidden h-16 w-48 rounded-full bg-neutral-800 p-2 font-extrabold hover:bg-sky-700"
-          >
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-16 h-16 rounded-full group-hover:scale-150 duration-700 right-12 top-12 bg-yellow-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150 duration-700 right-20 -top-6 bg-orange-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8 rounded-full group-hover:scale-150 duration-700 right-32 top-6 bg-pink-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4 rounded-full group-hover:scale-150 duration-700 right-2 top-12 bg-red-600"></div>
-            <p className="z-10 absolute bottom-2 left-10 font-roboto">Know More</p>
-          </button>
+          <div className="mt-6">
+            <button className="bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition">
+              Book a Service Now <FaArrowRight />
+            </button>
+          </div>
         </div>
+
 
         {/* Right Section (Images Grid) */}
         <div className="flex-1 mt-8 md:mt-0 grid grid-cols-2 sm:grid-cols-3 gap-5" data-aos="fade-left">
@@ -62,16 +60,12 @@ const HeroSection = () => {
               <img
                 src={image}
                 alt={`Service ${index + 1}`}
-                className="rounded-lg w-full h-full object-cover"
+                className="rounded-lg w-50 h-50 object-cover"
                 data-aos="flip-left"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <button
-                  onClick={() => navigate("/maid")}
-                  className="text-white font-bold border border-white px-4 py-2 font-roboto"
-                >
-                  Know More
-                </button>
+              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 
+              transition-opacity flex items-center justify-center">
+                
               </div>
             </div>
           ))}

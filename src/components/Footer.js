@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/ZU.png";
+import Logo from "../assets/zollowup.png";
 
 
 const Footer = () => {
@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
         {/* Column 1: Logo and About */}
         <div>
-        <img src={Logo} alt="Logo" className="h-16" />
+        <img src={Logo} alt="Logo" className="h-10 mb-3" />
           <p className="text-black-400">
             Your trusted partner in delivering quality services. We are here to
             make your experience seamless and enjoyable.
@@ -20,7 +20,7 @@ const Footer = () => {
       <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150  duration-700 right-20 -top-6 bg-orange-500"></div>
       <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8   rounded-full group-hover:scale-150  duration-700 right-32 top-6 bg-pink-500"></div>
       <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4   rounded-full group-hover:scale-150  duration-700 right-2 top-12 bg-red-600"></div>
-      <p class="z-10 absolute bottom-2 left-10 font-roboto">Join Us Today</p>
+      <p class="relative z-20 text-xl font-roboto">Join Us Today</p>
     </button>
 
         </div>
@@ -77,7 +77,7 @@ const Footer = () => {
           <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
           <p className="text-black mb-2">U-134B, 3rd Floor Shakarpur Near Laxmi Nagar Metro station gate  No.- 4  Laxmi Nagar, Delhi  110092</p>
           <p className="text-black mb-2">Phone: +91 9267987940</p>
-          <p className="text-black mb-2">Email: info@yourbrand.com</p>
+          <p className="text-black mb-2">Email: sales@zollowup.com</p>
 
           {/* Social Media Links */}
           <div className="mt-4 flex space-x-4">

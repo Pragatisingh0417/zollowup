@@ -36,20 +36,20 @@ const Maid = () => {
 
           {/* Right Column - Content */}
           <div className="sm:w-1/2 w-full">
-            <h2 className="text-xl font-bold text-indigo-950 mb-3">
+            <h2 className="text-xl font-bold text-blue-600 mb-3 font-[Lobster] italic">
               We offer a full range of daily services
             </h2>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               About Our Maid Services
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-4 text-justify">
+            <p className="text-gray-600 leading-6 mb-4 font-roboto">
               A clean kitchen is the heart of a healthy home, and professional cleaning
               services ensure your kitchen remains spotless and germ-free.
               Kitchen cleaning service in NCR offers a thorough cleaning solution that goes beyond everyday tidying up.
               From deep-cleaning appliances to sanitizing countertops, these services leave your kitchen sparkling and safe.
               Regular professional cleaning not only enhances the appearance of your kitchen but also promotes a healthier cooking environment.
             </p>
-            <p className="text-gray-700 leading-relaxed mb-4 text-justify">
+            <p className="text-gray-600 leading-6 mb-4 font-roboto">
               For businesses, maintaining a clean and sanitary kitchen is crucial. Zollowup kitchen  services in NCR provide specialized cleaning for restaurants, hotels, and other food establishments. These services ensure that every part of your commercial kitchen meets health and safety standards. Professional cleaners use industrial-grade equipment and cleaning agents to tackle grease, grime, and bacteria, ensuring a hygienic space that complies with local regulations.
             </p>
             {/* <p className="text-gray-700 leading-relaxed text-justify">

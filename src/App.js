@@ -6,7 +6,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Footer from "./components/Footer";
 import Services from "./Pages/Services";
-import Banner from "./components/Banner"; // Import Banner
+import Banner from "./components/Banner";
 import Maid from "./Pages/Maid";
 import Nursing from "./Pages/Nursing";
 import Cta from "./components/Cta";
@@ -16,13 +16,14 @@ import Electrician from "./Pages/Electrician";
 import Plumber from "./Pages/Plumber";
 import Housekeeping from "./Pages/Housekeeping";
 import TopNavbar from "./components/TopNavbar";
-import FloatingButtons from "./components/FloatingButtons"; // Import FloatingButtons
+import FloatingButtons from "./components/FloatingButtons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Faq from "./Pages/Faq";
 import ExitIntentPopup from "./components/ExitIntentPopup";
-
+import LoginModal from "./components/LoginModal"; 
+import SignupModal from "./components/SignupModal";
+import ServiceList from "./components/ServiceList";
+import AddService from "./components/AddService";
 
 function App() {
   return (
@@ -34,12 +35,12 @@ function App() {
       {/* Routes */}
       <div className="container mx-auto">
         <Routes>
-          {/* Show Banner only on the Home page */}
+          {/* Home Page */}
           <Route
             path="/"
             element={
               <>
-                <Banner /> {/* Banner Component for Home Page */}
+                <Banner />
                 <Home />
               </>
             }
@@ -56,13 +57,16 @@ function App() {
           <Route path="/faqs" element={<Faq />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/" element={<ExitIntentPopup />} />
+          <Route path="/login" element={<LoginModal />} />
+          <Route path="/signup" element={<SignupModal />} />
+          <Route path="/services" element={<ServiceList />} />
+          <Route path="/add-service" element={<AddService />} />
 
         </Routes>
       </div>
 
       {/* Footer */}
       <Footer />
-
       {/* Floating Buttons */}
       <FloatingButtons />
     </Router>

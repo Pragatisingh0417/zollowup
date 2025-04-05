@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Reasons = () => {
   return (
     <div
-      className="relative bg-cover bg-center py-20 mx-10 md:px-20 text-center"
+      className="relative bg-cover bg-center py-20 px-20 text-center"
       style={{
         backgroundImage:
           "url('https://mehedi.asiandevelopers.com/demo/html/fouens/images/parallax-background/choose-bg.jpg')",
@@ -15,7 +15,7 @@ const Reasons = () => {
         <h6 className="text-white font-poppins">Why You Should Choose Us</h6>
         <h2 className="text-white font-bold text-3xl mt-2 font-poppins">Reasons To Choose Us</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2 mt-8 font-roboto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mt-8 font-roboto">
           {[
             { icon: "🏅", text: "Qualified Experts" },
             { icon: "📅", text: "Service on Schedule" },
