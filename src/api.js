@@ -30,11 +30,13 @@ export const fetchUserById = async (userId, token) => {
 
 // Register user
 export const registerUser = async (userData) => {
-    try {
-        const res = await axios.post("http://localhost:5000/api/auth/register", userData);
-        return res.data; 
-    } catch (error) {
-      throw error.response?.data?.message || "Signup failed";
-    }
-  };
+  try {
+    const res = await axios.post("http://localhost:5000/api/auth/register", userData);
+    return res.data;
+  } catch (error) {
+    console.error("🛑 Register API Error:", error.response?.data || error.message);
+    throw error.response?.data?.message || "Signup failed";
+  }
+};
+
   

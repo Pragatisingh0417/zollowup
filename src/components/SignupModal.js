@@ -79,10 +79,28 @@ export default function SignupModal({ onClose }) {
             required
           />
           <input
+            type="text"
+            name="position"
+            placeholder="Position"
+            value={formData.position}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-full py-3 px-4"
+            required
+          />
+          <input
             type="email"
             name="email"
             placeholder="Email Address"
             value={formData.email}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-full py-3 px-4"
+            required
+          />
+          <input
+            type="email"
+            name="userId"
+            placeholder="UserID"
+            value={formData.userId}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-full py-3 px-4"
             required
