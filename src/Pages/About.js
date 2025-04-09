@@ -1,14 +1,10 @@
 // src/pages/About.js
 import React from "react";
 import Whyus from "../components/Whyus";
-import Cta from "../components/Cta";
 import { motion } from "framer-motion";
 import AboutCta from "../components/AboutCta";
-import MissionVisionValues from "../components/MissionVisionValues";
 import Cards from "../components/Cards";
-import ServiceButtons from "../components/ServiceButtons";
 import ExitIntentPopup from "../components/ExitIntentPopup";
-
 
 const About = () => {
   return (
@@ -16,20 +12,24 @@ const About = () => {
       <ExitIntentPopup />
 
       {/* Hero Section */}
-
-      
-        <div className="relative w-full sm:h-[500px] h-[300px] bg-cover bg-center" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/armchair-green-living-room-with-copy-space_43614-910.jpg?t=st=1739900181~exp=1739903781~hmac=6d6589c93229962edbad81c6912c8c3fdbc51d6e8dda8ffdba178507335c3e4c&w=740')" }}>
+      <div
+        className="relative w-full sm:h-[500px] h-[300px] bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://img.freepik.com/free-photo/armchair-green-living-room-with-copy-space_43614-910.jpg?t=st=1739900181~exp=1739903781~hmac=6d6589c93229962edbad81c6912c8c3fdbc51d6e8dda8ffdba178507335c3e4c&w=740')",
+        }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white px-6 sm:px-12 md:px-16 lg:px-20 xl:px-24">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">About</h1>
-          <p className="mt-4 text-base sm:text-lg md:text-xl">Enjoy Tasty Dishes Cooked by Our Skilled Cooking Maids Dining Table.</p>
-
+          <p className="mt-4 text-base sm:text-lg md:text-xl">
+            Enjoy Tasty Dishes Cooked by Our Skilled Cooking Maids Dining Table.
+          </p>
         </div>
       </div>
-      
 
       {/* About Section */}
-      <div className="flex flex-wrap items-center py-10 px-6  ">
-        {/* Left Image Section */}
+      <div className="flex flex-wrap items-center py-10 px-6">
+        {/* Left Images */}
         <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
           <div className="flex flex-wrap justify-center lg:justify-start">
             <motion.div
@@ -65,88 +65,49 @@ const About = () => {
           </div>
         </div>
 
-        {/* Right Text Section */}
+        {/* Right Text */}
         <div className="lg:w-1/2 w-full px-5 text-center lg:text-left">
-          <h2 className="text-3xl font-semibold text-blue-900  font-poppins mt-5">
-          <span className="text-blue-600 font-[Lobster] italic">About Us</span>
+          <h2 className="text-3xl font-semibold text-blue-900 font-poppins mt-5">
+            <span className="text-blue-600 font-[Lobster] italic">About Us</span>
           </h2>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 font-roboto">
             We Can Make Your Place Sparkle
           </h2>
 
-          <p className="text-gray-600  leading-6 font-roboto text-sm">
+          <p className="text-gray-600 leading-6 font-roboto text-sm">
             At Zollowup Services, we are dedicated to providing top-quality home
             and business services that bring convenience and reliability to your
-            doorstep. From experienced maids and professional cleaners to
-            skilled plumbers, electricians, we ensure every
-            service is delivered with excellence and trust.
+            doorstep. From experienced maids and professional cleaners to skilled
+            plumbers, electricians, we ensure every service is delivered with excellence and trust.
           </p>
           <p className="text-gray-600 mb-6 leading-6 font-roboto text-sm">
-            With a commitment to quality, affordability, and customer
-            satisfaction, we simplify home management by connecting you with
-            verified professionals. Whether you need routine cleaning, emergency
-            repairs, or specialized care, we’ve got you covered with on-demand,
-            hassle-free booking.
+            With a commitment to quality, affordability, and customer satisfaction, 
+            we simplify home management by connecting you with verified professionals. 
+            Whether you need routine cleaning, emergency repairs, or specialized care, 
+            we’ve got you covered with on-demand, hassle-free booking.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-roboto items-start text-sm">
             <ul className="space-y-1">
-              <li className="text-gray-800 flex items-center justify-center sm:justify-start">
-                <span className="text-blue-500 mr-2">-</span> House Cleaning
-                Service
-              </li>
-              <li className="text-gray-800 flex items-center justify-center sm:justify-start">
-                <span className="text-blue-500 mr-2">-</span> References
-                Available
-              </li>
-              <li className="text-gray-800 flex items-center justify-center sm:justify-start">
-                <span className="text-blue-500 mr-2">-</span> Commercial
-                Cleaning
-              </li>
+              <li className="text-gray-800 flex items-center justify-center sm:justify-start"><span className="text-blue-500 mr-2">-</span> House Cleaning Service</li>
+              <li className="text-gray-800 flex items-center justify-center sm:justify-start"><span className="text-blue-500 mr-2">-</span> References Available</li>
+              <li className="text-gray-800 flex items-center justify-center sm:justify-start"><span className="text-blue-500 mr-2">-</span> Commercial Cleaning</li>
             </ul>
             <ul className="space-y-1">
-
-              <li className="text-gray-800 flex items-center justify-center sm:justify-start">
-                <span className="text-blue-500 mr-2">-</span> Satisfaction
-                Guaranteed
-              </li>
-              <li className="text-gray-800 flex items-center justify-center sm:justify-start">
-                <span className="text-blue-500 mr-2">-</span> All Equipment
-                Provided
-              </li>
-              <li className="text-gray-800 flex items-center justify-center sm:justify-start">
-                <span className="text-blue-500 mr-2">-</span> Housekeeping
-              </li>
+              <li className="text-gray-800 flex items-center justify-center sm:justify-start"><span className="text-blue-500 mr-2">-</span> Satisfaction Guaranteed</li>
+              <li className="text-gray-800 flex items-center justify-center sm:justify-start"><span className="text-blue-500 mr-2">-</span> All Equipment Provided</li>
+              <li className="text-gray-800 flex items-center justify-center sm:justify-start"><span className="text-blue-500 mr-2">-</span> Housekeeping</li>
             </ul>
           </div>
-          {/* <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 mt-6 font-roboto">
-            <div className="text-center">
-              <img src="https://mehedi.asiandevelopers.com/demo/html/fouens/images/icon/1.png" alt="Ontime Services" className="mx-auto w-10 h-10" />
-              <p className="text-gray-800 font-bold mt-2">Ontime Services</p>
-            </div>
-            <div className="text-center">
-              <img src="https://mehedi.asiandevelopers.com/demo/html/fouens/images/icon/2.png" alt="Free Estimates" className="mx-auto w-10 h-10" />
-              <p className="text-gray-800 font-bold mt-2">Free Estimates</p>
-            </div>
-            <div className="text-center">
-              <img src="https://mehedi.asiandevelopers.com/demo/html/fouens/images/icon/1.png" alt="Happy Clients" className="mx-auto w-10 h-10" />
-              <p className="text-gray-800 font-bold mt-2">Happy Clients</p>
-            </div>
-            <div className="text-center">
-              <img src="https://mehedi.asiandevelopers.com/demo/html/fouens/images/icon/2.png" alt="Well Maintained" className="mx-auto w-10 h-10" />
-              <p className="text-gray-800 font-bold mt-2">Well Maintained</p>
-            </div>
-          </div> */}
         </div>
       </div>
 
-      <ServiceButtons />
-
+      {/* Who We Are Section */}
       <div className="bg-white p-6 rounded-2xl shadow-md w-full max-w-5xl mb-5 mx-auto">
         <h2 className="text-3xl font-bold text-blue-900 mb-6 text-center font-poppins">
           Who We Are – Your Trusted Home Service Experts
         </h2>
-        <p className="text-gray-700 mb-6 leading-relaxed  text-center font-roboto">
+        <p className="text-gray-700 mb-6 leading-relaxed text-center font-roboto">
           We are a team of service professionals and tech innovators who believe
           in simplifying home management. With a rigorous vetting process,
           real-time scheduling, and customer-first approach, we ensure that you
@@ -154,59 +115,28 @@ const About = () => {
           fix, a deep clean, or elderly care, we connect you with trained
           experts who prioritize your comfort and satisfaction. Life gets busy,
           and finding reliable, professional, and affordable home services can
-          be challenging. That’s where we come in <b> Zollowup </b> was created
-          to provide a seamless, all-in-one solution for every household service
+          be challenging. That’s where we come in <b>Zollowup</b> was created to
+          provide a seamless, all-in-one solution for every household service
           you may need. We focus on:
         </p>
-        <ul className="space-y-4 mb-8 ">
-          <li className="flex items-center text-gray-800">
-            <span className="text-blue-600 mr-3">&#10003;</span>
-            <a href="#" className="text-blue-600 hover:underline">
-              Verified & Skilled Professionals
-            </a>
-          </li>
-          <li className="flex items-center text-gray-800">
-            <span className="text-blue-600 mr-3">&#10003;</span>
-            <a href="#" className="text-blue-600 hover:underline">
-              Easy Online Booking & Instant Support
-            </a>
-          </li>
-          <li className="flex items-center text-gray-800">
-            <span className="text-blue-600 mr-3">&#10003;</span>
-            Affordable, Transparent Pricing
-          </li>
-          <li className="flex items-center text-gray-800">
-            <span className="text-blue-600 mr-3">&#10003;</span>
-            Reliable Services at Your Convenience
-          </li>
+        <ul className="space-y-4 mb-8">
+          <li className="flex items-center text-gray-800"><span className="text-blue-600 mr-3">&#10003;</span> Verified & Skilled Professionals</li>
+          <li className="flex items-center text-gray-800"><span className="text-blue-600 mr-3">&#10003;</span> Easy Online Booking & Instant Support</li>
+          <li className="flex items-center text-gray-800"><span className="text-blue-600 mr-3">&#10003;</span> Affordable, Transparent Pricing</li>
+          <li className="flex items-center text-gray-800"><span className="text-blue-600 mr-3">&#10003;</span> Reliable Services at Your Convenience</li>
         </ul>
-        <button class="border text-gray-50  duration-300 relative group cursor-pointer   overflow-hidden h-16 w-48 rounded-full bg-neutral-800 p-2  font-extrabold hover:bg-sky-700">
-          <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-16 h-16 rounded-full group-hover:scale-150  duration-700 right-12 top-12 bg-yellow-500"></div>
-          <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150  duration-700 right-20 -top-6 bg-orange-500"></div>
-          <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8   rounded-full group-hover:scale-150  duration-700 right-32 top-6 bg-pink-500"></div>
-          <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4   rounded-full group-hover:scale-150  duration-700 right-2 top-12 bg-red-600"></div>
-          <p class="relative z-20 text-xl font-roboto">Get Started</p>
+        <button className="relative group overflow-hidden h-16 w-48 rounded-full bg-neutral-800 text-white font-extrabold hover:bg-sky-700 transition-all duration-300">
+          <div className="absolute w-16 h-16 rounded-full bg-yellow-500 right-12 top-12 group-hover:-top-1 group-hover:-right-2 group-hover:scale-150 transition-all duration-700 z-10"></div>
+          <div className="absolute w-12 h-12 rounded-full bg-orange-500 right-20 -top-6 group-hover:-top-1 group-hover:-right-2 group-hover:scale-150 transition-all duration-700 z-10"></div>
+          <div className="absolute w-8 h-8 rounded-full bg-pink-500 right-32 top-6 group-hover:-top-1 group-hover:-right-2 group-hover:scale-150 transition-all duration-700 z-10"></div>
+          <div className="absolute w-4 h-4 rounded-full bg-red-600 right-2 top-12 group-hover:-top-1 group-hover:-right-2 group-hover:scale-150 transition-all duration-700 z-10"></div>
+          <p className="relative z-20 text-xl font-roboto">Get Started</p>
         </button>
       </div>
-      {/* Call to Action Section */}
-      {/* <div className="bg-gray-100 py-12 text-center">
-        <h3 className="text-4xl font-bold text-blue-900 mb-4 font-poppins">Get Involved</h3>
-        <p className="text-gray-700 leading-relaxed mb-6 font-roboto">
-          Together, we can make a difference. Become a part of our journey to empower children and transform lives.
-        </p>
-        <button class="border text-gray-50  duration-300 relative group cursor-pointer   overflow-hidden h-16 w-48 rounded-full bg-neutral-800 p-2  font-extrabold hover:bg-sky-700">
-      <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-16 h-16 rounded-full group-hover:scale-150  duration-700 right-12 top-12 bg-yellow-500"></div>
-      <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150  duration-700 right-20 -top-6 bg-orange-500"></div>
-      <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8   rounded-full group-hover:scale-150  duration-700 right-32 top-6 bg-pink-500"></div>
-      <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4   rounded-full group-hover:scale-150  duration-700 right-2 top-12 bg-red-600"></div>
-      <p class="z-10 absolute bottom-15 left-12">Know More</p>
-    </button>
-      </div> */}
-      <Cards />
 
+      <Cards />
       <Whyus />
       <AboutCta />
-      {/* <Cta /> */}
     </div>
   );
 };

@@ -24,7 +24,7 @@ import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
 import ServiceList from "./components/ServiceList";
 import AddService from "./components/AddService";
-
+import ServiceButtons from "./components/ServiceButtons";
 function App() {
   return (
     <Router>
