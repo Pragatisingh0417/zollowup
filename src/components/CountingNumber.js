@@ -14,15 +14,14 @@ const CountingNumber = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCounts((prevCounts) =>
-        prevCounts.map((count, index) => {
-          if (count < stats[index].target) {
-            return Math.min(count + Math.ceil(stats[index].target / 50), stats[index].target);
-          }
-          return stats[index].target;
-        })
+      setCounts((prev) =>
+        prev.map((val, i) =>
+          val < stats[i].target
+            ? Math.min(val + Math.ceil(stats[i].target / 60), stats[i].target)
+            : stats[i].target
+        )
       );
-    }, 50);
+    }, 40);
 
     return () => clearInterval(interval);
   }, []);
@@ -33,21 +32,28 @@ const CountingNumber = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="max-w-auto mx-auto py-16 px-4 sm:px-6 lg:px-8"
+      className="w-full py-16 px-4 sm:px-6 lg:px-8"
     >
       <section
         className="relative bg-cover bg-center text-white py-20 sm:py-24 md:py-28"
         style={{ backgroundImage: "url('https://maidwala.in/img/fun-bg.jpg')" }}
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 container-fluid px-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
             {stats.map((stat, index) => (
-              <div key={index} className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-start gap-4">
-                <i className={`fas ${stat.icon} text-4xl sm:text-5xl`}></i>
-                <div className="flex flex-col text-center sm:text-left">
-                  <h3 className="text-2xl sm:text-3xl font-bold">{counts[index]}+</h3>
-                  <p className="text-base sm:text-lg">{stat.label}</p>
+              <div
+                key={index}
+                className="flex flex-col items-center gap-4 sm:flex-row sm:justify-start sm:text-left"
+                aria-label={stat.label}
+              >
+                <i className={`fas ${stat.icon} text-4xl sm:text-5xl`} aria-hidden="true"></i>
+                <div>
+                  <h3 className="text-3xl font-bold">
+                    {counts[index]}<span className="text-primary">+</span>
+                  </h3>
+                  <p className="text-lg">{stat.label}</p>
                 </div>
               </div>
             ))}

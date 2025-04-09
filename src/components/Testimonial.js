@@ -16,7 +16,7 @@ export default function TestimonialCarousel() {
   const [itemsPerSlide, setItemsPerSlide] = useState(2);
 
   useEffect(() => {
-    const updateItemsPerSlide = () => {
+    const handleResize = () => {
       if (window.innerWidth < 640) {
         setItemsPerSlide(1);
       } else if (window.innerWidth < 1024) {
@@ -25,17 +25,31 @@ export default function TestimonialCarousel() {
         setItemsPerSlide(3);
       }
     };
-    updateItemsPerSlide();
-    window.addEventListener("resize", updateItemsPerSlide);
-    return () => window.removeEventListener("resize", updateItemsPerSlide);
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const nextSlide = () => {
-    setIndex((prevIndex) => (prevIndex + itemsPerSlide) % testimonials.length);
+    setIndex((prevIndex) =>
+      (prevIndex + itemsPerSlide) % testimonials.length
+    );
   };
 
   const prevSlide = () => {
-    setIndex((prevIndex) => (prevIndex - itemsPerSlide + testimonials.length) % testimonials.length);
+    setIndex((prevIndex) =>
+      (prevIndex - itemsPerSlide + testimonials.length) % testimonials.length
+    );
+  };
+
+  const getVisibleTestimonials = () => {
+    const end = index + itemsPerSlide;
+    if (end <= testimonials.length) {
+      return testimonials.slice(index, end);
+    } else {
+      return [...testimonials.slice(index), ...testimonials.slice(0, end - testimonials.length)];
+    }
   };
 
   return (
@@ -46,30 +60,46 @@ export default function TestimonialCarousel() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="max-w-7xl mx-auto px-4 py-20"
     >
-      <div className="bg-white text-black py-12 px-6">
+      <div className="bg-white text-black py-12 px-6 rounded-2xl shadow-md">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center mb-6">
-            <FaQuoteLeft className="text-5xl" />
-            <h2 className="text-3xl font-bold ml-2 font-poppins">What our customers say</h2>
+          <div className="flex items-center mb-8">
+            <FaQuoteLeft className="text-4xl text-primary" />
+            <h2 className="text-3xl font-bold ml-4 font-poppins">
+              What our customers say
+            </h2>
           </div>
-          <div className="relative flex items-center">
-            <button onClick={prevSlide} className="absolute left-0 bg-white text-black p-3 rounded-full shadow-lg">
+
+          <div className="relative">
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-100 z-10"
+            >
               <FaChevronLeft />
             </button>
-            <div className="flex space-x-6 overflow-hidden w-full">
-              {testimonials.slice(index, index + itemsPerSlide).map((testimonial) => (
-                <div key={testimonial.id} className="bg-white text-black rounded-xl overflow-hidden shadow-lg w-full p-4">
-                  <h3 className="font-bold text-lg font-poppins">{testimonial.name}</h3>
-                  <div className="flex text-yellow-500">
+
+            <div className="flex overflow-hidden gap-6 mx-12">
+              {getVisibleTestimonials().map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="bg-gray-50 rounded-xl shadow-md p-6 w-full transition duration-300"
+                >
+                  <h3 className="text-xl font-semibold font-poppins mb-2">
+                    {testimonial.name}
+                  </h3>
+                  <div className="flex text-yellow-500 mb-3">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
                       <span key={i}>★</span>
                     ))}
                   </div>
-                  <p className="text-gray-700 mt-2 font-roboto py-5 px-5">{testimonial.text}</p>
+                  <p className="text-gray-700 font-roboto">{testimonial.text}</p>
                 </div>
               ))}
             </div>
-            <button onClick={nextSlide} className="absolute right-0 bg-white text-black p-3 rounded-full shadow-lg">
+
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-100 z-10"
+            >
               <FaChevronRight />
             </button>
           </div>

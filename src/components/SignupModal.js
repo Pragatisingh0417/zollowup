@@ -1,23 +1,28 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import LoginModal from "./LoginModal";
-import { registerUser } from "../api"; 
+import { registerUser } from "../api";
+
 export default function SignupModal({ onClose }) {
   const [showLogin, setShowLogin] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    position: "",
+    userId: "",
+  });
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(null); // Success/Error messages
+  const [message, setMessage] = useState(null);
 
   if (showLogin) {
     return <LoginModal onClose={onClose} />;
   }
 
-  // Handle form input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -26,7 +31,7 @@ export default function SignupModal({ onClose }) {
     try {
       await registerUser(formData);
       setMessage({ type: "success", text: "Signup successful! Redirecting..." });
-      setTimeout(() => setShowLogin(true), 1500); // Redirect to login after success
+      setTimeout(() => setShowLogin(true), 1500);
     } catch (error) {
       setMessage({ type: "error", text: "Signup failed. Please try again." });
     } finally {
@@ -36,8 +41,7 @@ export default function SignupModal({ onClose }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 p-4 z-50">
-      <div className="bg-white w-full max-w-md rounded-2xl shadow-lg p-6 relative">
-        {/* Close Button */}
+      <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl shadow-lg p-4 sm:p-6 relative">
         <button
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
           onClick={onClose}
@@ -50,7 +54,6 @@ export default function SignupModal({ onClose }) {
           To send a message, you’ll need a Zollowup account.
         </p>
 
-        {/* Google Sign-up Button */}
         <button className="flex items-center justify-center w-full bg-black text-white rounded-full py-3 font-medium mb-4">
           <img
             src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
@@ -60,14 +63,12 @@ export default function SignupModal({ onClose }) {
           Sign up with Google
         </button>
 
-        {/* Divider */}
         <div className="flex items-center my-4">
           <hr className="flex-grow border-gray-300" />
           <span className="mx-2 text-gray-500">or</span>
           <hr className="flex-grow border-gray-300" />
         </div>
 
-        {/* Email Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -97,7 +98,7 @@ export default function SignupModal({ onClose }) {
             required
           />
           <input
-            type="email"
+            type="text"
             name="userId"
             placeholder="UserID"
             value={formData.userId}
@@ -115,14 +116,12 @@ export default function SignupModal({ onClose }) {
             required
           />
 
-          {/* Show Success/Error Messages */}
           {message && (
             <p className={`text-sm text-center ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
               {message.text}
             </p>
           )}
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white rounded-full py-3 font-medium hover:bg-blue-700 transition"
@@ -132,7 +131,6 @@ export default function SignupModal({ onClose }) {
           </button>
         </form>
 
-        {/* Terms and Login Info */}
         <p className="text-xs text-gray-500 text-center mt-4">
           By creating an account, you agree to our
           <a href="#" className="text-blue-600"> Terms of Service</a>,

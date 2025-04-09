@@ -6,9 +6,10 @@ export default function DynamicBanner() {
       <Marquee
         speed={50}
         gradient={false}
-        className="text-black text-lg font-bold font-roboto"
+        className="text-black text-base md:text-lg font-bold font-roboto"
+        aria-label="Hiring Announcement Banner"
       >
-        Hiring! Hiring! Hiring! &nbsp; | &nbsp; We Are Hiring Maids, Cooks And Many More House Helper &nbsp; | &nbsp; Join Us Today For Better Lifestyle!
+        Hiring! Hiring! Hiring! &nbsp; | &nbsp; We Are Hiring Maids, Cooks And Many More House Helpers &nbsp; | &nbsp; Join Us Today For Better Lifestyle! &nbsp; | &nbsp;
       </Marquee>
     </div>
   );

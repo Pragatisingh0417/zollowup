@@ -36,19 +36,26 @@ const HeroSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col md:flex-row items-center" data-aos="fade-up">
         {/* Left Section */}
         <div className="md:w-1/2 text-center md:text-left">
-          <h1 className="text-3xl md:text-4xl font-bold text-black leading-snug font-poppins">
-          Expert Help for
-             Your  Home<br />
-            <span className="text-blue-600 font-[Lobster] italic">Doorstep</span>
-          </h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-black leading-snug font-poppins">
+  Expert Help for Your Home<br /> 
+  <span className="text-blue-600 font-[Lobster] italic">Doorstep</span>
+</h1>
+          <p className="mt-4 text-gray-600 font-roboto">
+            We provide professional, reliable, and efficient home services tailored to meet all your needs. 
+            Whether it’s plumbing, electrical repairs, cleaning, or handyman services, our team of experts is ready to help.
+          </p>
           <p className="mt-4 text-gray-600 font-roboto">
             We provide professional, reliable, and efficient home services tailored to meet all your needs. 
             Whether it’s plumbing, electrical repairs, cleaning, or handyman services, our team of experts is ready to help.
           </p>
           <div className="mt-6">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition">
-              Book a Service Now <FaArrowRight />
-            </button>
+          <button
+  onClick={() => navigate("/services")}
+  className="bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition"
+>
+  Book a Service Now <FaArrowRight />
+</button>
+
           </div>
         </div>
 
@@ -58,15 +65,15 @@ const HeroSection = () => {
           {images.map((image, index) => (
             <div key={index} className="relative group">
               <img
-                src={image}
-                alt={`Service ${index + 1}`}
-                className="rounded-lg w-50 h-50 object-cover"
-                data-aos="flip-left"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 
-              transition-opacity flex items-center justify-center">
-                
-              </div>
+  src={image}
+  alt={`Service ${index + 1}`}
+  className="rounded-lg w-full h-40 sm:h-48 object-cover"
+/>
+
+<div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-semibold text-sm">
+  Service {index + 1}
+</div>
+
             </div>
           ))}
         </div>

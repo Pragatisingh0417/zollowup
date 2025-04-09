@@ -25,38 +25,43 @@ const NewAndNoteworthySlider = () => {
   const sliderItems = [
     {
       id: 1,
-      title: "Maid",
-      description: "Professional and trustworthy maid services tailored to your needs. Enjoy a spotless and hassel free  home services with our reliable cleaning experts.",
+      title: "Maid Services",
+      description:
+        "Experienced and reliable maids to keep your home spotless, hygienic, and stress-free.",
       image:
-        "https://img.freepik.com/free-photo/chambermaid-hotel-room_23-2148095264.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+        "https://img.freepik.com/free-photo/chambermaid-hotel-room_23-2148095264.jpg",
     },
     {
       id: 2,
-      title: "Plumber",
-      description: "Expert plumbing services for repairs, installations, and maintenance. Fast, reliable, and hassle-free solutions for your home or business.",
+      title: "Plumbing",
+      description:
+        "Quick and professional plumbing solutions for installations, leaks, and repairs.",
       image:
-        "https://img.freepik.com/premium-photo/serious-handyman-using-pliers-when-fixing-leaking-pipe-sink-kitchen-customer_274689-26032.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+        "https://img.freepik.com/premium-photo/serious-handyman-using-pliers-when-fixing-leaking-pipe-sink-kitchen-customer_274689-26032.jpg",
     },
     {
       id: 3,
-      title: "Electrician ",
-      description: "Professional electrician services for safe and efficient repairs, installations, and maintenance. Reliable solutions for homes and businesses.",
+      title: "Electrician",
+      description:
+        "Certified electricians for safe and efficient electrical work at your home or office.",
       image:
-        "https://img.freepik.com/free-photo/male-electrician-works-switchboard-with-electrical-connecting-cable_169016-18026.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+        "https://img.freepik.com/free-photo/male-electrician-works-switchboard-with-electrical-connecting-cable_169016-18026.jpg",
     },
     {
       id: 4,
       title: "Cook",
-      description: "Skilled and experienced cooks providing delicious, home-style meals tailored to your taste. Enjoy hassle-free cooking with our expert services.",
+      description:
+        "Skilled home cooks to prepare fresh and tasty meals tailored to your preferences.",
       image:
-        "https://img.freepik.com/free-photo/chef-kitchen_23-2148006182.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+        "https://img.freepik.com/free-photo/chef-kitchen_23-2148006182.jpg",
     },
     {
       id: 5,
       title: "Housekeeping",
-      description: "Reliable housekeeping services for a spotless, organized, and stress-free home. Our professionals ensure cleanliness, hygiene, and comfort.",
+      description:
+        "Thorough housekeeping for a clean, tidy, and comfortable living space.",
       image:
-        "https://img.freepik.com/premium-photo/african-man-cleaning-cooktop-cooker-hood-home-brick-wall-with-mountain-unwashed-dirty-dishes-near-sink-background_175356-4288.jpg?ga=GA1.1.853350676.1718004547&semt=ais_incoming",
+        "https://img.freepik.com/premium-photo/african-man-cleaning-cooktop-cooker-hood-home-brick-wall-with-mountain-unwashed-dirty-dishes-near-sink-background_175356-4288.jpg",
     },
   ];
 
@@ -69,7 +74,7 @@ const NewAndNoteworthySlider = () => {
       className="max-w-7xl mx-auto px-4 py-20"
     >
       <h2 className="text-2xl sm:text-4xl font-bold text-center mb-6 text-gray-900 font-poppins">
-        New and Noteworthy
+        Our Most Popular Home Services
       </h2>
 
       <div className="relative">
@@ -83,28 +88,32 @@ const NewAndNoteworthySlider = () => {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="p-2"
             >
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <img
                   src={item.image}
                   alt={item.title}
                   className="h-40 w-full object-cover"
                 />
                 <div className="p-4">
-                  <h3 className="text-lg font-medium font-poppins">{item.title}</h3>
-                  <p className="text-sm text-gray-600 font-roboto">{item.description}</p>
+                  <h3 className="text-lg font-semibold font-poppins mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 font-roboto">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             </motion.div>
           ))}
         </Slider>
 
+        {/* Custom Arrows */}
         <button
           className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full z-10 hover:bg-gray-200"
           onClick={() => sliderRef.current.slickPrev()}
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
-
         <button
           className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full z-10 hover:bg-gray-200"
           onClick={() => sliderRef.current.slickNext()}

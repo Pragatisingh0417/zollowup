@@ -41,7 +41,7 @@ const Services = () => {
 
   return (
     <div className="container mx-auto py-20 px-4 sm:px-20" data-aos="fade-up">
-      <h1 className="text-4xl font-poppins font-bold text-black text-center mb-8" data-aos="fade-down">
+      <h1 className="text-4xl font-bold text-black text-center mb-8 font-roboto" data-aos="fade-down">
         Our Services
       </h1>
 
@@ -53,32 +53,28 @@ const Services = () => {
                 className="card bg-white rounded-2xl shadow-lg relative cursor-pointer overflow-hidden group"
                 onClick={() => navigate(service.path)}
               >
-                {/* Image with Hover Zoom Effect */}
                 <div className="relative">
                   <img 
                     src={service.image} 
                     alt={service.title} 
                     className="h-44 w-full object-cover rounded-t-2xl transition-transform duration-300 group-hover:scale-110"
                   />
-                  {/* Overlay Pop-Up */}
                   <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <p className="text-white text-xl font-semibold">{service.title}</p>
+                    <p className="text-white text-xl font-semibold font-roboto">{service.title}</p>
                   </div>
                 </div>
 
-                {/* Service Card Content */}
                 <div className="card-body text-center relative">
                   <div className="circle-btn w-12 h-12 bg-[#00000099] text-white rounded-full flex items-center justify-center mx-auto -mt-7 text-lg transition-colors hover:bg-yellow-500">
                     <i className="fa fa-arrow-right"></i>
                   </div>
-                  <h5 className="card-title my-2 text-blue-900 font-bold text-lg font-poppins">{service.title}</h5>
+                  <h5 className="card-title my-2 text-blue-900 font-bold text-lg font-roboto">{service.title}</h5>
                 </div>
               </div>
             </div>
           ))}
         </Slider>
 
-        {/* Navigation Buttons */}
         <button className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-green-800 shadow-lg text-white p-2 rounded-full z-10 hover:bg-green-600" onClick={() => sliderRef.current.slickPrev()}>
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -88,18 +84,17 @@ const Services = () => {
         </button>
       </div>
 
-      {/* CTA Section */}
       <div className="py-12" data-aos="fade-up">
         <div className="container mx-auto text-center">
-          <p className="text-gray-800 leading-relaxed mb-6 font-roboto">
+          <p className="text-gray-800 leading-relaxed mb-6 font-roboto text-base">
             Together, we can make a difference. Become a part of our journey to transform lives.
           </p>
-          <button className="border text-gray-50 duration-300 relative group cursor-pointer overflow-hidden h-16 w-48 rounded-full bg-neutral-800 p-2 font-extrabold hover:bg-sky-700">
+          <button className="border text-gray-50 duration-300 relative group cursor-pointer overflow-hidden h-16 w-48 rounded-full bg-neutral-800 p-2 font-extrabold hover:bg-sky-700 font-roboto text-lg">
             <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-16 h-16 rounded-full group-hover:scale-150 duration-700 right-12 top-12 bg-yellow-500"></div>
             <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150 duration-700 right-20 -top-6 bg-orange-500"></div>
             <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8 rounded-full group-hover:scale-150 duration-700 right-32 top-6 bg-pink-500"></div>
             <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4 rounded-full group-hover:scale-150 duration-700 right-2 top-12 bg-red-600"></div>
-            <p className="z-20 relative text-xl font-roboto">Know More</p>
+            <p className="z-20 relative font-roboto">Know More</p>
           </button>
         </div>
       </div>

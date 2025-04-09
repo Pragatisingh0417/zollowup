@@ -4,9 +4,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        roboto: ["Roboto", "sans-serif"],
+        heading: ['Poppins', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
       },
+      colors: {
+        primary: '#111111',
+        accent: '#FBBF24',
+        light: '#FAFAFA',
+      }
     },
   },
   plugins: [],

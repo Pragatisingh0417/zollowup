@@ -12,34 +12,34 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white px-5 py-3 sticky top-0 z-50 flex justify-between items-center shadow-md font-poppins">
-        {/* Logo - Redirect to Home */}
+      <nav className="bg-white px-6 py-4 sticky top-0 z-50 shadow-md font-poppins flex items-center justify-between">
+        {/* Logo */}
         <div className="flex items-center">
           <Link to="/" onClick={() => setIsOpen(false)}>
             <img src={Logo} alt="Logo" className="h-10" />
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Icon */}
         <div className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={30} /> : <Menu size={30} />}
         </div>
 
         {/* Navigation Links */}
         <ul
-          className={`lg:flex lg:space-x-2 absolute lg:static top-[100%] left-0 w-full lg:w-auto bg-white lg:bg-transparent transition-all duration-300 ${
+          className={`lg:flex lg:space-x-6 absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent transition-all duration-300 ${
             isOpen ? "block" : "hidden"
           }`}
         >
           {[
             { to: "/", text: "Home" },
             { to: "/about", text: "About" },
-            { to: "/faq", text: "FAQ" }
+            { to: "/faq", text: "FAQ" },
           ].map(({ to, text }) => (
             <li key={to}>
               <Link
                 to={to}
-                className="relative block py-2 px-5 text-black-800 hover:text-blue-900"
+                className="block px-5 py-2 text-gray-800 hover:text-yellow-500 transition"
                 onClick={() => setIsOpen(false)}
               >
                 {text}
@@ -47,12 +47,12 @@ const Navbar = () => {
             </li>
           ))}
 
-          {/* Dropdown Menu */}
+          {/* Services Dropdown */}
           <li className="relative group">
-            <div className="relative block py-2 px-5 text-gray-800 hover:text-blue-900 cursor-pointer">
+            <div className="block px-5 py-2 text-gray-800 hover:text-yellow-500 cursor-pointer transition">
               Services
             </div>
-            <ul className="absolute left-0 mt-2 w-48 bg-black font-poppins text-white rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            <ul className="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
               {[
                 { to: "/maid", text: "Maid Services" },
                 { to: "/nursing", text: "Nursing Care" },
@@ -60,22 +60,25 @@ const Navbar = () => {
                 { to: "/cooks", text: "Cooks" },
                 { to: "/electrician", text: "Electrician" },
                 { to: "/plumber", text: "Plumber" },
-                { to: "/housekeeping", text: "Housekeeping" }
+                { to: "/housekeeping", text: "Housekeeping" },
               ].map(({ to, text }) => (
-                <li key={to} className="border-b border-gray-600">
-                  <Link to={to} className="block px-4 py-2 hover:bg-gray-600">
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="block px-4 py-2 hover:bg-gray-100 transition"
+                    onClick={() => setIsOpen(false)}
+                  >
                     {text}
                   </Link>
                 </li>
-                
               ))}
             </ul>
           </li>
 
-          <li key="/contact">
+          <li>
             <Link
               to="/contact"
-              className="relative block py-2 px-5 text-black-800 hover:text-blue-900"
+              className="block px-5 py-2 text-gray-800 hover:text-yellow-500 transition"
               onClick={() => setIsOpen(false)}
             >
               Contact
@@ -83,36 +86,19 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Sign Up & Login Buttons */}
-        <div className="hidden lg:flex gap-2 relative">
-          {/* Login Button */}
+        {/* Auth Buttons */}
+        <div className="hidden lg:flex items-center space-x-4">
           <button
-            className="border text-gray-50 duration-300 relative group cursor-pointer overflow-hidden h-14 w-20 rounded-full bg-blue-900 p-2 font-extrabold hover:bg-sky-700"
             onClick={() => setShowLoginForm(true)}
+            className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-900 transition font-semibold"
           >
-            {/* Animated expanding circles */}
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-16 h-16 rounded-full group-hover:scale-150 duration-700 right-12 top-12 bg-yellow-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150 duration-700 right-20 -top-6 bg-orange-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8 rounded-full group-hover:scale-150 duration-700 right-32 top-6 bg-pink-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4 rounded-full group-hover:scale-150 duration-700 right-2 top-12 bg-red-600"></div>
-
-            {/* Button Text */}
-            <p className="relative z-20 text-xl font-roboto">Login</p>
+            Login
           </button>
-
-          {/* Signup Button */}
           <button
-            className="border text-gray-50 duration-300 relative group cursor-pointer overflow-hidden h-14 w-25 rounded-full bg-neutral-800 p-2 font-extrabold hover:bg-sky-700"
             onClick={() => setShowSignupForm(true)}
+            className="border border-black text-black px-6 py-2 rounded-full hover:bg-black hover:text-white transition font-semibold"
           >
-            {/* Animated expanding circles */}
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-16 h-16 rounded-full group-hover:scale-150 duration-700 right-12 top-12 bg-yellow-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150 duration-700 right-20 -top-6 bg-orange-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8 rounded-full group-hover:scale-150 duration-700 right-32 top-6 bg-pink-500"></div>
-            <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4 rounded-full group-hover:scale-150 duration-700 right-2 top-12 bg-red-600"></div>
-
-            {/* Button Text */}
-            <p className="relative z-20 text-xl font-roboto">SignUp</p>
+            Sign Up
           </button>
         </div>
       </nav>
