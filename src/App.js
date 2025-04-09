@@ -25,6 +25,7 @@ import SignupModal from "./components/SignupModal";
 import ServiceList from "./components/ServiceList";
 import AddService from "./components/AddService";
 import ServiceButtons from "./components/ServiceButtons";
+import DashboardPage from "./Pages/DashboardPage";
 function App() {
   return (
     <Router>
@@ -61,6 +62,8 @@ function App() {
           <Route path="/signup" element={<SignupModal />} />
           <Route path="/services" element={<ServiceList />} />
           <Route path="/add-service" element={<AddService />} />
+                  <Route path="/dashboard" element={<DashboardPage />} />
+
 
         </Routes>
       </div>

@@ -20,6 +20,8 @@ const LoginModal = ({ onClose }) => {
 
       // Save token to local storage
       localStorage.setItem("token", response.data.token);
+      window.location.href = "/dashboard";
+
 
       // Close modal after successful login
       onClose();
