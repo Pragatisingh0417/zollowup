@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../components/AuthContext"; // Make sure this path is correct
 import { FaUserCircle } from "react-icons/fa";
 
 const DashboardPage = () => {
   const [isSliderOpen, setSliderOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  const user = {
-    name: "John Doe",
-    email: "john@example.com",
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   const bookings = [
@@ -20,7 +23,7 @@ const DashboardPage = () => {
     <div className="min-h-screen bg-gray-100 relative overflow-x-hidden">
       {/* Top bar */}
       <div className="flex justify-between items-center px-6 py-4 bg-white shadow">
-        <h2 className="text-2xl font-bold"> My Account</h2>
+        <h2 className="text-2xl font-bold">My Account</h2>
         <button onClick={() => setSliderOpen(true)} className="text-3xl text-gray-700 hover:text-black">
           <FaUserCircle />
         </button>
@@ -28,7 +31,9 @@ const DashboardPage = () => {
 
       {/* Main Content */}
       <main className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Welcome back, {user.name} 👋</h1>
+        <h1 className="text-2xl font-bold mb-4">
+          Welcome back, {user?.name || "Guest"} 👋
+        </h1>
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
@@ -93,12 +98,12 @@ const DashboardPage = () => {
           <button onClick={() => setSliderOpen(false)} className="text-2xl">&times;</button>
         </div>
         <div className="p-6 space-y-4">
-          <p><strong>{user.name}</strong></p>
-          <p className="text-sm text-gray-600">{user.email}</p>
+          <p><strong>{user?.name || "Guest"}</strong></p>
+          <p className="text-sm text-gray-600">{user?.email || "Not logged in"}</p>
           <hr />
           <Link to="/dashboard/profile" className="block text-blue-600 hover:underline">Edit Profile</Link>
           <Link to="/dashboard/help" className="block text-blue-600 hover:underline">Help Center</Link>
-          <Link to="/" className="block text-red-500 hover:underline">Logout</Link>
+          <button onClick={handleLogout} className="block text-red-500 hover:underline">Logout</button>
         </div>
       </div>
 

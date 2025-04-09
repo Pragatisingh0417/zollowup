@@ -20,59 +20,69 @@ import FloatingButtons from "./components/FloatingButtons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Faq from "./Pages/Faq";
 import ExitIntentPopup from "./components/ExitIntentPopup";
-import LoginModal from "./components/LoginModal"; 
+import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
 import ServiceList from "./components/ServiceList";
 import AddService from "./components/AddService";
 import ServiceButtons from "./components/ServiceButtons";
 import DashboardPage from "./Pages/DashboardPage";
+import { AuthProvider } from "./components/AuthContext"; 
+import PrivateRoute from "./components/PrivateRoute";
+
 function App() {
   return (
-    <Router>
-      {/* Sticky Navbar */}
-      <TopNavbar />
-      <Navbar />
+    <AuthProvider>
+      <Router>
+        {/* Sticky Navbar */}
+        <TopNavbar />
+        <Navbar />
 
-      {/* Routes */}
-      <div className="container mx-auto">
-        <Routes>
-          {/* Home Page */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Banner />
-                <Home />
-              </>
-            }
-          />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/maid" element={<Maid />} />
-          <Route path="/nursing" element={<Nursing />} />
-          <Route path="/drivers" element={<Drivers />} />
-          <Route path="/cooks" element={<Cooks />} />
-          <Route path="/electrician" element={<Electrician />} />
-          <Route path="/plumber" element={<Plumber />} />
-          <Route path="/housekeeping" element={<Housekeeping />} />
-          <Route path="/faqs" element={<Faq />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/" element={<ExitIntentPopup />} />
-          <Route path="/login" element={<LoginModal />} />
-          <Route path="/signup" element={<SignupModal />} />
-          <Route path="/services" element={<ServiceList />} />
-          <Route path="/add-service" element={<AddService />} />
-                  <Route path="/dashboard" element={<DashboardPage />} />
+        {/* Routes */}
+        <div className="container mx-auto">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Banner />
+                  <Home />
+                </>
+              }
+            />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/maid" element={<Maid />} />
+            <Route path="/nursing" element={<Nursing />} />
+            <Route path="/drivers" element={<Drivers />} />
+            <Route path="/cooks" element={<Cooks />} />
+            <Route path="/electrician" element={<Electrician />} />
+            <Route path="/plumber" element={<Plumber />} />
+            <Route path="/housekeeping" element={<Housekeeping />} />
+            <Route path="/faqs" element={<Faq />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/" element={<ExitIntentPopup />} />
+            <Route path="/login" element={<LoginModal />} />
+            <Route path="/signup" element={<SignupModal />} />
+            <Route path="/services" element={<ServiceList />} />
+            <Route path="/add-service" element={<AddService />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route
+  path="/dashboard"
+  element={
+    <PrivateRoute>
+      <DashboardPage />
+    </PrivateRoute>
+  }
+/>
+          </Routes>
+        </div>
 
-
-        </Routes>
-      </div>
-
-      {/* Footer */}
-      <Footer />
-      {/* Floating Buttons */}
-      <FloatingButtons />
-    </Router>
+        {/* Footer */}
+        <Footer />
+        {/* Floating Buttons */}
+        <FloatingButtons />
+      </Router>
+    </AuthProvider>
   );
 }
 
