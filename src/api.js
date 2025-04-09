@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/users"; 
+// Use environment variable for base URL
+const BASE_URL = process.env.REACT_APP_API_URL;
+const API_URL = `${BASE_URL}/api/users`;
 
 // Fetch all users (Admin only)
 export const fetchUsers = async (token) => {
@@ -31,12 +33,10 @@ export const fetchUserById = async (userId, token) => {
 // Register user
 export const registerUser = async (userData) => {
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/register", userData);
+    const res = await axios.post(`${BASE_URL}/api/auth/register`, userData);
     return res.data;
   } catch (error) {
     console.error("🛑 Register API Error:", error.response?.data || error.message);
     throw error.response?.data?.message || "Signup failed";
   }
 };
-
-  
