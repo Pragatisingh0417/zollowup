@@ -29,6 +29,7 @@ import DashboardPage from "./Pages/DashboardPage";
 import { AuthProvider } from "./components/AuthContext"; 
 import PrivateRoute from "./components/PrivateRoute";
 
+
 function App() {
   return (
     <AuthProvider>

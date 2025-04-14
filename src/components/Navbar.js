@@ -4,21 +4,23 @@ import { Menu, X, User } from "lucide-react";
 import Logo from "../assets/image.png";
 import SignupModal from "./SignupModal";
 import LoginModal from "./LoginModal";
+import Location from "./Location";  // Import the Location component
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+
   const dropdownRef = useRef(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowUserDropdown(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -26,8 +28,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-white px-6 py-4 sticky top-0 z-50 shadow-md font-poppins flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center">
+        {/* Logo & Location */}
+        <div className="flex items-center space-x-4">
           <Link to="/" onClick={() => setIsOpen(false)}>
             <img src={Logo} alt="Logo" className="h-10" />
           </Link>
@@ -44,11 +46,7 @@ const Navbar = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          {[
-            { to: "/", text: "Home" },
-            { to: "/about", text: "About" },
-            { to: "/faq", text: "FAQ" },
-          ].map(({ to, text }) => (
+          {[{ to: "/", text: "Home" }, { to: "/about", text: "About" }, { to: "/faq", text: "FAQ" }].map(({ to, text }) => (
             <li key={to}>
               <Link
                 to={to}
@@ -66,15 +64,7 @@ const Navbar = () => {
               Services
             </div>
             <ul className="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              {[
-                { to: "/maid", text: "Maid Services" },
-                { to: "/nursing", text: "Nursing Care" },
-                { to: "/drivers", text: "Drivers" },
-                { to: "/cooks", text: "Cooks" },
-                { to: "/electrician", text: "Electrician" },
-                { to: "/plumber", text: "Plumber" },
-                { to: "/housekeeping", text: "Housekeeping" },
-              ].map(({ to, text }) => (
+              {[{ to: "/maid", text: "Maid Services" }, { to: "/nursing", text: "Nursing Care" }, { to: "/drivers", text: "Drivers" }].map(({ to, text }) => (
                 <li key={to}>
                   <Link
                     to={to}
@@ -99,7 +89,10 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* I want a job link */}
+        {/* Location */}
+        <Location /> {/* Use the Location component here */}
+
+        {/* Job Button & User Icon */}
         <div className="flex items-center space-x-4">
           <button
             onClick={() => (window.location.href = "/contact")}
@@ -108,7 +101,6 @@ const Navbar = () => {
             मुझे नौकरी चाहिए..
           </button>
 
-          {/* User Icon with Dropdown */}
           <div className="relative hidden lg:block" ref={dropdownRef}>
             <button
               onClick={() => setShowUserDropdown(!showUserDropdown)}
