@@ -7,20 +7,28 @@ const Location = () => {
 
   useEffect(() => {
     const fetchLocation = async () => {
-      if (navigator.geolocation) {
+      if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           async (pos) => {
             const { latitude, longitude } = pos.coords;
+
             try {
-              const response = await axios.get("http://localhost:5000/api/location", {
-                params: { lat: String(latitude), lng: String(longitude) },
+              const res = await axios.get("http://localhost:5000/api/location", {
+                params: {
+                  lat: latitude,
+                  lng: longitude,
+                },
               });
-              setLocation(response.data.city || "City not found");
+
+              const city = res.data.city;
+              setLocation(city || "City not found");
             } catch (err) {
-              setLocation("Error fetching location");
+              console.error("Location API error:", err);
+              setLocation("Unable to fetch location");
             }
           },
           (err) => {
+            console.warn("Geolocation permission error:", err);
             setLocation("Permission denied");
           }
         );
@@ -33,7 +41,8 @@ const Location = () => {
   }, []);
 
   return (
-    <div className="hidden md:flex items-center text-sm font-medium px-4 py-2 rounded-full border border-yellow-300 transition ml-20">
+    <div className="hidden md:flex items-center text-sm font-medium px-4 py-2 rounded-full 
+    border border-yellow-300 transition ml-20">
       <MapPin size={16} className="mr-1 text-yellow-600" />
       <span>{location}</span>
     </div>
