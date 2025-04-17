@@ -15,7 +15,7 @@ const MaidServices = () => {
     <div className="flex flex-col md:flex-row w-full max-w-5xl mx-auto p-6 mb-5 border rounded-lg shadow-lg  bg-gradient-to-r from-black to-green-700">
       {/* Left Sidebar */}
       <div className="w-full md:w-1/3 rounded-md  p-4  bg-yellow-300">
-        <h2 className="text-lg font-semibold mb-4">Select a Service</h2>
+        <h2 className="text-lg font-semibold mb-4">Our Maid Service</h2>
         <ul>
           {services.map((service) => (
             <li

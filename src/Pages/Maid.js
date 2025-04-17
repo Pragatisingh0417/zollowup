@@ -5,6 +5,7 @@ import Handycleaning from "../components/Handycleaning";
 import MaidServices from "../components/MaidServices";
 import Cta from "../components/Cta";
 import ExitIntentPopup from "../components/ExitIntentPopup";
+import Pricing from "../components/Pricing";
 
 
 const Maid = () => {
@@ -13,14 +14,19 @@ const Maid = () => {
       <ExitIntentPopup />
       {/* Hero Section */}
 
-      <div className="relative sm:h-[500px] h-[400px] bg-cover bg-center" style={{ backgroundImage: "url('https://i.pinimg.com/736x/4b/fa/c2/4bfac2846c9c552d5b42d6798728a81f.jpg')" }}>
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white px-6 sm:px-12 md:px-16 lg:px-20 xl:px-24">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">Cooking maid</h1>
-          <p className="mt-4 text-base sm:text-lg md:text-xl">Enjoy Tasty Dishes Cooked by Our Skilled Cooking Maids.
-            Satisfy Your Taste Buds with Flavorful Meals Prepared by Our Expert Cooking Maids. Experience Delicious and Exquisite Dishes Right at Your Dining Table.</p>
+      <div className="w-full relative h-[350px] md:h-[450px] bg-cover bg-center" style={{ backgroundImage: "url('https://i.pinimg.com/736x/4b/fa/c2/4bfac2846c9c552d5b42d6798728a81f.jpg')" }}>
+  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="text-center text-white px-4 max-w-4xl mx-auto">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Cooking Maid</h1>
+      <p className="mt-4 text-sm sm:text-base md:text-lg">
+        Enjoy Tasty Dishes Cooked by Our Skilled Cooking Maids. <br />
+        Satisfy Your Taste Buds with Flavorful Meals Prepared by Our Expert Cooking Maids. <br />
+        Experience Delicious and Exquisite Dishes Right at Your Dining Table.
+      </p>
+    </div>
+  </div>
+</div>
 
-        </div>
-      </div>
 
       {/* About Section - Image on Left, Content on Right */}
       <div className="container mx-auto py-10 px-6 sm:px-8 md:px-12 lg:px-20 xl:px-32">
@@ -56,15 +62,16 @@ const Maid = () => {
               Our mission is to create a sustainable future where every child
               has the opportunity to dream, learn, and grow without limitations.
             </p> */}
-            <button className="bg-blue-900 text-white px-5 sm:px-6 py-3 mt-5 rounded-lg font-semibold hover:bg-blue-600 transition">
+            {/* <button className="bg-blue-900 text-white px-5 sm:px-6 py-3 mt-5 rounded-lg font-semibold hover:bg-blue-600 transition">
               Join Us
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
 
       {/* Maid Services & Handy Cleaning Sections */}
       <MaidServices />
+      <Pricing />
       <Handycleaning />
       <Cta />
 

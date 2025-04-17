@@ -26,7 +26,7 @@ import ServiceList from "./components/ServiceList";
 import AddService from "./components/AddService";
 import ServiceButtons from "./components/ServiceButtons";
 import DashboardPage from "./Pages/DashboardPage";
-import { AuthProvider } from "./components/AuthContext"; 
+import { AuthProvider } from "./components/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
 
@@ -68,13 +68,13 @@ function App() {
             <Route path="/add-service" element={<AddService />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route
-  path="/dashboard"
-  element={
-    <PrivateRoute>
-      <DashboardPage />
-    </PrivateRoute>
-  }
-/>
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <DashboardPage />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </div>
 
