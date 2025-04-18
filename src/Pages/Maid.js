@@ -11,7 +11,7 @@ import Pricing from "../components/Pricing";
 const Maid = () => {
   return (
     <div className="bg-gray-100">
-      <ExitIntentPopup />
+      {/* <ExitIntentPopup /> */}
       {/* Hero Section */}
 
       <div className="w-full relative h-[350px] md:h-[450px] bg-cover bg-center" style={{ backgroundImage: "url('https://i.pinimg.com/736x/4b/fa/c2/4bfac2846c9c552d5b42d6798728a81f.jpg')" }}>

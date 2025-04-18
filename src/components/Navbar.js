@@ -72,6 +72,10 @@ const Navbar = () => {
                 { to: "/electrician", text: "Electrician" },
                 { to: "/plumber", text: "Plumber" },
                 { to: "/drivers", text: "Drivers" },
+                { to: "/housekeeping", text: "Housekeeping" },
+                { to: "/cooks", text: "Cooks" },
+
+
               ].map(({ to, text }) => (
                 <li key={to}>
                   <Link

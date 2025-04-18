@@ -28,6 +28,8 @@ import ServiceButtons from "./components/ServiceButtons";
 import DashboardPage from "./Pages/DashboardPage";
 import { AuthProvider } from "./components/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
+import Pricing from "./components/Pricing";
+import Checkout from "./Pages/Checkout";
 
 
 function App() {
@@ -66,6 +68,10 @@ function App() {
             <Route path="/signup" element={<SignupModal />} />
             <Route path="/services" element={<ServiceList />} />
             <Route path="/add-service" element={<AddService />} />
+            <Route path="/" element={<Pricing />} />
+            <Route path="/checkout" element={<Checkout />} />
+
+
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route
               path="/dashboard"
