@@ -25,9 +25,10 @@ const FloatingButtons = () => {
       {/* Floating CTA Button */}
       <a
         href="/contact"
-        className="bg-gradient-to-r from-yellow-400 to-orange-500 text-dark px-5 py-3 rounded-full shadow-lg transition"
+        className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-full transition"
       >
-        Get a Free Quote
+                      मुझे नौकरी चाहिए..
+
       </a>
     </div>
   );
