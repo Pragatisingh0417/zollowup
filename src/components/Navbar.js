@@ -12,6 +12,8 @@ const Navbar = () => {
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showServicesDropdown, setShowServicesDropdown] = useState(false); // Added state for mobile services dropdown
+
   const dropdownRef = useRef(null);
 
   const { cart } = useCart();
@@ -21,6 +23,7 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowUserDropdown(false);
+        setShowServicesDropdown(false); // Close services dropdown when clicking outside
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -38,69 +41,67 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Icon */}
-        <div className="lg:hidden " onClick={() => setIsOpen(!isOpen)}>
+        <div className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={30} /> : <Menu size={30} />}
         </div>
 
-        {/* Navigation Links */}
+        {/* Desktop Navigation Links */}
         <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
-  <ul className="flex space-x-4 items-center">
-    {[
-      { to: "/", text: "Home" },
-      { to: "/about", text: "About" },
-      { to: "/faq", text: "FAQ" },
-    ].map(({ to, text }) => (
-      <li key={to}>
-        <Link
-          to={to}
-          className="block px-2 py-2 text-gray-800 hover:text-yellow-500 transition"
-        >
-          {text}
-        </Link>
-      </li>
-    ))}
+          <ul className="flex space-x-4 items-center">
+            {[
+              { to: "/", text: "Home" },
+              { to: "/about", text: "About" },
+              { to: "/faq", text: "FAQ" },
+            ].map(({ to, text }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className="block px-2 py-2 text-gray-800 hover:text-yellow-500 transition"
+                >
+                  {text}
+                </Link>
+              </li>
+            ))}
 
-    {/* Services Dropdown */}
-    <li className="relative group">
-      <div className="block px-2 py-2 text-gray-800 hover:text-yellow-500 cursor-pointer transition">
-        Services
-      </div>
-      <ul className="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-40">
-        {[
-          { to: "/maid", text: "Maid Services" },
-          { to: "/nursing", text: "Nursing Care" },
-          { to: "/electrician", text: "Electrician" },
-          { to: "/plumber", text: "Plumber" },
-          { to: "/drivers", text: "Drivers" },
-          { to: "/housekeeping", text: "Housekeeping" },
-          { to: "/cooks", text: "Cooks" },
-        ].map(({ to, text }) => (
-          <li key={to}>
-            <Link
-              to={to}
-              className="block px-4 py-2 hover:bg-gray-100 transition"
-            >
-              {text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </li>
+            {/* Services Dropdown */}
+            <li className="relative group">
+              <div className="block px-2 py-2 text-gray-800 hover:text-yellow-500 cursor-pointer transition">
+                Services
+              </div>
+              <ul className="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-40">
+                {[
+                  { to: "/maid", text: "Maid Services" },
+                  { to: "/nursing", text: "Nursing Care" },
+                  { to: "/electrician", text: "Electrician" },
+                  { to: "/plumber", text: "Plumber" },
+                  { to: "/drivers", text: "Drivers" },
+                  { to: "/housekeeping", text: "Housekeeping" },
+                  { to: "/cooks", text: "Cooks" },
+                ].map(({ to, text }) => (
+                  <li key={to}>
+                    <Link
+                      to={to}
+                      className="block px-4 py-2 hover:bg-gray-100 transition"
+                    >
+                      {text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
 
-    <li>
-      <Link
-        to="/contact"
-        className="block px-2 py-2 text-gray-800 hover:text-yellow-500 transition"
-      >
-        Contact
-      </Link>
-    </li>
-  </ul>
-</div>
+            <li>
+              <Link
+                to="/contact"
+                className="block px-2 py-2 text-gray-800 hover:text-yellow-500 transition"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-
-
-        {/* Location + Right Section */}
+        {/* Right Section */}
         <div className="flex items-center gap-4 ml-auto">
           <Location />
           <div className="flex items-center gap-4">
@@ -148,6 +149,63 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="w-full block lg:hidden mt-4">
+            <ul className="flex flex-col space-y-2 text-gray-800">
+              {[
+                { to: "/", text: "Home" },
+                { to: "/about", text: "About" },
+                { to: "/faq", text: "FAQ" },
+                { to: "/contact", text: "Contact" },
+              ].map(({ to, text }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    onClick={() => setIsOpen(false)}
+                    className="block px-4 py-2 hover:bg-gray-100 transition"
+                  >
+                    {text}
+                  </Link>
+                </li>
+              ))}
+
+              {/* Services Dropdown (inlined for mobile) */}
+              <li>
+                <div
+                  className="font-semibold px-4 py-2 cursor-pointer"
+                  onClick={() => setShowServicesDropdown(!showServicesDropdown)}
+                >
+                  Services
+                </div>
+                {showServicesDropdown && (
+                  <ul className="pl-4">
+                    {[
+                      { to: "/maid", text: "Maid Services" },
+                      { to: "/nursing", text: "Nursing Care" },
+                      { to: "/electrician", text: "Electrician" },
+                      { to: "/plumber", text: "Plumber" },
+                      { to: "/drivers", text: "Drivers" },
+                      { to: "/housekeeping", text: "Housekeeping" },
+                      { to: "/cooks", text: "Cooks" },
+                    ].map(({ to, text }) => (
+                      <li key={to}>
+                        <Link
+                          to={to}
+                          onClick={() => setIsOpen(false)}
+                          className="block px-4 py-2 hover:bg-gray-100 transition"
+                        >
+                          {text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            </ul>
+          </div>
+        )}
       </nav>
 
       {/* Modals */}
