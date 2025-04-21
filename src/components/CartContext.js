@@ -46,6 +46,8 @@ export const CartProvider = ({ children }) => {
     if (updatedCart[index].quantity > 1) {
       updatedCart[index].quantity -= 1;
       setCart(updatedCart);
+    } else {
+      removeFromCart(index); // Automatically remove if quantity reaches 0
     }
   };
 

@@ -17,15 +17,25 @@ const CheckoutPage = () => {
     toast.info("Item removed from cart");
   };
 
+  //increase 
+
   const handleIncrease = (index) => {
     increaseQuantity(index);
     toast.success("Increased quantity");
   };
 
+  //decrease 
   const handleDecrease = (index) => {
-    decreaseQuantity(index);
-    toast.warn("Decreased quantity");
+    const item = cart[index];
+    if (item.quantity === 1) {
+      removeFromCart(index);
+      toast.info("Item removed from cart");
+    } else {
+      decreaseQuantity(index);
+      toast.warn("Decreased quantity");
+    }
   };
+  
 
   return (
     <div className="max-w-2xl mx-auto p-6">

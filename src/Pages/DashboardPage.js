@@ -17,7 +17,7 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/bookings"); // Adjust if deployed
+        const res = await fetch("http://localhost:5000/api/bookings"); 
         const data = await res.json();
         setBookings(data);
       } catch (err) {
