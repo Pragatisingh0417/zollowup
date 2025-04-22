@@ -26,14 +26,14 @@ const Pricing = () => {
           {pricingPlans.slice(0, 4).map((plan, idx) => (
             <div
               key={idx}
-              className="relative w-full sm:w-[calc(50%-10px)] lg:w-64 bg-white p-5 rounded-xl border transition-all duration-300 text-center shadow-sm hover:shadow-md hover:border-green-500"
+              className="relative w-full sm:w-[calc(50%-10px)] lg:w-64 bg-white p-5 rounded-xl border transition-all duration-300 text-center shadow-sm hover:shadow-md hover:border-blue-500"
             >
               {plan.mostPopular && (
-                <span className="absolute top-2 right-2 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">
+                <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">
                   Most Popular
                 </span>
               )}
-              <h3 className="text-xl font-semibold text-green-700 mb-1">{plan.title}</h3>
+              <h3 className="text-xl font-semibold text-gray-700 mb-1">{plan.title}</h3>
               <p className="text-2xl font-bold text-gray-800 mb-2">{plan.price}</p>
               <ul className="text-sm text-gray-600 mb-4 space-y-1">
                 {plan.features.map((f, i) => (
@@ -45,8 +45,8 @@ const Pricing = () => {
                 disabled={bookedServices.has(plan.title)}
                 className={`w-full py-2 rounded-lg font-medium transition ${
                   bookedServices.has(plan.title)
-                    ? "bg-white text-green-600 border border-green-600 cursor-not-allowed"
-                    : "bg-green-600 text-white hover:bg-green-700"
+                    ? "bg-white text-blue-600 border border-blue-600 cursor-not-allowed"
+                    : "bg-blue-900 text-white hover:bg-blue-700"
                 }`}
               >
                 {bookedServices.has(plan.title) ? "Booked" : "Book Now"}
@@ -60,14 +60,14 @@ const Pricing = () => {
           {pricingPlans.slice(4).map((plan, idx) => (
             <div
               key={idx}
-              className="relative w-full sm:w-[calc(50%-10px)] lg:w-64 bg-white p-5 rounded-xl border transition-all duration-300 text-center shadow-sm hover:shadow-md hover:border-green-500"
+              className="relative w-full sm:w-[calc(50%-10px)] lg:w-64 bg-white p-5 rounded-xl border transition-all duration-300 text-center shadow-sm hover:shadow-md hover:border-blue-500"
             >
               {plan.mostPopular && (
-                <span className="absolute top-2 right-2 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">
+                <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">
                   Most Popular
                 </span>
               )}
-              <h3 className="text-xl font-semibold text-green-700 mb-1">{plan.title}</h3>
+              <h3 className="text-xl font-semibold text-gray-700 mb-1">{plan.title}</h3>
               <p className="text-2xl font-bold text-gray-800 mb-2">{plan.price}</p>
               <ul className="text-sm text-gray-600 mb-4 space-y-1">
                 {plan.features.map((f, i) => (
@@ -79,8 +79,8 @@ const Pricing = () => {
                 disabled={bookedServices.has(plan.title)}
                 className={`w-full py-2 rounded-lg font-medium transition ${
                   bookedServices.has(plan.title)
-                    ? "bg-white text-green-600 border border-green-600 cursor-not-allowed"
-                    : "bg-green-600 text-white hover:bg-green-700"
+                    ? "bg-white text-blue-600 border border-blue-600 cursor-not-allowed"
+                    : "bg-blue-900 text-white hover:bg-blue-700"
                 }`}
               >
                 {bookedServices.has(plan.title) ? "Booked" : "Book Now"}

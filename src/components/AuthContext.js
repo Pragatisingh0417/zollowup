@@ -14,15 +14,36 @@ export const AuthProvider = ({ children }) => {
     if (savedToken) {
       setToken(savedToken);
       setIsAuthenticated(true);
-      // Optionally, fetch user info from API using token
+  
+      // ✅ Fetch user info using the saved token
+      const fetchUser = async () => {
+        try {
+          const res = await fetch("http://localhost:5000/api/auth/me", {
+            headers: {
+              Authorization: `Bearer ${savedToken}`,
+            },
+          });
+          
+          const data = await res.json();
+          setUser(data); // 🧠 Set the user here
+        } catch (err) {
+          console.error("Failed to fetch user", err);
+          logout(); // Optional: log out on failure
+        }
+      };
+  
+      fetchUser();
     }
   }, []);
+  
 
-  const login = (token) => {
+  const login = (token, userData) => {
     localStorage.setItem("token", token);
     setToken(token);
+    setUser(userData); // Save user info to context
     setIsAuthenticated(true);
   };
+  
 
   const logout = () => {
     localStorage.removeItem("token");

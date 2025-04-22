@@ -31,6 +31,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
 import { CartProvider } from "./components/CartContext";
 import CheckoutPage from "./Pages/CheckoutPage";
+import EmployeeForm from "./Pages/EmployeeForm";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -81,6 +82,8 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route path="/employee-form" element={<EmployeeForm />} />
+
             </Routes>
           </div>
 

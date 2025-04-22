@@ -1,5 +1,6 @@
 import React from "react";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa"; // Import icons
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const FloatingButtons = () => {
   return (
@@ -23,13 +24,12 @@ const FloatingButtons = () => {
       </a>
 
       {/* Floating CTA Button */}
-      <a
-        href="/contact"
+      <Link
+        to="/employee-form" // Use Link instead of <a> for React Router
         className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-full transition"
       >
         मुझे नौकरी चाहिए..
-
-      </a>
+      </Link>
     </div>
   );
 };

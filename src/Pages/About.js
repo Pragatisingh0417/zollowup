@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import AboutCta from "../components/AboutCta";
 import Cards from "../components/Cards";
 import ExitIntentPopup from "../components/ExitIntentPopup";
+import Handycleaning from "../components/Handycleaning";
 
 const About = () => {
   return (
@@ -12,7 +13,7 @@ const About = () => {
       <ExitIntentPopup />
 
       {/* Hero Section */}
-      <div
+      {/* <div
         className="relative w-full sm:h-[500px] h-[300px] bg-cover bg-center"
         style={{
           backgroundImage:
@@ -25,7 +26,7 @@ const About = () => {
             Enjoy Tasty Dishes Cooked by Our Skilled Cooking Maids Dining Table.
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* About Section */}
       <div className="flex flex-wrap items-center py-10 px-6">
@@ -81,9 +82,9 @@ const About = () => {
             plumbers, electricians, we ensure every service is delivered with excellence and trust.
           </p>
           <p className="text-gray-600 mb-6 leading-6 font-roboto text-sm">
-            With a commitment to quality, affordability, and customer satisfaction, 
-            we simplify home management by connecting you with verified professionals. 
-            Whether you need routine cleaning, emergency repairs, or specialized care, 
+            With a commitment to quality, affordability, and customer satisfaction,
+            we simplify home management by connecting you with verified professionals.
+            Whether you need routine cleaning, emergency repairs, or specialized care,
             we’ve got you covered with on-demand, hassle-free booking.
           </p>
 
@@ -135,7 +136,9 @@ const About = () => {
       </div>
 
       <Cards />
-      <Whyus />
+      {/* <Whyus /> */}
+      <Handycleaning />
+
       <AboutCta />
     </div>
   );
