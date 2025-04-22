@@ -1,5 +1,4 @@
 import React from "react";
-import GoogleForm from "../components/GoogleForm";
 
 const EmployeeForm = () => {
   return (
@@ -117,7 +116,6 @@ const EmployeeForm = () => {
           </button>
         </form>
       </div>
-      <GoogleForm />
 
     </div>
   );
