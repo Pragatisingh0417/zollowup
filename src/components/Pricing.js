@@ -49,7 +49,7 @@ const Pricing = () => {
                     : "bg-blue-900 text-white hover:bg-blue-700"
                 }`}
               >
-                {bookedServices.has(plan.title) ? "Booked" : "Book Now"}
+                {bookedServices.has(plan.title) ? "Added to cart" : "Book Now"}
               </button>
             </div>
           ))}

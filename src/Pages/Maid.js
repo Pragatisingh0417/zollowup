@@ -1,11 +1,10 @@
 // src/pages/Maid.js
 import React from "react";
-import Whyus from "../components/Whyus";
-import Handycleaning from "../components/Handycleaning";
 import MaidServices from "../components/MaidServices";
 import Cta from "../components/Cta";
 import ExitIntentPopup from "../components/ExitIntentPopup";
 import Pricing from "../components/Pricing";
+import OurMaids from "../components/OurMaids";
 
 
 const Maid = () => {
@@ -29,6 +28,7 @@ const Maid = () => {
       {/* Maid Services & Handy Cleaning Sections */}
       <MaidServices />
       <Pricing />
+      <OurMaids />
       <Cta />
 
       {/* Call to Action Section */}
