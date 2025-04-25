@@ -73,17 +73,17 @@ function App() {
               <Route path="/add-service" element={<AddService />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/employee-form" element={<EmployeeForm />} />
 
+              {/* PrivateRoute with conditional check for /dashboard */}
               <Route
                 path="/dashboard"
                 element={
-                  <PrivateRoute>
+                  <PrivateRoute path="/dashboard">
                     <DashboardPage />
                   </PrivateRoute>
                 }
               />
-              <Route path="/employee-form" element={<EmployeeForm />} />
-
             </Routes>
           </div>
 

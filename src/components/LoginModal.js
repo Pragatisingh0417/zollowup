@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import axios from "axios";
-import { useAuth } from "../components/AuthContext"; // Adjust the path as needed
+import { useAuth } from "../components/AuthContext"; // Make sure the path is correct
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ const LoginModal = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { login } = useAuth(); // Use context's login method
+  const { login, loading: contextLoading } = useAuth(); // Use context's login method
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,6 +35,10 @@ const LoginModal = ({ onClose }) => {
       setLoading(false);
     }
   };
+
+  if (contextLoading) {
+    return <div>Loading...</div>; // Optional: A loading state for the modal while context is being fetched
+  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
