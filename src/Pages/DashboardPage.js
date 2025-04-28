@@ -6,6 +6,7 @@ import { FaUserCircle } from "react-icons/fa";
 const DashboardPage = () => {
   const [isSliderOpen, setSliderOpen] = useState(false);
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true); // <-- added loading state
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -17,11 +18,13 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/bookings"); 
+        const res = await fetch("http://localhost:5000/api/bookings");
         const data = await res.json();
         setBookings(data);
       } catch (err) {
         console.error("Error fetching bookings:", err);
+      } finally {
+        setLoading(false); // <-- stop loading after fetch
       }
     };
 
@@ -83,12 +86,15 @@ const DashboardPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {bookings.length === 0 ? (
+                {loading ? (
                   <tr>
-                    <td colSpan="3" className="py-4 text-center text-gray-500">
-                      No bookings found.
-                    </td>
-                  </tr>
+                  <td colSpan="3" className="py-8 text-center">
+                    <div className="flex justify-center">
+                      <div className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+                    </div>
+                    <p className="text-gray-500 text-sm mt-2">Loading bookings...</p>
+                  </td>
+                </tr>
                 ) : (
                   bookings.map((booking) => (
                     <tr key={booking._id} className="border-b hover:bg-gray-50">

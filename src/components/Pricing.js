@@ -19,6 +19,8 @@ const Pricing = () => {
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-gray-800">Our Pricing</h2>
           <p className="text-gray-600 mt-2">Affordable & Transparent Rates</p>
+          <p className="text-gray-600 mt-2">You can a service and proceed for the confirmation then will get in touch with you.</p>
+
         </div>
 
         {/* First row: 4 cards */}

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useCart } from "../components/CartContext";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";  // Use useNavigate instead of useHistory
 import 'react-toastify/dist/ReactToastify.css';
 
 const availableMaids = [
   { id: 1, name: "Sunita Sharma", age: 32, experience: "5 years" },
   { id: 2, name: "Fatima Begum", age: 28, experience: "3 years" },
   { id: 3, name: "Anjali Kumari", age: 40, experience: "10 years" },
-  
 ];
 
 const CheckoutPage = () => {
@@ -20,6 +20,9 @@ const CheckoutPage = () => {
   } = useCart();
 
   const [selectedMaid, setSelectedMaid] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const navigate = useNavigate();
 
   const handleRemove = (index) => {
     removeFromCart(index);
@@ -40,6 +43,16 @@ const CheckoutPage = () => {
       decreaseQuantity(index);
       toast.warn("Decreased quantity");
     }
+  };
+
+  const handleConfirmBooking = () => {
+    if (!address || !phoneNumber) {
+      toast.error("Please fill in both address and phone number.");
+      return;
+    }
+
+    // Redirect to the confirmation page
+    navigate("/confirmation");  // Use navigate to redirect
   };
 
   return (
@@ -95,30 +108,33 @@ const CheckoutPage = () => {
             );
           })}
 
-          {/* Maid selection */}
+          {/* Address and Phone Number Inputs */}
           <div className="pt-4 mt-6 border-t">
-            <label htmlFor="maidSelect" className="block text-lg font-semibold mb-2">
-              Select Your Preferred Maid
+            <label htmlFor="address" className="block text-lg font-semibold mb-2">
+              Address
             </label>
-            <select
-              id="maidSelect"
+            <input
+              type="text"
+              id="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               className="w-full border rounded p-2"
-              value={selectedMaid}
-              onChange={(e) => setSelectedMaid(e.target.value)}
-            >
-              <option value="">-- Choose a Maid --</option>
-              {availableMaids.map((maid) => (
-                <option key={maid.id} value={maid.name}>
-                  {maid.name} (Age: {maid.age}, Exp: {maid.experience})
-                </option>
-              ))}
-            </select>
+              placeholder="Enter your address"
+            />
+          </div>
 
-            {selectedMaid && (
-              <p className="mt-2 text-sm text-green-600">
-                Selected Maid: <strong>{selectedMaid}</strong>
-              </p>
-            )}
+          <div className="pt-4 mt-6 border-t">
+            <label htmlFor="phoneNumber" className="block text-lg font-semibold mb-2">
+              Phone Number
+            </label>
+            <input
+              type="text"
+              id="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="w-full border rounded p-2"
+              placeholder="Enter your phone number"
+            />
           </div>
 
           <div className="pt-4 mt-6 border-t flex justify-between items-center font-semibold text-lg">
@@ -126,8 +142,11 @@ const CheckoutPage = () => {
             <span>₹{getTotal()}</span>
           </div>
 
-          <button className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
-            Proceed to Payment
+          <button
+            onClick={handleConfirmBooking}
+            className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+          >
+            Confirm your Booking
           </button>
         </div>
       )}

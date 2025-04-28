@@ -32,7 +32,7 @@ import { AuthProvider } from "./components/AuthContext";
 import { CartProvider } from "./components/CartContext";
 import CheckoutPage from "./Pages/CheckoutPage";
 import EmployeeForm from "./Pages/EmployeeForm";
-
+import ConfirmationPage from "./Pages/ConfirmationPage";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
@@ -74,6 +74,7 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/employee-form" element={<EmployeeForm />} />
+               <Route path="/confirmation" element={<ConfirmationPage />} /> 
 
               {/* PrivateRoute with conditional check for /dashboard */}
               <Route
@@ -83,6 +84,7 @@ function App() {
                     <DashboardPage />
                   </PrivateRoute>
                 }
+                
               />
             </Routes>
           </div>
