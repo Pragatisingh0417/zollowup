@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import axios from "axios";
-import { useAuth } from "../components/AuthContext"; // Adjust the path as needed
+import { useAuth } from "../components/AuthContext";
+import { useNavigate } from "react-router-dom"; // For navigation
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ const LoginModal = ({ onClose }) => {
   const [error, setError] = useState("");
 
   const { login } = useAuth(); // Use context's login method
+  const navigate = useNavigate(); // React Router navigation
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +19,12 @@ const LoginModal = ({ onClose }) => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const apiUrl =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5000/api/auth/login"
+          : "/api/auth/login"; // Adjust API URL for production
+
+      const response = await axios.post(apiUrl, {
         email,
         password,
       });
@@ -28,9 +35,12 @@ const LoginModal = ({ onClose }) => {
       login(token, user);
 
       onClose(); // Close the modal
-      window.location.href = "/dashboard"; // Navigate (you can use useNavigate instead)
+      navigate("/dashboard"); // Seamless React Router navigation
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed. Please try again.");
+      const errorMessage = err.response
+        ? err.response.data?.message || "Login failed. Please try again."
+        : "Network error. Please try again.";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
