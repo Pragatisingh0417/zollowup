@@ -19,22 +19,22 @@ const Cleaning = () => {
     {
       title: "Kitchen Cleaning",
       image: "https://img.freepik.com/free-photo/woman-holding-rag-detergent-cleaning-cooker_651396-2881.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
-      path: "/kitchen-cleaning",
+      path: "/maid",
     },
     {
       title: "Bathroom Cleaning",
       image: "https://img.freepik.com/free-photo/household-chores-concept_53876-139519.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
-      path: "/bathroom-cleaning",
+      path: "/housekeeping",
     },
     {
       title: "Full Home Cleaning",
       image: "https://img.freepik.com/premium-photo/cleaning-service-team-working-messy-room-after-new-year-party_495423-36368.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
-      path: "/full-home-cleaning",
+      path: "/housekeeping",
     },
     {
       title: "Cooking",
       image: "https://img.freepik.com/premium-photo/young-woman-cook-sweet-cake-kitchen_41471-8748.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
-      path: "/cook",
+      path: "/cooks",
     },
     {
       title: "Nanny",

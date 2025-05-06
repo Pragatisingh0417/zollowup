@@ -13,7 +13,6 @@ import ServiceList from "./components/ServiceList";
 import AddService from "./components/AddService";
 import ServiceButtons from "./components/ServiceButtons";
 import Pricing from "./components/Pricing";
-
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
@@ -34,7 +33,7 @@ import CheckoutPage from "./Pages/CheckoutPage";
 import EmployeeForm from "./Pages/EmployeeForm";
 import ConfirmationPage from "./Pages/ConfirmationPage";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import MaidSelectionPage from "./Pages/MaidSelectionPage";
 function App() {
   return (
     <AuthProvider>
@@ -74,7 +73,8 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/employee-form" element={<EmployeeForm />} />
-               <Route path="/confirmation" element={<ConfirmationPage />} /> 
+              <Route path="/confirmation" element={<ConfirmationPage />} />
+              <Route path="/maid-selection" element={<MaidSelectionPage />} />
 
               {/* PrivateRoute with conditional check for /dashboard */}
               <Route
@@ -84,7 +84,7 @@ function App() {
                     <DashboardPage />
                   </PrivateRoute>
                 }
-                
+
               />
             </Routes>
           </div>

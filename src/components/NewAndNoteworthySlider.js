@@ -43,7 +43,7 @@ const NewAndNoteworthySlider = () => {
       id: 3,
       title: "Electrician",
       description:
-        "Certified electricians for safe and efficient electrical work at your home or office.",
+        "We provide Certified electricians for safe and efficient electrical work at your home or office.",
       image:
         "https://img.freepik.com/free-photo/male-electrician-works-switchboard-with-electrical-connecting-cable_169016-18026.jpg",
     },

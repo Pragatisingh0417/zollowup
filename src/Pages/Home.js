@@ -9,7 +9,6 @@ import NewAndNoteworthySlider from "../components/NewAndNoteworthySlider";
 import Testimonial from "../components/Testimonial";
 import CountingNumber from "../components/CountingNumber";
 import Cleaning from "../components/Cleaning";
-import GoogleForm from "../components/GoogleForm";
 
 const Home = () => {
   const [data, setData] = useState(null);

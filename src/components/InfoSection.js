@@ -94,7 +94,7 @@ const Services = () => {
             <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-12 h-12 rounded-full group-hover:scale-150 duration-700 right-20 -top-6 bg-orange-500"></div>
             <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-8 h-8 rounded-full group-hover:scale-150 duration-700 right-32 top-6 bg-pink-500"></div>
             <div className="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4 rounded-full group-hover:scale-150 duration-700 right-2 top-12 bg-red-600"></div>
-            <p className="z-20 relative font-roboto">Know More</p>
+            <p  onClick={() => navigate("/services")} className="z-20 relative font-roboto">Know More</p>
           </button>
         </div>
       </div>

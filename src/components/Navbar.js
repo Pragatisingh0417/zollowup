@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white px-4 lg:px-10 py-4 sticky top-0 z-50 shadow-md font-poppins flex items-center justify-between gap-4 flex-wrap">
+      <nav className="bg-white px-4 lg:px-10 py-4 sticky top-0 z-50 shadow-md font-poppins flex items-center justify-between gap-2 flex-wrap">
         {/* Logo */}
         <div className="flex items-center space-x-4">
           <Link to="/" onClick={() => setIsOpen(false)}>
@@ -49,11 +49,11 @@ const Navbar = () => {
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
-          <ul className="flex space-x-4 items-center">
+          <ul className="flex  items-center">
             {[
               { to: "/", text: "Home" },
               { to: "/about", text: "About" },
-              { to: "/faq", text: "FAQ" },
+              // { to: "/faq", text: "FAQ" },
             ].map(({ to, text }) => (
               <li key={to}>
                 <Link
@@ -67,7 +67,7 @@ const Navbar = () => {
 
             {/* Services Dropdown */}
             <li className="relative group">
-            <div className="flex items-center gap-1 px-2 py-2 text-gray-800 hover:text-yellow-500 cursor-pointer transition">
+              <div className="flex items-center gap-1 px-2 py-2 text-gray-800 hover:text-yellow-500 cursor-pointer transition">
                 Services
                 <ChevronDown size={16} />
               </div>
@@ -79,7 +79,7 @@ const Navbar = () => {
                   { to: "/plumber", text: "Plumber" },
                   { to: "/drivers", text: "Drivers" },
                   { to: "/housekeeping", text: "Housekeeping" },
-                  { to: "/cooks", text: "Cooks" },
+
                 ].map(({ to, text }) => (
                   <li key={to}>
                     <Link
@@ -105,9 +105,9 @@ const Navbar = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center gap-4 ml-auto">
+        <div className="flex items-center gap-2 ml-auto">
           <Location />
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {/* Cart Icon */}
             <Link to="/checkout" className="relative">
               <ShoppingCart size={24} className="text-gray-700 hover:text-yellow-500 transition" />
@@ -118,38 +118,23 @@ const Navbar = () => {
               )}
             </Link>
 
-            {/* User Icon */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setShowUserDropdown(!showUserDropdown)}
-                className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition"
-              >
-                <User size={24} />
-              </button>
+            {/* signup and login button */}
+            <div className="flex items-center gap-2">
+  <button
+    onClick={() => setShowLoginForm(true)}
+    className="px-5 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-yellow-100 hover:border-yellow-400 transition-all duration-200"
+  >
+    Login
+  </button>
+  <button
+    onClick={() => setShowSignupForm(true)}
+    className="px-5 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:bg-yellow-600 text-black  text-sm font-semibold  transition-all duration-200"
+  >
+    Sign Up
+  </button>
+</div>
 
-              {showUserDropdown && (
-                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md py-2 z-50">
-                  <button
-                    onClick={() => {
-                      setShowLoginForm(true);
-                      setShowUserDropdown(false);
-                    }}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-100 transition"
-                  >
-                    Login
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowSignupForm(true);
-                      setShowUserDropdown(false);
-                    }}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-100 transition"
-                  >
-                    Sign Up
-                  </button>
-                </div>
-              )}
-            </div>
+
           </div>
         </div>
 
@@ -158,10 +143,11 @@ const Navbar = () => {
           <div className="w-full block lg:hidden mt-4">
             <ul className="flex flex-col space-y-2 text-gray-800">
               {[
-                { to: "/", text: "Home" },
+                { to: "/home", text: "Home" },
                 { to: "/about", text: "About" },
-                { to: "/faq", text: "FAQ" },
+                // { to: "/faq", text: "FAQ" },
                 { to: "/contact", text: "Contact" },
+
               ].map(({ to, text }) => (
                 <li key={to}>
                   <Link
@@ -197,7 +183,8 @@ const Navbar = () => {
                     { to: "/plumber", text: "Plumber" },
                     { to: "/drivers", text: "Drivers" },
                     { to: "/housekeeping", text: "Housekeeping" },
-                    { to: "/cooks", text: "Cooks" },
+
+
                   ].map(({ to, text }) => (
                     <li key={to}>
                       <Link

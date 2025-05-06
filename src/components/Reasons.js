@@ -21,9 +21,9 @@ const Reasons = () => {
       <div className="absolute inset-0 bg-blue-800 bg-opacity-80"></div>
 
       <div className="relative z-10 container mx-auto">
-        <h6 className="text-white font-poppins text-base sm:text-lg">
+        {/* <h6 className="text-white font-poppins text-base sm:text-lg">
           Why You Should Choose Us
-        </h6>
+        </h6> */}
         <h2 className="text-white font-bold text-3xl sm:text-4xl mt-2 font-poppins">
           Reasons To Choose Us
         </h2>
@@ -44,15 +44,15 @@ const Reasons = () => {
           ))}
         </div>
 
-        <p className="text-white mt-10 font-roboto text-lg">
+        {/* <p className="text-white mt-10 font-roboto text-lg">
           Don’t hesitate, contact us for help and services.{" "}
           <a
-            href="#"
+            href="/contact"
             className="inline-block mt-2 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-6 rounded-full transition duration-300"
           >
             Book Online
           </a>
-        </p>
+        </p> */}
       </div>
     </div>
   );
