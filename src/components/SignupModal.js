@@ -53,15 +53,19 @@ export default function SignupModal({ onClose }) {
         <p className="text-gray-600 text-center mb-6">
           To send a message, you’ll need a Zollowup account.
         </p>
+{/* google */}
+        <button
+  onClick={() => (window.location.href = "http://localhost:5000/api/auth/google")}
+  className="flex items-center justify-center w-full bg-black text-white rounded-full py-3 font-medium mb-4"
+>
+  <img
+    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+    alt="Google Logo"
+    className="h-5 w-5 mr-2"
+  />
+  Sign up with Google
+</button>
 
-        <button className="flex items-center justify-center w-full bg-black text-white rounded-full py-3 font-medium mb-4">
-          <img
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-            alt="Google Logo"
-            className="h-5 w-5 mr-2"
-          />
-          Sign up with Google
-        </button>
 
         <div className="flex items-center my-4">
           <hr className="flex-grow border-gray-300" />
