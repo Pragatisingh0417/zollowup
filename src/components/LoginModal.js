@@ -2,7 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import axios from "axios";
 import { useAuth } from "../components/AuthContext";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom"; 
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState("");

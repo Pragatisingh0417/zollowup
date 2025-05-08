@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // useNavigate added to navigate to checkout
+import { useLocation, useNavigate } from 'react-router-dom'; 
 import { fetchMaids } from '../maidApi';
 
 const MaidSelection = () => {
-    const location = useLocation(); // Get the location (state) passed via navigate
+    const location = useLocation(); 
     const [filteredMaids, setFilteredMaids] = useState([]);
-    const navigate = useNavigate(); // Initialize navigate function
+    const navigate = useNavigate(); 
 
     useEffect(() => {
       const loadMaids = async () => {
           try {
               const selectedHours = location.state?.selectedHours;
-              console.log("Selected Hours:", selectedHours);  // Log to check if it's correct
+              console.log("Selected Hours:", selectedHours);  
               if (selectedHours) {
                   const allMaids = await fetchMaids(selectedHours); 
                   setFilteredMaids(allMaids);
@@ -28,7 +28,7 @@ const MaidSelection = () => {
   
     const handleBookMaid = (maid) => {
         // Navigate to Checkout Page and pass the selected maid details in the state
-        navigate('/checkout', { state: { selectedMaid: maid } });
+        navigate('/checkoutPage', { state: { selectedMaid: maid } });
     };
 
     return (
@@ -51,15 +51,30 @@ const MaidSelection = () => {
                             <h3 className="text-lg font-semibold text-gray-800">{maid.name}</h3>
                             <div className="mt-2 space-y-1 text-sm text-gray-600">
                                 <p>
-                                    <span className="font-medium text-gray-700">Experience:</span>{" "}
+                                    <span className="font-medium text-gray-700">Name:</span>{" "}
                                     {maid.experience}
                                 </p>
                                 <p>
-                                    <span className="font-medium text-gray-700">Religion:</span>{" "}
+                                    <span className="font-medium text-gray-700">Age:</span>{" "}
                                     {maid.religion}
                                 </p>
                                 <p>
-                                    <span className="font-medium text-gray-700">Age:</span> {maid.age}
+                                    <span className="font-medium text-gray-700">Experience:</span> {maid.age}
+                                </p>
+                                <p>
+                                    <span className="font-medium text-gray-700">Religion:</span> {maid.age}
+                                </p>
+                                <p>
+                                    <span className="font-medium text-gray-700">Language:</span> {maid.age}
+                                </p>
+                                <p>
+                                    <span className="font-medium text-gray-700">Speciality:</span> {maid.age}
+                                </p>
+                                <p>
+                                    <span className="font-medium text-gray-700">State:</span> {maid.age}
+                                </p>
+                                <p>
+                                    <span className="font-medium text-gray-700">Martial Status:</span> {maid.age}
                                 </p>
                             </div>
 

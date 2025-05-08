@@ -1,3 +1,4 @@
+// import statements
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
@@ -69,8 +70,8 @@ const DashboardPage = () => {
         </button>
       </div>
 
-      {/* Main Content */}
       <main className="p-6">
+        {/* Welcome Section */}
         <section className="bg-white p-6 rounded-lg shadow mb-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-1">
             Welcome back, {user?.name || "Guest"} 👋
@@ -96,7 +97,7 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Bookings Filter */}
+        {/* Filter */}
         <div className="flex items-center gap-4 mb-4">
           <label htmlFor="status" className="font-medium text-gray-700">
             Filter:
@@ -129,12 +130,13 @@ const DashboardPage = () => {
                   <th className="py-3 pr-4">Service</th>
                   <th className="py-3 pr-4">Date</th>
                   <th className="py-3 pr-4">Status</th>
+                  <th className="py-3 pr-4">Review</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan="3" className="py-8 text-center">
+                    <td colSpan="4" className="py-8 text-center">
                       <div className="flex justify-center">
                         <div className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
                       </div>
@@ -143,7 +145,7 @@ const DashboardPage = () => {
                   </tr>
                 ) : currentBookings.length === 0 ? (
                   <tr>
-                    <td colSpan="3" className="text-center py-6 text-gray-500">
+                    <td colSpan="4" className="text-center py-6 text-gray-500">
                       No bookings found for selected filter.
                     </td>
                   </tr>
@@ -169,6 +171,16 @@ const DashboardPage = () => {
                           {booking.status}
                         </span>
                       </td>
+                      <td className="py-3 pr-4">
+                        {booking.status === "confirmed" && (
+                          <Link
+                            to={`/review/${booking._id}`}
+                            className="text-sm text-blue-600 hover:underline"
+                          >
+                            Write Review
+                          </Link>
+                        )}
+                      </td>
                     </tr>
                   ))
                 )}
@@ -176,7 +188,7 @@ const DashboardPage = () => {
             </table>
           </div>
 
-          {/* Pagination Controls */}
+          {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex justify-center mt-6 gap-2">
               {[...Array(totalPages)].map((_, idx) => (

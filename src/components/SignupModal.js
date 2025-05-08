@@ -7,7 +7,7 @@ export default function SignupModal({ onClose }) {
   const [showLogin, setShowLogin] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    email: "",  
     password: "",
     position: "",
     userId: "",
@@ -49,30 +49,11 @@ export default function SignupModal({ onClose }) {
           <X size={24} />
         </button>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">Zollowup</h1>
-        <p className="text-gray-600 text-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-900  mb-4 text-center">Zollowup</h1>
+        <p className="text-gray-600 text-center mb-3">
           To send a message, you’ll need a Zollowup account.
         </p>
-{/* google */}
-        <button
-  onClick={() => (window.location.href = "http://localhost:5000/api/auth/google")}
-  className="flex items-center justify-center w-full bg-black text-white rounded-full py-3 font-medium mb-4"
->
-  <img
-    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-    alt="Google Logo"
-    className="h-5 w-5 mr-2"
-  />
-  Sign up with Google
-</button>
-
-
-        <div className="flex items-center my-4">
-          <hr className="flex-grow border-gray-300" />
-          <span className="mx-2 text-gray-500">or</span>
-          <hr className="flex-grow border-gray-300" />
-        </div>
-
+      
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -131,7 +112,7 @@ export default function SignupModal({ onClose }) {
             className="w-full bg-blue-600 text-white rounded-full py-3 font-medium hover:bg-blue-700 transition"
             disabled={loading}
           >
-            {loading ? "Signing up..." : "Create Account"}
+            {loading ? "Logingin..." : "Submit"}
           </button>
         </form>
 
@@ -142,15 +123,7 @@ export default function SignupModal({ onClose }) {
           <a href="#" className="text-blue-600"> Notification Settings</a>.
         </p>
 
-        <p className="text-sm text-gray-700 text-center mt-4">
-          Already have an account?{" "}
-          <button
-            onClick={() => setShowLogin(true)}
-            className="text-blue-600 hover:underline"
-          >
-            Log in
-          </button>
-        </p>
+        
       </div>
     </div>
   );

@@ -5,8 +5,6 @@ import TopNavbar from "./components/TopNavbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
 import Banner from "./components/Banner";
-import Cta from "./components/Cta";
-import ExitIntentPopup from "./components/ExitIntentPopup";
 import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
 import ServiceList from "./components/ServiceList";
@@ -24,7 +22,6 @@ import Cooks from "./Pages/Cooks";
 import Electrician from "./Pages/Electrician";
 import Plumber from "./Pages/Plumber";
 import Housekeeping from "./Pages/Housekeeping";
-import Faq from "./Pages/Faq";
 import DashboardPage from "./Pages/DashboardPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
@@ -34,6 +31,9 @@ import EmployeeForm from "./Pages/EmployeeForm";
 import ConfirmationPage from "./Pages/ConfirmationPage";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import MaidSelectionPage from "./Pages/MaidSelectionPage";
+import UserSignup from "./components/UserSignup";
+import ReviewPage from "./components/ReviewForm";
+
 function App() {
   return (
     <AuthProvider>
@@ -64,17 +64,20 @@ function App() {
               <Route path="/electrician" element={<Electrician />} />
               <Route path="/plumber" element={<Plumber />} />
               <Route path="/housekeeping" element={<Housekeeping />} />
-              <Route path="/faqs" element={<Faq />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<LoginModal />} />
               <Route path="/signup" element={<SignupModal />} />
               <Route path="/service-list" element={<ServiceList />} />
               <Route path="/add-service" element={<AddService />} />
               <Route path="/pricing" element={<Pricing />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/checkoutpage" element={<CheckoutPage />} />
               <Route path="/employee-form" element={<EmployeeForm />} />
               <Route path="/confirmation" element={<ConfirmationPage />} />
               <Route path="/maid-selection" element={<MaidSelectionPage />} />
+              <Route path="/user-signup" element={<UserSignup />} />
+              <Route path="/review/:bookingId" element={<ReviewPage />} />
+
+
 
               {/* PrivateRoute with conditional check for /dashboard */}
               <Route
@@ -89,9 +92,7 @@ function App() {
             </Routes>
           </div>
 
-          {/* Exit Popup */}
-          {/* <ExitIntentPopup /> */}
-
+      
           {/* Footer & Floating Chat/Buttons */}
           <Footer />
           <FloatingButtons />

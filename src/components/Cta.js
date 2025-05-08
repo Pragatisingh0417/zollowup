@@ -1,6 +1,6 @@
 import React from "react";
 
-const Cts = () => {
+const Cta = () => {
   return (
     <div className="relative bg-blue-900 text-white py-16 px-8 md:px-16">
       {/* Background Image Overlay */}
@@ -39,4 +39,4 @@ const Cts = () => {
   );
 };
 
-export default Cts;
+export default Cta;
