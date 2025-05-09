@@ -6,7 +6,7 @@ import { useAuth } from "./AuthContext";
 const PrivateRoute = ({ children, path }) => {
   const { user, isAuthenticated, loading } = useAuth();
 
-  if (loading) return <div>Loading...</div>; // or spinner
+  if (loading) return <div>Loading...</div>; 
 
   // If the route is /dashboard, skip authentication check
   if (path === "/dashboard") {

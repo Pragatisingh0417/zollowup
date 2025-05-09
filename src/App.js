@@ -33,12 +33,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import MaidSelectionPage from "./Pages/MaidSelectionPage";
 import UserSignup from "./components/UserSignup";
 import ReviewPage from "./components/ReviewForm";
+import AccountDetails from "./components/AccountDetails";
 
 function App() {
   return (
+    <Router>
+
     <AuthProvider>
       <CartProvider>
-        <Router>
           {/* Top and Main Navbar */}
           <TopNavbar />
           <Navbar />
@@ -76,6 +78,8 @@ function App() {
               <Route path="/maid-selection" element={<MaidSelectionPage />} />
               <Route path="/user-signup" element={<UserSignup />} />
               <Route path="/review/:bookingId" element={<ReviewPage />} />
+              {/* <Route path="/dashboard/account-details" element={<AccountDetails />} /> */}
+
 
 
 
@@ -96,9 +100,10 @@ function App() {
           {/* Footer & Floating Chat/Buttons */}
           <Footer />
           <FloatingButtons />
-        </Router>
       </CartProvider>
     </AuthProvider>
+    </Router>
+
   );
 }
 

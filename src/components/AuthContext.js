@@ -1,50 +1,74 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
-// Create AuthContext
 const AuthContext = createContext();
 
-// AuthProvider component
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null); // Optional: for user data
+  const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true); // New state to handle loading
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // ✅ For redirecting after logout
 
   useEffect(() => {
+    let isMounted = true;
+
     const savedToken = localStorage.getItem("token");
+
     if (savedToken) {
-      setToken(savedToken);
-      setIsAuthenticated(true);
+      try {
+        const decoded = jwtDecode(savedToken);
+        const isExpired = decoded.exp * 1000 < Date.now();
 
-      // Fetch user info using the saved token
-      const fetchUser = async () => {
-        try {
-          const res = await fetch("http://localhost:5000/api/auth/me", {
-            headers: {
-              Authorization: `Bearer ${savedToken}`,
-            },
-          });
-
-          const data = await res.json();
-          setUser(data); // Set the user here
-        } catch (err) {
-          console.error("Failed to fetch user", err);
-          logout(); // Log out on failure
-        } finally {
-          setLoading(false); // Done with loading
+        if (isExpired) {
+          logout();
+          if (isMounted) setLoading(false);
+          return;
         }
-      };
 
-      fetchUser();
+        setToken(savedToken);
+        setIsAuthenticated(true);
+
+        const fetchUser = async () => {
+          try {
+            const res = await fetch("http://localhost:5000/api/auth/me", {
+              headers: {
+                Authorization: `Bearer ${savedToken}`,
+              },
+            });
+
+            if (!res.ok) throw new Error("Failed to fetch user");
+
+            const data = await res.json();
+            if (isMounted) setUser(data);
+          } catch (err) {
+            console.error("Error fetching user:", err);
+            if (isMounted) logout();
+          } finally {
+            if (isMounted) setLoading(false);
+          }
+        };
+
+        fetchUser();
+      } catch (err) {
+        console.error("Invalid token:", err);
+        logout();
+        if (isMounted) setLoading(false);
+      }
     } else {
-      setLoading(false); // No token, still done with loading
+      if (isMounted) setLoading(false);
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const login = (token, userData) => {
     localStorage.setItem("token", token);
     setToken(token);
-    setUser(userData); // Save user info to context
+    setUser(userData);
     setIsAuthenticated(true);
   };
 
@@ -53,14 +77,16 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setIsAuthenticated(false);
     setUser(null);
+    navigate("/"); // ✅ Redirect to home page after logout
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, isAuthenticated, login, logout, loading, setUser }}>
+    <AuthContext.Provider
+      value={{ token, user, isAuthenticated, login, logout, loading, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use AuthContext
 export const useAuth = () => useContext(AuthContext);

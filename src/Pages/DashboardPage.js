@@ -1,8 +1,8 @@
-// import statements
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 import { FaUserCircle } from "react-icons/fa";
+import { format } from "date-fns"; // For improved date formatting
 
 const DashboardPage = () => {
   const [isSliderOpen, setSliderOpen] = useState(false);
@@ -25,20 +25,27 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchBookings = async () => {
       try {
         const res = await fetch("http://localhost:5000/api/bookings");
+        if (!res.ok) throw new Error(`Error ${res.status}`);
         const data = await res.json();
-        setBookings(data);
+        if (isMounted) {
+          setBookings(data.sort((a, b) => new Date(a.date) - new Date(b.date)));
+        }
       } catch (err) {
-        console.error("Error fetching bookings:", err);
-        setError("Failed to load bookings. Please try again later.");
+        if (isMounted) {
+          setError("Failed to load bookings. Please try again later.");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchBookings();
+    return () => { isMounted = false };
   }, []);
 
   useEffect(() => {
@@ -74,13 +81,13 @@ const DashboardPage = () => {
         {/* Welcome Section */}
         <section className="bg-white p-6 rounded-lg shadow mb-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-1">
-            Welcome back, {user?.name || "Guest"} 👋
+            Hi {user?.name || "Guest"} 👋
           </h1>
           <p className="text-gray-600">Manage your bookings and profile with ease.</p>
         </section>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+        <div className="flex sm:grid sm:grid-cols-3 gap-6 overflow-x-auto mb-8">
           <div className="bg-white p-6 rounded-xl shadow text-center">
             <h2 className="text-lg font-medium text-gray-700">Total Bookings</h2>
             <p className="text-3xl font-bold text-blue-600 mt-2">{bookings.length}</p>
@@ -154,9 +161,9 @@ const DashboardPage = () => {
                     <tr key={booking._id} className="border-b hover:bg-gray-50">
                       <td className="py-3 pr-4">{booking.service?.name || "N/A"}</td>
                       <td className="py-3 pr-4">
-                        {new Date(booking.date).toLocaleDateString(undefined, {
-                          dateStyle: "medium",
-                        })}
+                        {isNaN(new Date(booking.date))
+                          ? 'Invalid date'
+                          : format(new Date(booking.date), 'PPP')}
                       </td>
                       <td className="py-3 pr-4">
                         <span
@@ -194,7 +201,7 @@ const DashboardPage = () => {
               {[...Array(totalPages)].map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setCurrentPage(idx + 1)}
+                  onClick={() => currentPage !== idx + 1 && setCurrentPage(idx + 1)}
                   className={`px-3 py-1 rounded ${
                     currentPage === idx + 1
                       ? "bg-blue-500 text-white"
@@ -229,29 +236,17 @@ const DashboardPage = () => {
           <p>
             <strong className="text-lg text-gray-800">{user?.name || "Guest"}</strong>
           </p>
-          <p className="text-sm text-gray-600">{user?.email || "Not logged in"}</p>
-          <hr />
-          <Link to="/dashboard/profile" className="block text-blue-500 hover:text-blue-700">
-            Edit Profile
-          </Link>
-          <Link to="/dashboard/help" className="block text-blue-500 hover:text-blue-700">
-            Help Center
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="block text-left text-red-500 hover:text-red-700"
-          >
-            Logout
-          </button>
+          <p className="text-sm text-gray-600">{user?.email}</p>
+          <div className="flex flex-col mt-4 space-y-2">
+            <button
+              onClick={handleLogout}
+              className="bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
-
-      {isSliderOpen && (
-        <div
-          onClick={() => setSliderOpen(false)}
-          className="fixed inset-0 bg-black bg-opacity-30 z-40"
-        ></div>
-      )}
     </div>
   );
 };
