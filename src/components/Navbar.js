@@ -2,15 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, User, ShoppingCart, ChevronDown, ChevronUp } from "lucide-react";
 import Logo from "../assets/image.png";
-import SignupModal from "./SignupModal";
 import LoginModal from "./LoginModal";
 import Location from "./Location";
 import { useCart } from "./CartContext";
 import UserSignup from "./UserSignup";
+import EmployeeLogin from "./EmployeeLogin";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSignupForm, setShowSignupForm] = useState(false);
+  const [showEmployeeLogin, setShowEmployeeLogin] = useState(false);
   const [showUserSignup, setShowUserSignup] = useState(false);
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
   const dropdownRef = useRef(null);
@@ -106,10 +106,10 @@ const Navbar = () => {
               UserSignup
             </button>
             <button
-              onClick={() => setShowSignupForm(true)}
+              onClick={() => setShowEmployeeLogin(true)}
               className="px-5 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:bg-yellow-600 text-black text-sm font-semibold transition-all duration-200"
             >
-              EmployeeSignIn
+              EmployeeLogin
             </button>
           </div>
         </div>
@@ -177,7 +177,7 @@ const Navbar = () => {
 
       {/* Modals */}
       {showUserSignup && <UserSignup onClose={() => setShowUserSignup(false)} />}
-      {showSignupForm && <SignupModal onClose={() => setShowSignupForm(false)} />}
+      {showEmployeeLogin && <EmployeeLogin onClose={() => setShowEmployeeLogin(false)} />}
     </>
   );
 };

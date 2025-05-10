@@ -33,13 +33,16 @@ import MaidSelectionPage from "./Pages/MaidSelectionPage";
 import UserSignup from "./components/UserSignup";
 import ReviewPage from "./components/ReviewForm";
 import AccountDetails from "./components/AccountDetails";
+import EmployeeLogin from "./components/EmployeeLogin";
+import EmployeeDashboard from "./Pages/EmployeeDashboard";
+import UserLogin from "./components/UserLogin";
 
 function App() {
   return (
     <Router>
 
-    <AuthProvider>
-      <CartProvider>
+      <AuthProvider>
+        <CartProvider>
           {/* Top and Main Navbar */}
           <TopNavbar />
           <Navbar />
@@ -76,8 +79,13 @@ function App() {
               <Route path="/confirmation" element={<ConfirmationPage />} />
               <Route path="/maid-selection" element={<MaidSelectionPage />} />
               <Route path="/user-signup" element={<UserSignup />} />
+                            <Route path="/user-login" element={<UserLogin />} />
+
               <Route path="/review/:bookingId" element={<ReviewPage />} />
               <Route path="/dashboard/account-details" element={<AccountDetails />} />
+
+              <Route path="/employee-login" element={<EmployeeLogin />} />
+      <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
 
 
 
@@ -95,12 +103,12 @@ function App() {
             </Routes>
           </div>
 
-      
+
           {/* Footer & Floating Chat/Buttons */}
           <Footer />
           <FloatingButtons />
-      </CartProvider>
-    </AuthProvider>
+        </CartProvider>
+      </AuthProvider>
     </Router>
 
   );

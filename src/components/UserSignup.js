@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react'; 
-import LoginModal from './LoginModal';
+import { X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import UserLogin from './UserLogin';
 import { registerUser } from "../api";
 
 const UserSignup = ({ onClose }) => {
-    const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -15,7 +16,7 @@ const UserSignup = ({ onClose }) => {
   const [message, setMessage] = useState(null);
 
   if (showLogin) {
-    return <LoginModal onClose={onClose} />;
+    return <UserLogin onClose={onClose} />;
   }
 
   const handleChange = (e) => {
@@ -29,7 +30,7 @@ const UserSignup = ({ onClose }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch('https://zollowupdemoapi.vercel.app/api/users/signup', {
+      const res = await fetch('https://zollowupdemoapi.vercel.app/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -53,43 +54,17 @@ const UserSignup = ({ onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-start z-50 pt-10 px-4">
       <div className="relative bg-white p-6 rounded shadow-xl w-full max-w-md animate-slide-down">
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-5 text-gray-500 hover:text-red-500"
-        >
+        <button onClick={onClose} className="absolute top-5 right-5 text-gray-500 hover:text-red-500">
           <X size={22} />
         </button>
-        <h2 className="text-xl font-semibold mb-4 text-center">Create your account to have access to a more personalised experience.
-
-</h2>
+        <h2 className="text-xl font-semibold mb-4 text-center">Create your account</h2>
         <p className="text-sm text-gray-700 text-center mb-3">
           Already have an account?{" "}
-          <button
-            onClick={() => setShowLogin(true)}
-            className="text-blue-600 hover:underline"
-          >
+          <button onClick={() => setShowLogin(true)} className="text-blue-600 hover:underline">
             Log in here
           </button>
         </p>
-         {/* google */}
-         <button
-          onClick={() => (window.location.href = "http://localhost:5000/api/auth/google")}
-          className="flex items-center justify-center w-full bg-black text-white rounded-full py-3 font-medium mb-4"
-        >
-          <img
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-            alt="Google Logo"
-            className="h-5 w-5 mr-2"
-          />
-          Sign up with Google
-        </button>
 
-        <div className="flex items-center my-4">
-          <hr className="flex-grow border-gray-300" />
-          <span className="mx-2 text-gray-500">or</span>
-          <hr className="flex-grow border-gray-300" />
-        </div>
-        
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
             type="text"
