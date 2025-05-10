@@ -9,7 +9,6 @@ import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
 import ServiceList from "./components/ServiceList";
 import AddService from "./components/AddService";
-import ServiceButtons from "./components/ServiceButtons";
 import Pricing from "./components/Pricing";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -78,7 +77,7 @@ function App() {
               <Route path="/maid-selection" element={<MaidSelectionPage />} />
               <Route path="/user-signup" element={<UserSignup />} />
               <Route path="/review/:bookingId" element={<ReviewPage />} />
-              {/* <Route path="/dashboard/account-details" element={<AccountDetails />} /> */}
+              <Route path="/dashboard/account-details" element={<AccountDetails />} />
 
 
 

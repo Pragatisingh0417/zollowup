@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,16 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // ✅ For redirecting after logout
+  const navigate = useNavigate();
+
+  // Memoize logout function using useCallback to prevent unnecessary re-renders
+  const logout = useCallback(() => {
+    localStorage.removeItem("token");
+    setToken(null);
+    setIsAuthenticated(false);
+    setUser(null);
+    navigate("/"); // Redirect to home page
+  }, [navigate]);
 
   useEffect(() => {
     let isMounted = true;
@@ -38,13 +47,19 @@ export const AuthProvider = ({ children }) => {
               },
             });
 
+            if (res.status === 401) {
+              throw new Error("Unauthorized");
+            }
+
             if (!res.ok) throw new Error("Failed to fetch user");
 
             const data = await res.json();
             if (isMounted) setUser(data);
           } catch (err) {
             console.error("Error fetching user:", err);
-            if (isMounted) logout();
+            if (err.message === "Unauthorized" && isMounted) {
+              logout();
+            }
           } finally {
             if (isMounted) setLoading(false);
           }
@@ -63,21 +78,13 @@ export const AuthProvider = ({ children }) => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [logout]); // Now, logout is stable and won't change on each render
 
   const login = (token, userData) => {
     localStorage.setItem("token", token);
     setToken(token);
     setUser(userData);
     setIsAuthenticated(true);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setIsAuthenticated(false);
-    setUser(null);
-    navigate("/"); // ✅ Redirect to home page after logout
   };
 
   return (
