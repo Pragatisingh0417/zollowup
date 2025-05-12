@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import UserLogin from './UserLogin';
-import { registerUser } from "../api";
 
 const UserSignup = ({ onClose }) => {
   const [showLogin, setShowLogin] = useState(false);
@@ -14,9 +13,11 @@ const UserSignup = ({ onClose }) => {
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null); // Error handling state
+  const navigate = useNavigate();
 
   if (showLogin) {
-    return <UserLogin onClose={onClose} />;
+    return <UserLogin onClose={onClose} setShowLogin={setShowLogin} />;
   }
 
   const handleChange = (e) => {
@@ -26,30 +27,35 @@ const UserSignup = ({ onClose }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+  setMessage(null);
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/user/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
 
-    try {
-      const res = await fetch('https://zollowupdemoapi.vercel.app/api/users/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+    const result = await res.json();
 
-      const result = await res.json();
-
-      if (res.ok) {
-        alert('User signup successful!');
-        setFormData({ name: '', email: '', password: '' });
-        onClose(); // Close the form after success
-      } else {
-        alert(result.message || 'Signup failed.');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Error occurred during signup.');
+    if (res.ok) {
+      setMessage('Signup successful! Please check your email to verify your account.');
+      setFormData({ name: '', email: '', password: '' });
+      // Don't navigate or close the form until email is verified
+    } else {
+      setError(result.msg || 'Signup failed.');
     }
-  };
+  } catch (error) {
+    console.error(error);
+    setError('Error occurred during signup.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-start z-50 pt-10 px-4">
@@ -64,6 +70,9 @@ const UserSignup = ({ onClose }) => {
             Log in here
           </button>
         </p>
+
+        {message && <p className="text-green-500 text-sm mb-3">{message}</p>}
+        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
@@ -96,8 +105,9 @@ const UserSignup = ({ onClose }) => {
           <button
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full transition duration-200"
+            disabled={loading} // Disable button when loading
           >
-            Sign Up
+            {loading ? 'Signing up...' : 'Sign Up'}
           </button>
         </form>
       </div>

@@ -1,34 +1,34 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";  // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 export default function EmployeeLogin({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();  // Initialize navigate hook
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError(""); // Clear previous error message
 
     try {
-      const res = await axios.post("/api/employee/login", { email, password });
+const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
       const { token, employee } = res.data;
 
-      // Save token to localStorage
       localStorage.setItem("employeeToken", token);
+      setEmail("");
+      setPassword("");
+      setError(""); // Clear any previous error message
       alert(`Welcome, ${employee.name}`);
 
-      // Navigate to Employee Dashboard after successful login
-      navigate("/employee/dashboard");  // Redirect to dashboard
+      navigate("/employee/dashboard");
 
-      // Optionally close login modal
       if (onClose) onClose();
     } catch (err) {
-      setError(err.response?.data?.msg || "Login failed");
+      setError(err.response?.data?.msg || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -56,6 +56,7 @@ export default function EmployeeLogin({ onClose }) {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="username"
+              disabled={loading} // Disable while loading
             />
           </div>
           <div className="mb-4">
@@ -67,6 +68,7 @@ export default function EmployeeLogin({ onClose }) {
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="current-password"
+              disabled={loading} // Disable while loading
             />
           </div>
           {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}

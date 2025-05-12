@@ -5,8 +5,6 @@ import TopNavbar from "./components/TopNavbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
 import Banner from "./components/Banner";
-import LoginModal from "./components/LoginModal";
-import SignupModal from "./components/SignupModal";
 import ServiceList from "./components/ServiceList";
 import AddService from "./components/AddService";
 import Pricing from "./components/Pricing";
@@ -30,12 +28,13 @@ import EmployeeForm from "./Pages/EmployeeForm";
 import ConfirmationPage from "./Pages/ConfirmationPage";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import MaidSelectionPage from "./Pages/MaidSelectionPage";
-import UserSignup from "./components/UserSignup";
 import ReviewPage from "./components/ReviewForm";
 import AccountDetails from "./components/AccountDetails";
 import EmployeeLogin from "./components/EmployeeLogin";
 import EmployeeDashboard from "./Pages/EmployeeDashboard";
 import UserLogin from "./components/UserLogin";
+import UserSignup from "./components/UserSignup";
+import VerifyEmail from "./components/VerifyEmail";
 
 function App() {
   return (
@@ -69,8 +68,6 @@ function App() {
               <Route path="/plumber" element={<Plumber />} />
               <Route path="/housekeeping" element={<Housekeeping />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<LoginModal />} />
-              <Route path="/signup" element={<SignupModal />} />
               <Route path="/service-list" element={<ServiceList />} />
               <Route path="/add-service" element={<AddService />} />
               <Route path="/pricing" element={<Pricing />} />
@@ -87,6 +84,7 @@ function App() {
               <Route path="/employee-login" element={<EmployeeLogin />} />
       <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
 
+        <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
 
 
