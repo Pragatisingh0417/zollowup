@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const VerifyEmail = () => {
   const { token } = useParams();
-  const [message, setMessage] = useState("Verifying...");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/auth/verify-email/${token}`);
-        setMessage("Email verified successfully! You can now log in.");
-        // Optional: Redirect to login after a delay
-        setTimeout(() => navigate("/login"), 3000);
+        const res = await fetch(`http://localhost:5000/api/users/verify-email/${token}`);
+        const data = await res.json();
+        alert(data.msg || "Verification complete!");
       } catch (err) {
-        setMessage("Invalid or expired token.");
+        alert("Verification failed. Invalid or expired token.");
       }
     };
 
     verifyEmail();
-  }, [token, navigate]);
+  }, [token]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex justify-center items-center h-screen">
       <div className="bg-white p-6 rounded shadow text-center">
-        <h2 className="text-xl font-bold">{message}</h2>
+        <h2 className="text-xl font-semibold mb-2">Verifying Email...</h2>
       </div>
     </div>
   );

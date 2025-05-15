@@ -2,18 +2,15 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import UserLogin from './UserLogin';
+import GoogleLoginButton from './GoogleLoginButton';
+import { registerUser } from '../api';
 
 const UserSignup = ({ onClose }) => {
   const [showLogin, setShowLogin] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
-  const [error, setError] = useState(null); // Error handling state
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   if (showLogin) {
@@ -21,41 +18,26 @@ const UserSignup = ({ onClose }) => {
   }
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setError(null);
-  setMessage(null);
-  try {
-    const res = await fetch('http://localhost:5000/api/auth/user/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setMessage(null);
 
-    const result = await res.json();
-
-    if (res.ok) {
-      setMessage('Signup successful! Please check your email to verify your account.');
+    try {
+      const response = await registerUser(formData);
+      setMessage(response.msg || 'Signup successful! Please check your email to verify your account.');
       setFormData({ name: '', email: '', password: '' });
-      // Don't navigate or close the form until email is verified
-    } else {
-      setError(result.msg || 'Signup failed.');
+    } catch (err) {
+      console.error(err);
+      setError(err || 'Signup failed.');
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error(error);
-    setError('Error occurred during signup.');
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-start z-50 pt-10 px-4">
@@ -105,11 +87,15 @@ const UserSignup = ({ onClose }) => {
           <button
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full transition duration-200"
-            disabled={loading} // Disable button when loading
+            disabled={loading}
           >
             {loading ? 'Signing up...' : 'Sign Up'}
           </button>
         </form>
+
+        <div className="my-4">
+          <GoogleLoginButton />
+        </div>
       </div>
     </div>
   );

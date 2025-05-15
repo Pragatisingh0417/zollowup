@@ -1,15 +1,13 @@
 import axios from "axios";
 
-// General API URL
-const API_URL = "http://localhost:5000/api/auth/user"; 
-
-// Employee API URL
-const EMPLOYEE_API_URL = "http://localhost:5000/api/auth";
+// Base URLs
+const USER_API_URL = "http://localhost:5000/api/users";
+const EMPLOYEE_API_URL = "http://localhost:5000/api/employees";
 
 // Fetch all users (Admin only)
 export const fetchUsers = async (token) => {
   try {
-    const response = await axios.get(API_URL, {
+    const response = await axios.get(USER_API_URL, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -22,7 +20,7 @@ export const fetchUsers = async (token) => {
 // Fetch single user by ID
 export const fetchUserById = async (userId, token) => {
   try {
-    const response = await axios.get(`${API_URL}/${userId}`, {
+    const response = await axios.get(`${USER_API_URL}/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -35,11 +33,22 @@ export const fetchUserById = async (userId, token) => {
 // Register user
 export const registerUser = async (userData) => {
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/register", userData);
+    const res = await axios.post(`${USER_API_URL}/register`, userData);
     return res.data;
   } catch (error) {
     console.error("🛑 Register API Error:", error.response?.data || error.message);
     throw error.response?.data?.message || "Signup failed";
+  }
+};
+
+// Login user
+export const loginUser = async (credentials) => {
+  try {
+    const res = await axios.post(`${USER_API_URL}/login`, credentials);
+    return res.data;
+  } catch (error) {
+    console.error("🛑 Login API Error:", error.response?.data || error.message);
+    throw error.response?.data?.message || "Login failed";
   }
 };
 
@@ -74,7 +83,7 @@ export const loginEmployee = async ({ email, password }) => {
   }
 };
 
-// Employee Register
+// Employee Register (optional)
 export const registerEmployee = async (employeeData) => {
   try {
     const res = await axios.post(`${EMPLOYEE_API_URL}/register`, employeeData);

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import GoogleLoginButton from './GoogleLoginButton';
+import { loginUser } from '../api';
 
 const UserLogin = ({ onClose, setShowLogin }) => {
   const [email, setEmail] = useState('');
@@ -12,32 +14,20 @@ const UserLogin = ({ onClose, setShowLogin }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(''); // Reset error state before making a request
+    setError('');
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const result = await loginUser({ email, password });
+      localStorage.setItem('userToken', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
 
-      const result = await res.json();
-
-      if (res.ok) {
-        localStorage.setItem('userToken', result.token);
-        localStorage.setItem('user', JSON.stringify(result.user));
-        setEmail(''); // Clear form fields after successful login
-        setPassword('');
-        navigate('/dashboard'); // Navigate to the dashboard page
-        onClose(); // Close the login modal after successful login
-      } else {
-        setError(result.msg || 'Login failed');
-      }
-    } catch (error) {
-      console.error(error);
-      setError('Error occurred during login.');
+      setEmail('');
+      setPassword('');
+      navigate('/dashboard');
+      onClose();
+    } catch (err) {
+      console.error(err);
+      setError(err?.message || 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -57,7 +47,7 @@ const UserLogin = ({ onClose, setShowLogin }) => {
         <p className="text-sm text-gray-700 text-center mb-3">
           Don't have an account?{' '}
           <button
-            onClick={() => setShowLogin(false)} // Show signup form
+            onClick={() => setShowLogin(false)}
             className="text-blue-600 hover:underline"
           >
             Sign up here
@@ -93,6 +83,10 @@ const UserLogin = ({ onClose, setShowLogin }) => {
             {loading ? 'Logging in...' : 'Log In'}
           </button>
         </form>
+
+        <div className="my-4">
+          <GoogleLoginButton />
+        </div>
       </div>
     </div>
   );
