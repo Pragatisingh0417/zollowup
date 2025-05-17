@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import UserLogin from './UserLogin';
-import GoogleLoginButton from './GoogleLoginButton';
+import GoogleUserLoginButton from './GoogleUserLoginButton';
+// import GoogleLoginButton from './GoogleLoginButton';
 import { registerUser } from '../api';
 
 const UserSignup = ({ onClose }) => {
@@ -94,7 +95,7 @@ const UserSignup = ({ onClose }) => {
         </form>
 
         <div className="my-4">
-          <GoogleLoginButton />
+          <GoogleUserLoginButton />
         </div>
       </div>
     </div>

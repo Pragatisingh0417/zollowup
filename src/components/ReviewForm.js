@@ -38,7 +38,7 @@ const ReviewPage = () => {
     };
 
     fetchBooking();
-  }, [bookingId]);
+  }, [bookingId, API_BASE]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const ReviewPage = () => {
 
       if (res.ok) {
         setSuccess(true);
-        setTimeout(() => navigate("/dashboard"), 2000);
+        setTimeout(() => navigate("/dashboard/orders"), 2000);
       } else {
         alert("Failed to submit review.");
       }
@@ -83,7 +83,7 @@ const ReviewPage = () => {
         <p className="text-red-500 text-center">{error}</p>
       ) : success ? (
         <p className="text-green-600 text-center font-semibold">
-          Thank you! Your review has been submitted.
+          ✅ Thank you! Your review has been submitted.
         </p>
       ) : (
         <form onSubmit={handleSubmit}>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import GoogleLoginButton from './GoogleLoginButton';
 import { loginUser } from '../api';
 
@@ -9,7 +9,23 @@ const UserLogin = ({ onClose, setShowLogin }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [verifiedStatus, setVerifiedStatus] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // ✅ Read ?verified param from URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const verified = params.get('verified');
+    if (verified) setVerifiedStatus(verified);
+
+    // Clean up the URL so the param doesn’t stay forever
+    if (verified) {
+      const newURL = new URL(window.location.href);
+      newURL.searchParams.delete('verified');
+      window.history.replaceState({}, '', newURL.toString());
+    }
+  }, [location.search]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -53,6 +69,23 @@ const UserLogin = ({ onClose, setShowLogin }) => {
             Sign up here
           </button>
         </p>
+
+        {/* ✅ Verification messages */}
+        {verifiedStatus === 'true' && (
+          <p className="text-green-600 text-sm mb-3 text-center">
+            ✅ Email verified successfully. Please log in.
+          </p>
+        )}
+        {verifiedStatus === 'expired' && (
+          <p className="text-red-600 text-sm mb-3 text-center">
+            ❌ Verification link expired or invalid.
+          </p>
+        )}
+        {verifiedStatus === 'already' && (
+          <p className="text-yellow-600 text-sm mb-3 text-center">
+            ℹ️ Email already verified. Please log in.
+          </p>
+        )}
 
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
 

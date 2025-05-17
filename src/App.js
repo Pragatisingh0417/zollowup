@@ -19,14 +19,12 @@ import Cooks from "./Pages/Cooks";
 import Electrician from "./Pages/Electrician";
 import Plumber from "./Pages/Plumber";
 import Housekeeping from "./Pages/Housekeeping";
-import DashboardPage from "./Pages/DashboardPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
 import { CartProvider } from "./components/CartContext";
 import CheckoutPage from "./Pages/CheckoutPage";
 import EmployeeForm from "./Pages/EmployeeForm";
 import ConfirmationPage from "./Pages/ConfirmationPage";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import MaidSelectionPage from "./Pages/MaidSelectionPage";
 import ReviewPage from "./components/ReviewForm";
 import AccountDetails from "./components/AccountDetails";
@@ -35,11 +33,19 @@ import EmployeeDashboard from "./Pages/EmployeeDashboard";
 import UserLogin from "./components/UserLogin";
 import UserSignup from "./components/UserSignup";
 import VerifyEmail from "./components/VerifyEmail";
+import SetPassword from "./Pages/SetPassword";
+import GoogleRedirectHandler from "./components/GoogleRedirectHandler";
+import DashboardPage from "./components/DashboardPage";
+import DashboardLayout from "./Pages/DashboardLayout";
+import OrderHistory from "./components/OrderHistory";
+import Addresses from "./components/Addresses";
+import ContactUs from "./components/ContactUs";
+import Chat from "./components/Chat";
+import MyReviews from "./components/MyReviews";
 
 function App() {
   return (
     <Router>
-
       <AuthProvider>
         <CartProvider>
           {/* Top and Main Navbar */}
@@ -76,31 +82,35 @@ function App() {
               <Route path="/confirmation" element={<ConfirmationPage />} />
               <Route path="/maid-selection" element={<MaidSelectionPage />} />
               <Route path="/user-signup" element={<UserSignup />} />
-                            <Route path="/user-login" element={<UserLogin />} />
-
+              <Route path="/user-login" element={<UserLogin />} />
               <Route path="/review/:bookingId" element={<ReviewPage />} />
               <Route path="/dashboard/account-details" element={<AccountDetails />} />
-
               <Route path="/employee-login" element={<EmployeeLogin />} />
-      <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
-
-        <Route path="/verify-email/:token" element={<VerifyEmail />} />
-
-
+              <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
+              <Route path="/verify-email/:token" element={<VerifyEmail />} />
+              <Route path="/user/dashboard" element={<DashboardPage />} />
+              <Route path="/user/set-password" element={<SetPassword />} />
+              <Route path="/user/google-redirect" element={<GoogleRedirectHandler />} />
 
               {/* PrivateRoute with conditional check for /dashboard */}
               <Route
                 path="/dashboard"
                 element={
                   <PrivateRoute path="/dashboard">
-                    <DashboardPage />
+                    <DashboardLayout />
                   </PrivateRoute>
                 }
+              >
+                <Route index element={<DashboardPage />} />
+                <Route path="orders" element={<OrderHistory />} />
+                <Route path="addresses" element={<Addresses />} />
+                <Route path="contact" element={<ContactUs />} />
+                <Route path="chat" element={<Chat />} />
+                <Route path="my-reviews" element={<MyReviews />} />
 
-              />
-            </Routes>
+              </Route>
+            </Routes>{/* ✅ Close this before the container div ends */}
           </div>
-
 
           {/* Footer & Floating Chat/Buttons */}
           <Footer />
@@ -108,7 +118,6 @@ function App() {
         </CartProvider>
       </AuthProvider>
     </Router>
-
   );
 }
 
