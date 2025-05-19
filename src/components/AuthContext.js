@@ -11,25 +11,22 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Memoize logout function using useCallback to prevent unnecessary re-renders
   const logout = useCallback(() => {
     localStorage.removeItem("token");
     setToken(null);
-    setIsAuthenticated(false);
     setUser(null);
-    navigate("/"); // Redirect to home page
+    setIsAuthenticated(false);
+    navigate("/");
   }, [navigate]);
 
   useEffect(() => {
+    const savedToken = localStorage.getItem("token");
     let isMounted = true;
 
-    const savedToken = localStorage.getItem("token");
-
-    if (savedToken) {
+    const fetchUser = async () => {
       try {
         const decoded = jwtDecode(savedToken);
         const isExpired = decoded.exp * 1000 < Date.now();
-
         if (isExpired) {
           logout();
           if (isMounted) setLoading(false);
@@ -39,46 +36,33 @@ export const AuthProvider = ({ children }) => {
         setToken(savedToken);
         setIsAuthenticated(true);
 
-        const fetchUser = async () => {
-          try {
-            const res = await fetch("http://localhost:5000/api/auth/me", {
-              headers: {
-                Authorization: `Bearer ${savedToken}`,
-              },
-            });
+        const res = await fetch("http://localhost:5000/api/users/me", {
+          headers: {
+            Authorization: `Bearer ${savedToken}`,
+          },
+        });
 
-            if (res.status === 401) {
-              throw new Error("Unauthorized");
-            }
-
-            if (!res.ok) throw new Error("Failed to fetch user");
-
-            const data = await res.json();
-            if (isMounted) setUser(data);
-          } catch (err) {
-            console.error("Error fetching user:", err);
-            if (err.message === "Unauthorized" && isMounted) {
-              logout();
-            }
-          } finally {
-            if (isMounted) setLoading(false);
-          }
-        };
-
-        fetchUser();
+        if (!res.ok) throw new Error("Failed to fetch user");
+        const data = await res.json();
+        if (isMounted) setUser(data);
       } catch (err) {
-        console.error("Invalid token:", err);
-        logout();
+        console.error("Auth fetch error:", err);
+        if (isMounted) logout();
+      } finally {
         if (isMounted) setLoading(false);
       }
+    };
+
+    if (savedToken) {
+      fetchUser();
     } else {
-      if (isMounted) setLoading(false);
+      setLoading(false);
     }
 
     return () => {
       isMounted = false;
     };
-  }, [logout]); // Now, logout is stable and won't change on each render
+  }, [logout]);
 
   const login = (token, userData) => {
     localStorage.setItem("token", token);

@@ -29,6 +29,7 @@ const DashboardLayout = () => {
           <Link to="/dashboard/my-reviews" className="flex items-center hover:text-blue-600">
             📝 My Reviews
           </Link>
+          
           <button onClick={handleLogout} className="flex items-center text-red-600 hover:text-red-800"><FaSignOutAlt className="mr-2" /> Logout</button>
         </nav>
       </aside>

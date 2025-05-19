@@ -6,6 +6,10 @@ import { useCart } from "./CartContext";
 import UserSignup from "./UserSignup";
 import EmployeeLogin from "./EmployeeLogin";
 import Logo from "../assets/image.png";
+import { FaUser } from "react-icons/fa";
+import { FaUserTie } from "react-icons/fa"; // Make sure this is at the top
+
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,16 +90,19 @@ const Navbar = () => {
 
           <button
             onClick={() => setShowUserSignup(true)}
-            className="px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:bg-yellow-100"
+            className="flex flex-row items-center gap-2 px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:bg-yellow-100"
           >
-            UserSignup
+            <FaUser className="text-gray-700" />
+            <span>User Signup</span>
           </button>
+
           <button
-            onClick={() => setShowEmployeeLogin(true)}
-            className="px-4 py-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-sm text-black font-semibold"
-          >
-            EmployeeLogin
-          </button>
+  onClick={() => setShowEmployeeLogin(true)}
+  className="flex flex-row items-center gap-2 px-4 py-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-sm text-black font-semibold"
+>
+  <FaUserTie className="text-black" />
+  <span>Employee Login</span>
+</button>
         </div>
 
         {/* Mobile Menu */}
@@ -132,7 +139,7 @@ const Navbar = () => {
               </li>
 
               {/* Mobile Contact Dropdown */}
-                       <Link to="/contact" className="text-gray-800 hover:text-yellow-500 transition">ContactUs</Link>
+              <Link to="/contact" className="text-gray-800 hover:text-yellow-500 transition">ContactUs</Link>
 
             </ul>
           </div>

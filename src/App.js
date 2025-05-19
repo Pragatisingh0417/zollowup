@@ -42,6 +42,7 @@ import Addresses from "./components/Addresses";
 import ContactUs from "./components/ContactUs";
 import Chat from "./components/Chat";
 import MyReviews from "./components/MyReviews";
+import EditProfile from "./components/EditProfile";
 
 function App() {
   return (
@@ -88,7 +89,7 @@ function App() {
               <Route path="/employee-login" element={<EmployeeLogin />} />
               <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
               <Route path="/verify-email/:token" element={<VerifyEmail />} />
-              <Route path="/user/dashboard" element={<DashboardPage />} />
+              {/* <Route path="/user/dashboard" element={<DashboardPage />} /> */}
               <Route path="/user/set-password" element={<SetPassword />} />
               <Route path="/user/google-redirect" element={<GoogleRedirectHandler />} />
 
@@ -107,6 +108,8 @@ function App() {
                 <Route path="contact" element={<ContactUs />} />
                 <Route path="chat" element={<Chat />} />
                 <Route path="my-reviews" element={<MyReviews />} />
+                <Route path="edit-profile" element={<EditProfile />} />
+
 
               </Route>
             </Routes>{/* ✅ Close this before the container div ends */}
