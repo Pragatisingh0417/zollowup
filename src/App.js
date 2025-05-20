@@ -33,7 +33,6 @@ import EmployeeDashboard from "./Pages/EmployeeDashboard";
 import UserLogin from "./components/UserLogin";
 import UserSignup from "./components/UserSignup";
 import VerifyEmail from "./components/VerifyEmail";
-import SetPassword from "./Pages/SetPassword";
 import GoogleRedirectHandler from "./components/GoogleRedirectHandler";
 import DashboardPage from "./components/DashboardPage";
 import DashboardLayout from "./Pages/DashboardLayout";
@@ -43,6 +42,7 @@ import ContactUs from "./components/ContactUs";
 import Chat from "./components/Chat";
 import MyReviews from "./components/MyReviews";
 import EditProfile from "./components/EditProfile";
+import SetPasswordPage from "./components/SetPasswordPage";
 
 function App() {
   return (
@@ -89,8 +89,7 @@ function App() {
               <Route path="/employee-login" element={<EmployeeLogin />} />
               <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
               <Route path="/verify-email/:token" element={<VerifyEmail />} />
-              {/* <Route path="/user/dashboard" element={<DashboardPage />} /> */}
-              <Route path="/user/set-password" element={<SetPassword />} />
+  <Route path="/set-password" element={<SetPasswordPage />} />  {/* ✅ Add this */}
               <Route path="/user/google-redirect" element={<GoogleRedirectHandler />} />
 
               {/* PrivateRoute with conditional check for /dashboard */}

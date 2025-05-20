@@ -3,7 +3,6 @@ import { X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import GoogleLoginButton from './GoogleLoginButton';
 import { loginUser } from '../api';
-import GoogleUserLoginButton from './GoogleUserLoginButton';
 
 const UserLogin = ({ onClose, setShowLogin }) => {
   const [email, setEmail] = useState('');
@@ -118,9 +117,7 @@ const UserLogin = ({ onClose, setShowLogin }) => {
           </button>
         </form>
 
-        <div className="my-4">
-<GoogleUserLoginButton />
-        </div>
+        
       </div>
     </div>
   );
