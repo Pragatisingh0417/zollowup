@@ -64,12 +64,13 @@ export const AuthProvider = ({ children }) => {
     };
   }, [logout]);
 
-  const login = (token, userData) => {
-    localStorage.setItem("token", token);
-    setToken(token);
-    setUser(userData);
-    setIsAuthenticated(true);
-  };
+  const login = (token) => {
+  localStorage.setItem("token", token);
+  setToken(token); // ✅ fix
+  setIsAuthenticated(true); // ✅ fix
+  setUser(jwtDecode(token)); // or re-fetch user with /me if needed
+};
+
 
   return (
     <AuthContext.Provider

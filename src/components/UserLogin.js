@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import GoogleLoginButton from './GoogleLoginButton';
+// import GoogleLoginButton from './GoogleLoginButton';
 import { loginUser } from '../api';
+import GoogleUserLoginButton from './GoogleUserLoginButton';
 
 const UserLogin = ({ onClose, setShowLogin }) => {
   const [email, setEmail] = useState('');
@@ -118,7 +119,7 @@ const UserLogin = ({ onClose, setShowLogin }) => {
         </form>
 
         <div className="my-4">
-          <GoogleLoginButton />
+<GoogleUserLoginButton />
         </div>
       </div>
     </div>
