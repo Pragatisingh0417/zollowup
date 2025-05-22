@@ -1,99 +1,119 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchMaids } from '../maidApi';
+import VideoModal from '../components/VideoModal';
+import { Star } from 'lucide-react';
 
 const MaidSelection = () => {
-    const location = useLocation(); 
-    const [filteredMaids, setFilteredMaids] = useState([]);
-    const navigate = useNavigate(); 
+  const location = useLocation();
+  const [filteredMaids, setFilteredMaids] = useState([]);
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState(null);
+  const [selectedThumbnail, setSelectedThumbnail] = useState(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-      const loadMaids = async () => {
-          try {
-              const selectedHours = location.state?.selectedHours;
-              console.log("Selected Hours:", selectedHours);  
-              if (selectedHours) {
-                  const allMaids = await fetchMaids(selectedHours); 
-                  setFilteredMaids(allMaids);
-              } else {
-                  console.error("No selectedHours found in location state");
-              }
-          } catch (err) {
-              console.error("Failed to fetch maids", err);
-          }
-      };
-  
-      loadMaids();
-  }, [location.state]); 
-  
-    const handleBookMaid = (maid) => {
-        // Navigate to Checkout Page and pass the selected maid details in the state
-        navigate('/checkoutPage', { state: { selectedMaid: maid } });
+  useEffect(() => {
+    const loadMaids = async () => {
+      try {
+        const selectedHours = location.state?.selectedHours;
+        if (selectedHours) {
+          const allMaids = await fetchMaids(selectedHours);
+          const availableMaids = allMaids.filter(maid => maid.available !== false);
+          setFilteredMaids(availableMaids);
+        } else {
+          console.error('No selectedHours found in location state');
+        }
+      } catch (err) {
+        console.error('Failed to fetch maids', err);
+      }
     };
 
-    return (
-        <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold text-center mb-8">
-                Available Maids for {location.state.selectedHours} Hours
-            </h2>
-            <div className="maids-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {filteredMaids.length > 0 ? (
-                    filteredMaids.map((maid) => (
-                        <div
-                            key={maid.id}
-                            className="maid-card bg-white p-5 rounded-2xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center text-center"
-                        >
-                            <img
-                                src={maid.image}
-                                alt={maid.name}
-                                className="w-24 h-24 object-cover rounded-full border-4 border-blue-100 mb-4"
-                            />
-                            <h3 className="text-lg font-semibold text-gray-800">{maid.name}</h3>
-                            <div className="mt-2 space-y-1 text-sm text-gray-600">
-                                <p>
-                                    <span className="font-medium text-gray-700">Name:</span>{" "}
-                                    {maid.experience}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-gray-700">Age:</span>{" "}
-                                    {maid.religion}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-gray-700">Experience:</span> {maid.age}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-gray-700">Religion:</span> {maid.age}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-gray-700">Language:</span> {maid.age}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-gray-700">Speciality:</span> {maid.age}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-gray-700">State:</span> {maid.age}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-gray-700">Martial Status:</span> {maid.age}
-                                </p>
-                            </div>
+    loadMaids();
+  }, [location.state]);
 
-                            <button
-                                onClick={() => handleBookMaid(maid)}
-                                className="mt-4 px-4 py-2 w-full bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all"
-                            >
-                                Book This Maid
-                            </button>
-                        </div>
-                    ))
-                ) : (
-                    <p className="text-center text-gray-600 col-span-full">
-                        No maids available for this selection.
-                    </p>
-                )}
+  const handleBookMaid = (maid) => {
+    navigate('/checkoutPage', { state: { selectedMaid: maid } });
+  };
+
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }).map((_, index) => (
+      <Star
+        key={index}
+        className={`w-4 h-4 inline-block ${index < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+        fill={index < rating ? 'currentColor' : 'none'}
+      />
+    ));
+  };
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold text-center mb-8">
+        Available Maids for {location.state.selectedHours} Hours
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        {filteredMaids.length > 0 ? (
+          filteredMaids.map((maid) => (
+            <div
+              key={maid.id}
+              className="bg-white rounded-lg shadow-md p-4 flex flex-col items-start text-left"
+            >
+              <img
+                src={maid.image}
+                alt={maid.name}
+                className="w-full h-40 object-cover rounded-md mb-4"
+              />
+              <div className="flex justify-between items-center w-full mb-1">
+                <h3 className="text-lg font-semibold text-gray-800">{maid.name}</h3>
+                {maid.available && <span className="text-green-500 text-sm font-medium">● Available</span>}
+              </div>
+
+              <div className="mb-2">
+                {renderStars(maid.rating || 4)}
+              </div>
+
+              <div className="text-sm text-gray-700 w-full space-y-1 mb-4">
+                <p><span className="font-semibold">Experience:</span> {maid.experience}</p>
+                <p><span className="font-semibold">Age:</span> {maid.age}</p>
+                <p><span className="font-semibold">Religion:</span> {maid.religion}</p>
+                <p><span className="font-semibold">Language:</span> {maid.language}</p>
+                <p><span className="font-semibold">Speciality:</span> {maid.speciality}</p>
+                <p><span className="font-semibold">State:</span> {maid.state}</p>
+              </div>
+
+              <button
+                onClick={() => {
+                  setSelectedVideoUrl(maid.videoUrl);
+                  setSelectedThumbnail(maid.thumbnail || maid.image);
+                }}
+                className="mb-3 w-full px-4 py-2 bg-gray-100 text-sm rounded-md hover:bg-gray-200 border flex items-center justify-center gap-2"
+              >
+                ▶️ Watch Intro
+              </button>
+
+              <button
+                onClick={() => handleBookMaid(maid)}
+                className="w-full px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Book This Maid
+              </button>
             </div>
-        </div>
-    );
+          ))
+        ) : (
+          <p className="text-center text-gray-600 col-span-full">
+            No maids available for this selection.
+          </p>
+        )}
+      </div>
+
+      {selectedVideoUrl && (
+        <VideoModal
+          videoUrl={selectedVideoUrl}
+          thumbnail={selectedThumbnail}
+          onClose={() => setSelectedVideoUrl(null)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default MaidSelection;

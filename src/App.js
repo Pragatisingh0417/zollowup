@@ -89,7 +89,7 @@ function App() {
               <Route path="/employee-login" element={<EmployeeLogin />} />
               <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
               <Route path="/verify-email/:token" element={<VerifyEmail />} />
-  <Route path="/set-password" element={<SetPasswordPage />} />  {/* ✅ Add this */}
+              <Route path="/set-password" element={<SetPasswordPage />} />  {/* ✅ Add this */}
               <Route path="/user/google-redirect" element={<GoogleRedirectHandler />} />
 
               {/* PrivateRoute with conditional check for /dashboard */}
@@ -122,5 +122,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
