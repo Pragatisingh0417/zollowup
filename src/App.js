@@ -43,6 +43,7 @@ import Chat from "./components/Chat";
 import MyReviews from "./components/MyReviews";
 import EditProfile from "./components/EditProfile";
 import SetPasswordPage from "./components/SetPasswordPage";
+import AdminDashboard from "./Pages/AdminDashboard";
 
 function App() {
   return (
@@ -78,7 +79,7 @@ function App() {
               <Route path="/service-list" element={<ServiceList />} />
               <Route path="/add-service" element={<AddService />} />
               <Route path="/pricing" element={<Pricing />} />
-              <Route path="/checkoutpage" element={<CheckoutPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/employee-form" element={<EmployeeForm />} />
               <Route path="/confirmation" element={<ConfirmationPage />} />
               <Route path="/maid-selection" element={<MaidSelectionPage />} />
@@ -91,6 +92,9 @@ function App() {
               <Route path="/verify-email/:token" element={<VerifyEmail />} />
               <Route path="/set-password" element={<SetPasswordPage />} />  {/* ✅ Add this */}
               <Route path="/user/google-redirect" element={<GoogleRedirectHandler />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+
 
               {/* PrivateRoute with conditional check for /dashboard */}
               <Route

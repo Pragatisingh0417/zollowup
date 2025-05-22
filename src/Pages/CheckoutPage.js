@@ -11,35 +11,62 @@ const CheckoutPage = () => {
   const [promoCode, setPromoCode] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
 
-  const selectedMaid = state?.selectedMaid;
+  const selectedService = state?.selectedService;
 
   useEffect(() => {
-    if (!selectedMaid) {
+    if (!selectedService) {
       navigate("/");
     }
-  }, [selectedMaid, navigate]);
+  }, [selectedService, navigate]);
 
-  if (!selectedMaid) return null;
+  if (!selectedService) return null;
 
-  const hourlyRate = selectedMaid.rate || 150;
-  const duration = selectedMaid.hours || 1;
+  const hourlyRate = selectedService.rate || 150;
+  const duration = selectedService.hours || 1;
   const totalCost = hourlyRate * duration;
 
-  const handleConfirmBooking = () => {
+  const handleConfirmBooking = async () => {
     if (!agreeTerms) {
       alert("Please agree to the terms and conditions.");
       return;
     }
 
-    navigate("/confirmation", {
-      state: {
-        maid: selectedMaid,
-        bookingDateTime,
-        address,
-        phone,
-        totalCost,
-      },
-    });
+    const token = localStorage.getItem("token"); // if route is protected
+    const bookingPayload = {
+      serviceType: selectedService.type || "maid", // default fallback
+      name: selectedService.name,
+      address,
+      phone,
+      date: bookingDateTime,
+      status: "pending",
+    };
+
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Remove if public
+        },
+        body: JSON.stringify(bookingPayload),
+      });
+
+      if (!res.ok) throw new Error("Failed to save booking");
+
+      // Navigate to confirmation page
+      navigate("/confirmation", {
+        state: {
+          service: selectedService,
+          bookingDateTime,
+          address,
+          phone,
+          totalCost,
+        },
+      });
+    } catch (error) {
+      console.error("❌ Booking failed:", error);
+      alert("❌ Could not confirm booking. Please try again.");
+    }
   };
 
   return (
@@ -50,10 +77,10 @@ const CheckoutPage = () => {
         </h2>
 
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-          {selectedMaid?.image && (
+          {selectedService?.image && (
             <img
-              src={selectedMaid.image}
-              alt={selectedMaid.name}
+              src={selectedService.image}
+              alt={selectedService.name || selectedService.title}
               className="w-32 h-32 rounded-full object-cover border-4 border-blue-100"
             />
           )}
@@ -61,20 +88,26 @@ const CheckoutPage = () => {
           <div className="text-gray-700 w-full">
             <div className="mb-3">
               <p className="text-sm font-medium text-gray-500">Name</p>
-              <p className="text-lg font-semibold">{selectedMaid.name}</p>
+              <p className="text-lg font-semibold">
+                {selectedService.name || selectedService.title}
+              </p>
             </div>
+
             <div className="mb-3">
-              <p className="text-sm font-medium text-gray-500">Experience</p>
-              <p>{selectedMaid.experience}</p>
+              <p className="text-sm font-medium text-gray-500">Service Type</p>
+              <p>{selectedService.type || "maid"}</p>
             </div>
+
             <div className="mb-3">
               <p className="text-sm font-medium text-gray-500">Booking Duration</p>
               <p>{duration} hours</p>
             </div>
+
             <div className="mb-3">
               <p className="text-sm font-medium text-gray-500">Rate</p>
               <p>₹{hourlyRate}/hour</p>
             </div>
+
             <div className="mb-3">
               <p className="text-sm font-medium text-gray-500">Estimated Cost</p>
               <p className="text-lg font-bold text-green-600">₹{totalCost}</p>
@@ -84,9 +117,7 @@ const CheckoutPage = () => {
 
         <div className="mt-6 space-y-4">
           <div>
-            <label className="text-sm font-medium text-gray-600">
-              Booking Date & Time
-            </label>
+            <label className="text-sm font-medium text-gray-600">Booking Date & Time</label>
             <input
               type="datetime-local"
               className="w-full mt-1 p-2 border rounded"

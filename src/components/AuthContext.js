@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
@@ -44,7 +50,15 @@ export const AuthProvider = ({ children }) => {
 
         if (!res.ok) throw new Error("Failed to fetch user");
         const data = await res.json();
-        if (isMounted) setUser(data);
+
+        if (isMounted) {
+          console.log("👤 user loaded from /me =", data); // ✅ Debug
+          setUser({
+            name: data.name,
+            email: data.email,
+            isAdmin: data.isAdmin, // ✅ Must be stored here
+          });
+        }
       } catch (err) {
         console.error("Auth fetch error:", err);
         if (isMounted) logout();
@@ -65,12 +79,13 @@ export const AuthProvider = ({ children }) => {
   }, [logout]);
 
   const login = (token) => {
-  localStorage.setItem("token", token);
-  setToken(token); // ✅ fix
-  setIsAuthenticated(true); // ✅ fix
-  setUser(jwtDecode(token)); // or re-fetch user with /me if needed
-};
+    localStorage.setItem("token", token);
+    setToken(token);
+    setIsAuthenticated(true);
 
+    const decoded = jwtDecode(token);
+    setUser(decoded); // ✅ This must contain isAdmin if it's in the token
+  };
 
   return (
     <AuthContext.Provider

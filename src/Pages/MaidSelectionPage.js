@@ -31,7 +31,7 @@ const MaidSelection = () => {
   }, [location.state]);
 
   const handleBookMaid = (maid) => {
-    navigate('/checkoutPage', { state: { selectedMaid: maid } });
+navigate('/checkout', { state: { selectedService: maid } });
   };
 
   const renderStars = (rating) => {
