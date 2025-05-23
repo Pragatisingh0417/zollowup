@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const API_BASE = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 
 const EditProfile = () => {
-  const { user, token, setUser } = useAuth();
+  const { user, setUser } = useAuth(); // ✅ removed token
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -30,19 +30,19 @@ const EditProfile = () => {
     setSuccessMsg("");
 
     try {
-      const res = await fetch(`${API_BASE}/api/users/profile`, {
+      const res = await fetch(`${API_BASE}/api/users/update-profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
+        credentials: "include", // ✅ send cookie
         body: JSON.stringify({ name, address, phone }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Update failed");
 
-      setUser(data.user);
+      setUser(data.user); // ✅ update context
       setSuccessMsg("✅ Profile updated!");
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (err) {

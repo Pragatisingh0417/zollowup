@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../api/axiosInstance"; // ✅ use correct axios file
-import { useAuth } from "../components/AuthContext"; // ✅ use correct hook
+import axios from "../api/axiosInstance";
+import { useAuth } from "../components/AuthContext";
 
 const GoogleRedirectHandler = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const GoogleRedirectHandler = () => {
   useEffect(() => {
     const fetchGoogleUser = async () => {
       try {
-        const res = await axios.get("/users/me");
+        const res = await axios.get("/users/me"); // ✅ cookie will be sent automatically
         const user = res.data;
         setUser(user);
 
@@ -20,8 +20,8 @@ const GoogleRedirectHandler = () => {
           navigate("/dashboard");
         }
       } catch (error) {
-        console.error("Google login failed:", error);
-        navigate("/set-password");
+        console.error("❌ Google login failed:", error);
+        navigate("/user-login");
       }
     };
 

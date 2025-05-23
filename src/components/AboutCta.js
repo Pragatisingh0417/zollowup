@@ -26,6 +26,7 @@ const AboutCta = () => {
       <div class="absolute group-hover:-top-1 group-hover:-right-2 z-10 w-4 h-4   rounded-full group-hover:scale-150  duration-700 right-2 top-12 bg-red-600"></div>
       <p class="relative z-20 text-xl font-roboto">Conact Us</p>
     </button>
+    
         </div>
       </div>
     </div>

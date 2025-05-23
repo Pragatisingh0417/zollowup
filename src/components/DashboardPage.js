@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../components/AuthContext";
 import { Link } from "react-router-dom";
+import { io } from "socket.io-client";
+import ChatBox from "../components/ChatBox";
 
 const DashboardPage = () => {
   const { user } = useAuth();
+
+  useEffect(() => {
+  // ✅ Create socket connection inside useEffect
+  const socket = io("http://localhost:5000", {
+    withCredentials: true,
+  });
+
+  socket.emit("hello", "Hello from frontend (Dashboard)");
+
+  socket.on("welcome", (msg) => {
+    console.log("✅ Message from server:", msg);
+  });
+
+  // ✅ Handle real-time booking update
+  socket.on("booking_update", (data) => {
+    console.log("📢 Real-time booking received:", data);
+    alert("New booking received!\nService: " + data.serviceType);
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, []);
+
 
   return (
     <div className="max-w-3xl mx-auto bg-white p-6 rounded shadow mt-6">
@@ -41,6 +67,8 @@ const DashboardPage = () => {
           Edit Profile
         </Link>
       </div>
+        <ChatBox currentUser={user} />
+
     </div>
   );
 };

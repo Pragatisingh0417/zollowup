@@ -66,6 +66,7 @@ const FloatingButtons = () => {
           <FaArrowUp size={20} />
         </button>
       </div>
+      
     </div>
   );
 };
