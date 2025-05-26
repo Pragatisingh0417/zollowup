@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TopNavbar from "./components/TopNavbar";
 import Footer from "./components/Footer";
@@ -43,18 +43,16 @@ import Chat from "./components/Chat";
 import MyReviews from "./components/MyReviews";
 import EditProfile from "./components/EditProfile";
 import SetPasswordPage from "./components/SetPasswordPage";
-import AdminDashboard from "./Pages/AdminDashboard";
+import AdminChatPanel from "./components/AdminChatPanel";
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <CartProvider>
-          {/* Top and Main Navbar */}
           <TopNavbar />
           <Navbar />
 
-          {/* Routes */}
           <div className="container mx-auto">
             <Routes>
               <Route
@@ -90,13 +88,17 @@ function App() {
               <Route path="/employee-login" element={<EmployeeLogin />} />
               <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
               <Route path="/verify-email/:token" element={<VerifyEmail />} />
-              <Route path="/set-password" element={<SetPasswordPage />} />  {/* ✅ Add this */}
+              <Route path="/set-password" element={<SetPasswordPage />} />
               <Route path="/user/google-redirect" element={<GoogleRedirectHandler />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route
+                path="/admin/chat"
+                element={
+                  <PrivateRoute adminOnly>
+                    <AdminChatPanel />
+                  </PrivateRoute>
+                }
+              />
 
-
-
-              {/* PrivateRoute with conditional check for /dashboard */}
               <Route
                 path="/dashboard"
                 element={
@@ -112,13 +114,10 @@ function App() {
                 <Route path="chat" element={<Chat />} />
                 <Route path="my-reviews" element={<MyReviews />} />
                 <Route path="edit-profile" element={<EditProfile />} />
-
-
               </Route>
-            </Routes>{/* ✅ Close this before the container div ends */}
+            </Routes>
           </div>
 
-          {/* Footer & Floating Chat/Buttons */}
           <Footer />
           <FloatingButtons />
         </CartProvider>
@@ -126,4 +125,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useAuth } from "../components/AuthContext";
 import { Link } from "react-router-dom";
 import { io } from "socket.io-client";
-import ChatBox from "../components/ChatBox";
 
 const DashboardPage = () => {
   const { user } = useAuth();
@@ -67,7 +66,6 @@ const DashboardPage = () => {
           Edit Profile
         </Link>
       </div>
-        <ChatBox currentUser={user} />
 
     </div>
   );

@@ -24,11 +24,10 @@ const DashboardLayout = () => {
           <Link to="/dashboard" className="flex items-center hover:text-blue-600"><FaUser className="mr-2" /> Dashboard</Link>
           <Link to="/dashboard/orders" className="flex items-center hover:text-blue-600"><FaBox className="mr-2" /> Order history</Link>
           <Link to="/dashboard/addresses" className="flex items-center hover:text-blue-600"><FaMapMarkerAlt className="mr-2" /> Addresses</Link>
+          <Link to="/dashboard/chat" className="flex items-center hover:text-blue-600"><FaComments className="mr-2" /> Chat with us</Link>
           <Link to="/dashboard/my-reviews" className="flex items-center hover:text-blue-600">
             📝 My Reviews
           </Link>
-                    <Link to="/dashboard/chat" className="flex items-center hover:text-blue-600"><FaComments className="mr-2" /> Chat with us</Link>
-
           <Link to="/dashboard/contact" className="flex items-center hover:text-blue-600"><FaPhone className="mr-2" /> Contact Us</Link>
 
           <button onClick={handleLogout} className="flex items-center text-red-600 hover:text-red-800"><FaSignOutAlt className="mr-2" /> Logout</button>
