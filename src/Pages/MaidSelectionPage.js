@@ -17,7 +17,11 @@ const MaidSelection = () => {
         const selectedHours = location.state?.selectedHours;
         if (selectedHours) {
           const allMaids = await fetchMaids(selectedHours);
-          const availableMaids = allMaids.filter(maid => maid.available !== false);
+          const availableMaids = allMaids.filter(
+            maid =>
+              Array.isArray(maid.availableHours) &&
+              maid.availableHours.includes(`${selectedHours} Hours`)
+          );
           setFilteredMaids(availableMaids);
         } else {
           console.error('No selectedHours found in location state');
@@ -31,7 +35,7 @@ const MaidSelection = () => {
   }, [location.state]);
 
   const handleBookMaid = (maid) => {
-navigate('/checkout', { state: { selectedService: maid } });
+    navigate('/checkout', { state: { selectedService: maid } });
   };
 
   const renderStars = (rating) => {
@@ -54,7 +58,7 @@ navigate('/checkout', { state: { selectedService: maid } });
         {filteredMaids.length > 0 ? (
           filteredMaids.map((maid) => (
             <div
-              key={maid.id}
+              key={maid._id}
               className="bg-white rounded-lg shadow-md p-4 flex flex-col items-start text-left"
             >
               <img
@@ -64,7 +68,7 @@ navigate('/checkout', { state: { selectedService: maid } });
               />
               <div className="flex justify-between items-center w-full mb-1">
                 <h3 className="text-lg font-semibold text-gray-800">{maid.name}</h3>
-                {maid.available && <span className="text-green-500 text-sm font-medium">● Available</span>}
+                <span className="text-green-500 text-sm font-medium">● Available</span>
               </div>
 
               <div className="mb-2">
@@ -75,9 +79,10 @@ navigate('/checkout', { state: { selectedService: maid } });
                 <p><span className="font-semibold">Experience:</span> {maid.experience}</p>
                 <p><span className="font-semibold">Age:</span> {maid.age}</p>
                 <p><span className="font-semibold">Religion:</span> {maid.religion}</p>
-                <p><span className="font-semibold">Language:</span> {maid.language}</p>
-                <p><span className="font-semibold">Speciality:</span> {maid.speciality}</p>
-                <p><span className="font-semibold">State:</span> {maid.state}</p>
+                <p><span className="font-semibold">Language:</span> {maid.language || '—'}</p>
+                <p><span className="font-semibold">Speciality:</span> {maid.speciality || '—'}</p>
+                <p><span className="font-semibold">State:</span> {maid.state || '—'}</p>
+                <p><span className="font-semibold">Marital Status:</span> {maid.maritalStatus || '—'}</p>
               </div>
 
               <button

@@ -44,7 +44,11 @@ import MyReviews from "./components/MyReviews";
 import EditProfile from "./components/EditProfile";
 import SetPasswordPage from "./components/SetPasswordPage";
 import AdminChatPanel from "./components/AdminChatPanel";
-
+import AdminLayout from "./components/AdminLayout";
+import AdminDashboard from "./Pages/AdminDashboard";
+import AdminBookings from "./components/AdminBookings";
+import AdminMaids from "./components/AdminMaids";
+import AdminNurseBookings from "./components/AdminNurseBookings";
 function App() {
   return (
     <Router>
@@ -91,13 +95,22 @@ function App() {
               <Route path="/set-password" element={<SetPasswordPage />} />
               <Route path="/user/google-redirect" element={<GoogleRedirectHandler />} />
               <Route
-                path="/admin/chat"
+                path="/admin"
                 element={
                   <PrivateRoute adminOnly>
-                    <AdminChatPanel />
+                    <AdminLayout />
                   </PrivateRoute>
                 }
-              />
+              >
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="chat" element={<AdminChatPanel />} />
+                <Route path="bookings" element={<AdminBookings />} />
+                <Route path="maids" element={<AdminMaids />} />
+                <Route path="nurse-bookings" element={<AdminNurseBookings />} />
+
+
+              </Route>
+
 
               <Route
                 path="/dashboard"

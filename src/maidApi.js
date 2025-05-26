@@ -1,16 +1,3 @@
-// import axios from "axios";
-
-// export const fetchMaids = async ({ time }) => {
-//   try {
-//     const response = await axios.get(`http://localhost:5000/api/maids`, {
-//       params: { time },
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error fetching maids:", error);
-//     throw error;
-//   }
-// };
 import axios from 'axios';
 
 const API_URL = "http://localhost:5000/api/maids"; // Assuming your maids API endpoint
