@@ -9,13 +9,14 @@ const AdminMaids = () => {
     age: "",
     experience: "",
     religion: "",
-    image: "",
-    pricePerHour: "",
     availableHours: "",
+    pricePerHour: "",
     language: "",
     speciality: "",
     state: "",
     maritalStatus: "",
+    image: null,
+    video: null,
   });
 
   const fetchMaids = async () => {
@@ -32,26 +33,29 @@ const AdminMaids = () => {
     fetchMaids();
   }, []);
 
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (files) {
+      setForm((prev) => ({ ...prev, [name]: files[0] }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
   const handleAddMaid = async () => {
-    const payload = {
-      ...form,
-      age: Number(form.age),
-      pricePerHour: Number(form.pricePerHour),
-      availableHours: [form.availableHours],
-      userId: currentUser?._id,
-    };
+    const formData = new FormData();
+    for (const key in form) {
+      if (form[key]) formData.append(key, form[key]);
+    }
+    formData.append("userId", currentUser?._id);
 
     try {
       const res = await fetch("http://localhost:5000/api/maids", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        body: formData,
       });
 
       if (!res.ok) throw new Error("Failed to create maid");
-
       const saved = await res.json();
       setMaids((prev) => [...prev, saved]);
       setForm({
@@ -59,13 +63,14 @@ const AdminMaids = () => {
         age: "",
         experience: "",
         religion: "",
-        image: "",
-        pricePerHour: "",
         availableHours: "",
+        pricePerHour: "",
         language: "",
         speciality: "",
         state: "",
         maritalStatus: "",
+        image: null,
+        video: null,
       });
     } catch (err) {
       console.error("❌ Error adding maid:", err.message);
@@ -76,35 +81,12 @@ const AdminMaids = () => {
     <div className="max-w-4xl mx-auto p-6 bg-white rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Add New Maid</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        {[
-          { name: "name", placeholder: "Name" },
-          { name: "age", type: "number", placeholder: "Age" },
-          { name: "experience", placeholder: "Experience" },
-          { name: "religion", placeholder: "Religion" },
-          { name: "image", placeholder: "Image URL" },
-          { name: "pricePerHour", type: "number", placeholder: "Price per Hour" },
-          { name: "language", placeholder: "Language" },
-          { name: "speciality", placeholder: "Speciality (veg/non-veg)" },
-          { name: "state", placeholder: "State" },
-          { name: "maritalStatus", placeholder: "Marital Status" },
-        ].map(({ name, type = "text", placeholder }) => (
-          <input
-            key={name}
-            type={type}
-            name={name}
-            placeholder={placeholder}
-            value={form[name]}
-            onChange={(e) => setForm({ ...form, [name]: e.target.value })}
-            className="border p-2 rounded"
-          />
-        ))}
-
-        <select
-          value={form.availableHours}
-          onChange={(e) => setForm({ ...form, availableHours: e.target.value })}
-          className="border p-2 rounded col-span-2"
-          required
-        >
+        <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} className="border p-2 rounded" required />
+        <input type="number" name="age" placeholder="Age" value={form.age} onChange={handleChange} className="border p-2 rounded" required />
+        <input type="text" name="experience" placeholder="Experience" value={form.experience} onChange={handleChange} className="border p-2 rounded" />
+        <input type="text" name="religion" placeholder="Religion" value={form.religion} onChange={handleChange} className="border p-2 rounded" />
+        <input type="number" name="pricePerHour" placeholder="Price per Hour" value={form.pricePerHour} onChange={handleChange} className="border p-2 rounded" />
+        <select name="availableHours" value={form.availableHours} onChange={handleChange} className="border p-2 rounded">
           <option value="">Select Available Hours</option>
           <option value="2 Hours">2 Hours</option>
           <option value="4 Hours">4 Hours</option>
@@ -113,25 +95,19 @@ const AdminMaids = () => {
           <option value="12 Hours">12 Hours</option>
           <option value="24 Hours">24 Hours</option>
         </select>
+        <input type="text" name="language" placeholder="Language" value={form.language} onChange={handleChange} className="border p-2 rounded" />
+        <input type="text" name="speciality" placeholder="Speciality (veg/non-veg)" value={form.speciality} onChange={handleChange} className="border p-2 rounded" />
+        <input type="text" name="state" placeholder="State" value={form.state} onChange={handleChange} className="border p-2 rounded" />
+        <input type="text" name="maritalStatus" placeholder="Marital Status" value={form.maritalStatus} onChange={handleChange} className="border p-2 rounded" />
+        <input type="file" name="image" accept="image/*" onChange={handleChange} className="border p-2 rounded" />
+        <input type="file" name="video" accept="video/*" onChange={handleChange} className="border p-2 rounded" />
       </div>
 
-      <button
-        onClick={handleAddMaid}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
+      <button onClick={handleAddMaid} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
         Add Maid
       </button>
 
-      <div className="mt-8">
-        <h3 className="text-lg font-semibold mb-2">All Maids</h3>
-        {maids.map((maid) => (
-          <div key={maid._id} className="border p-2 mb-2 bg-gray-50 shadow">
-            <p>
-              {maid.name} - {maid.experience} - {maid.availableHours?.join(", ")} - {maid.speciality || "-"}
-            </p>
-          </div>
-        ))}
-      </div>
+     
     </div>
   );
 };

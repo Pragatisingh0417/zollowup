@@ -31,41 +31,83 @@ const CheckoutPage = () => {
       return;
     }
 
-    const token = localStorage.getItem("token"); // if route is protected
-    const bookingPayload = {
-      serviceType: selectedService.type || "maid", // default fallback
-      name: selectedService.name,
-      address,
-      phone,
-      date: bookingDateTime,
-      status: "pending",
-    };
-
     try {
-      const res = await fetch("/api/bookings", {
+      // 1️⃣ Create Razorpay order
+      const orderRes = await fetch("/api/payment/create-order", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Remove if public
-        },
-        body: JSON.stringify(bookingPayload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: totalCost }),
       });
 
-      if (!res.ok) throw new Error("Failed to save booking");
+      const orderData = await orderRes.json();
 
-      // Navigate to confirmation page
-      navigate("/confirmation", {
-        state: {
-          service: selectedService,
-          bookingDateTime,
-          address,
-          phone,
-          totalCost,
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId"); // or fetch from context
+
+      const bookingPayload = {
+        serviceType: selectedService.type || "maid",
+        name: selectedService.name,
+        address,
+        phone,
+        date: bookingDateTime,
+        status: "confirmed",
+      };
+
+      const options = {
+        key: "rzp_test_dummykey123456", // 🔁 Replace with real key later
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "ZollowUp",
+        description: "Booking Payment",
+        order_id: orderData.orderId,
+        handler: async function (response) {
+          // 2️⃣ Verify payment and save booking
+          const verifyRes = await fetch("/api/payment/verify-payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              amount: orderData.amount,
+              currency: orderData.currency,
+              userId,
+              bookingPayload,
+            }),
+          });
+
+          const result = await verifyRes.json();
+          if (verifyRes.ok && result.verified) {
+            navigate("/confirmation", {
+              state: {
+                service: selectedService,
+                bookingDateTime,
+                address,
+                phone,
+                totalCost,
+              },
+            });
+          } else {
+            navigate("/payment-failed");
+          }
         },
-      });
-    } catch (error) {
-      console.error("❌ Booking failed:", error);
-      alert("❌ Could not confirm booking. Please try again.");
+        prefill: {
+          name: selectedService.name || "Customer",
+          email: "test@example.com",
+          contact: phone,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (err) {
+      console.error("❌ Payment or Booking failed:", err);
+      alert("❌ Could not complete payment. Try again.");
     }
   };
 
@@ -162,11 +204,6 @@ const CheckoutPage = () => {
             />
           </div>
 
-          <div className="text-sm text-gray-600 border p-4 rounded bg-gray-50">
-            <strong>Payment Method:</strong> Pay on Arrival <br />
-            (Online payment coming soon)
-          </div>
-
           <div className="flex items-center space-x-2 mt-2">
             <input
               type="checkbox"
@@ -180,9 +217,9 @@ const CheckoutPage = () => {
 
           <button
             onClick={handleConfirmBooking}
-            className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-medium py-3 rounded-xl transition duration-300"
+            className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white text-lg font-medium py-3 rounded-xl transition duration-300"
           >
-            Confirm Booking
+            Pay ₹{totalCost} & Confirm Booking
           </button>
         </div>
       </div>

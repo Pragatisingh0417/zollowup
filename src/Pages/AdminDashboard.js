@@ -27,7 +27,7 @@ const AdminDashboard = () => {
 
         <li>
           <Link
-            to="/admin/add-maid"
+            to="/admin/add-maids"
             className="block text-center bg-green-600 text-white py-2 rounded hover:bg-green-700"
           >
             ➕ Add New Maid
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
 
         <li>
           <Link
-            to="/admin/add-nurse"
+            to="/admin/nurse-bookings"
             className="block text-center bg-pink-600 text-white py-2 rounded hover:bg-pink-700"
           >
             ➕ Add New Nurse

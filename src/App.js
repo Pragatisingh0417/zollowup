@@ -49,6 +49,7 @@ import AdminDashboard from "./Pages/AdminDashboard";
 import AdminBookings from "./components/AdminBookings";
 import AdminMaids from "./components/AdminMaids";
 import AdminNurseBookings from "./components/AdminNurseBookings";
+import AdminMaidTable from "./components/AdminMaidTable";
 function App() {
   return (
     <Router>
@@ -105,8 +106,10 @@ function App() {
                 <Route path="dashboard" element={<AdminDashboard />} />
                 <Route path="chat" element={<AdminChatPanel />} />
                 <Route path="bookings" element={<AdminBookings />} />
-                <Route path="maids" element={<AdminMaids />} />
+                <Route path="add-maids" element={<AdminMaids />} />
                 <Route path="nurse-bookings" element={<AdminNurseBookings />} />
+                <Route path="/admin/maids-data" element={<AdminMaidTable />} />
+
 
 
               </Route>

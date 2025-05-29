@@ -40,16 +40,21 @@ const VideoModal = ({ videoUrl, onClose, thumbnail }) => {
           <X className="w-6 h-6" />
         </button>
 
-        <video
-          ref={videoRef}
-          controls
-          autoPlay
-          className="w-full rounded-lg mt-2"
-          poster={thumbnail}
-        >
-          <source src={videoUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {videoUrl ? (
+  <video
+    ref={videoRef}
+    controls
+    autoPlay
+    className="w-full rounded-lg mt-2"
+    poster={thumbnail}
+  >
+    <source src={videoUrl} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+) : (
+  <p className="text-center text-gray-500 mt-4">Loading video...</p>
+)}
+
       </div>
     </div>
   );

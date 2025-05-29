@@ -31,19 +31,19 @@ export const AuthProvider = ({ children }) => {
 
   // ✅ Auto-login using cookie on mount
   useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get("/users/me");
-      setUser(res.data);
-      setIsAuthenticated(true);
-    } catch (err) {
-      console.error("Auth fetch error:", err);
-      setUser(null);
-      setIsAuthenticated(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+ const fetchUser = async () => {
+  try {
+    const res = await axios.get("/users/me");
+    setUser(res.data); // ✅ Make sure res.data includes isAdmin
+    setIsAuthenticated(true);
+  } catch (err) {
+    setUser(null);
+    setIsAuthenticated(false);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   fetchUser();
 }, []);

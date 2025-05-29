@@ -34,21 +34,29 @@ const AdminSidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/admin/maids"
+          to="/admin/add-maids"
           className={({ isActive }) =>
             isActive ? "text-blue-400 font-semibold" : "hover:text-blue-300"
           }
         >
-          🧹 Maids
+          🧹Add-Maids
         </NavLink>
 
+  <NavLink
+          to="/admin/maids-data"
+          className={({ isActive }) =>
+            isActive ? "text-blue-400 font-semibold" : "hover:text-blue-300"
+          }
+        >
+          🧹Maids-data
+        </NavLink>
         <NavLink
           to="/admin/nurse-bookings"
           className={({ isActive }) =>
             isActive ? "text-blue-400 font-semibold" : "hover:text-blue-300"
           }
         >
-        🧑‍⚕️ Nurses
+        🧑Nurses-booking data 
         </NavLink>
 
         <NavLink
