@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-// import GoogleLoginButton from './GoogleLoginButton';
-import { loginUser } from '../api';
+import { useAuth } from '../components/AuthContext';
 
-const UserLogin = ({ onClose, setShowLogin }) => {
+const UserLogin = ({ onClose = () => {}, setShowLogin = () => {}, setShowSignup = () => {} }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -13,13 +12,14 @@ const UserLogin = ({ onClose, setShowLogin }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ Read ?verified param from URL
+  const { login } = useAuth();
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const verified = params.get('verified');
     if (verified) setVerifiedStatus(verified);
 
-    // Clean up the URL so the param doesn’t stay forever
+    // ✅ Remove the URL param after handling
     if (verified) {
       const newURL = new URL(window.location.href);
       newURL.searchParams.delete('verified');
@@ -33,17 +33,14 @@ const UserLogin = ({ onClose, setShowLogin }) => {
     setError('');
 
     try {
-      const result = await loginUser({ email, password });
-      localStorage.setItem('userToken', result.token);
-      localStorage.setItem('user', JSON.stringify(result.user));
-
+      await login(email, password); // ✅ updates AuthContext
       setEmail('');
       setPassword('');
-      navigate('/dashboard');
-      onClose();
+      onClose(); // ✅ close modal
+      navigate('/dashboard'); // ✅ redirect to dashboard
     } catch (err) {
       console.error(err);
-      setError(err?.message || 'Login failed');
+      setError(err?.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -63,14 +60,16 @@ const UserLogin = ({ onClose, setShowLogin }) => {
         <p className="text-sm text-gray-700 text-center mb-3">
           Don't have an account?{' '}
           <button
-            onClick={() => setShowLogin(false)}
+            onClick={() => {
+              setShowLogin(false);
+              setShowSignup(true);
+            }}
             className="text-blue-600 hover:underline"
           >
             Sign up here
           </button>
         </p>
 
-        {/* ✅ Verification messages */}
         {verifiedStatus === 'true' && (
           <p className="text-green-600 text-sm mb-3 text-center">
             ✅ Email verified successfully. Please log in.
@@ -87,12 +86,11 @@ const UserLogin = ({ onClose, setShowLogin }) => {
           </p>
         )}
 
-        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+        {error && <p className="text-red-500 text-sm mb-3 text-center">{error}</p>}
 
         <form onSubmit={handleLogin} className="space-y-3">
           <input
             type="email"
-            name="email"
             value={email}
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -101,7 +99,6 @@ const UserLogin = ({ onClose, setShowLogin }) => {
           />
           <input
             type="password"
-            name="password"
             value={password}
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
@@ -110,14 +107,12 @@ const UserLogin = ({ onClose, setShowLogin }) => {
           />
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full transition duration-200"
             disabled={loading}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full transition"
           >
             {loading ? 'Logging in...' : 'Log In'}
           </button>
         </form>
-
-        
       </div>
     </div>
   );

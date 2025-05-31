@@ -108,12 +108,21 @@ const NewAndNoteworthySlider = () => {
         </Slider>
 
         {/* Custom Arrows */}
-        <button
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full z-10 hover:bg-gray-200"
-          onClick={() => sliderRef.current.slickPrev()}
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+        {/* Custom Arrows */}
+<button
+  className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#00000099] text-white p-2 rounded-full z-10 hover:bg-yellow-500 transition-colors"
+  onClick={() => sliderRef.current.slickPrev()}
+>
+  <ChevronLeft className="w-6 h-6" />
+</button>
+
+<button
+  className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#00000099] text-white p-2 rounded-full z-10 hover:bg-yellow-500 transition-colors"
+  onClick={() => sliderRef.current.slickNext()}
+>
+  <ChevronRight className="w-6 h-6" />
+</button>
+
         <button
           className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full z-10 hover:bg-gray-200"
           onClick={() => sliderRef.current.slickNext()}

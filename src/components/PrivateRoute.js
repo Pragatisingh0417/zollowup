@@ -1,19 +1,13 @@
-// PrivateRoute.js
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
-const PrivateRoute = ({ children, path }) => {
-  const { user, isAuthenticated, loading } = useAuth();
+const PrivateRoute = ({ children }) => {
+  const { user, loading } = useAuth();
 
-  if (loading) return <div>Loading...</div>; 
+  if (loading) return <div>Loading...</div>;
 
-  // If the route is /dashboard, skip authentication check
-  if (path === "/dashboard") {
-    return children;
-  }
-
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/user-login" />;
 };
 
 export default PrivateRoute;

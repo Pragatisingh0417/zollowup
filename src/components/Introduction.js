@@ -8,7 +8,7 @@ const Introduction = () => {
 				{/* Heading Section */}
 				<div className="text-center mb-12">
 					<motion.h2
-						className="text-3xl md:text-4xl font-bold text-black font-poppins"
+						className="text-3xl md:text-4xl font-bold text-black font-heading"
 						initial={{ opacity: 0, y: -20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
@@ -16,11 +16,14 @@ const Introduction = () => {
 					>
 						Reliable Home Services at Your Doorstep
 					</motion.h2>
+					<p className="text-gray-600 mt-3 text-lg font-sans">
+						One-stop destination for all home maintenance & personal care needs
+					</p>
 				</div>
 
 				{/* Content Section */}
 				<div className="flex flex-col lg:flex-row items-center gap-10">
-					{/* Left Image Column */}
+					{/* Left Images */}
 					<div className="lg:w-1/2 w-full flex flex-wrap justify-center lg:justify-start">
 						{/* Image 1 */}
 						<motion.div
@@ -33,7 +36,7 @@ const Introduction = () => {
 							<div className="rounded-2xl overflow-hidden">
 								<img
 									src="https://mehedi.asiandevelopers.com/demo/html/fouens/images/resources/welcome-thumb-1.jpg"
-									alt="Child on Carpet"
+									alt="Cleaning Service"
 									className="w-full h-auto object-cover"
 									loading="lazy"
 								/>
@@ -51,7 +54,7 @@ const Introduction = () => {
 							<div className="rounded-2xl overflow-hidden relative border-8 border-white lg:left-[-120px] lg:mt-10">
 								<img
 									src="https://mehedi.asiandevelopers.com/demo/html/fouens/images/resources/welcome.jpg"
-									alt="Cleaning Lady"
+									alt="Cleaner"
 									className="w-full h-64 lg:h-[320px] object-cover"
 									loading="lazy"
 								/>
@@ -69,7 +72,7 @@ const Introduction = () => {
 							<div className="rounded-2xl overflow-hidden border-8 border-white">
 								<img
 									src="https://mehedi.asiandevelopers.com/demo/html/fouens/images/resources/welcome-thumb-2.jpg"
-									alt="Child on Carpet"
+									alt="Service Professional"
 									className="w-full h-[200px] sm:h-auto object-cover"
 									loading="lazy"
 								/>
@@ -92,21 +95,20 @@ const Introduction = () => {
 								className="w-10 h-10 mr-4"
 								loading="lazy"
 							/>
-							<h3 className="text-2xl md:text-3xl font-bold text-black leading-snug font-poppins">
+							<h3 className="text-2xl md:text-3xl font-bold text-black leading-snug font-heading">
 								Fast & Reliable Services <br />
-								<span className="text-blue-600 font-[Lobster] italic">At Your Home</span>
+								<span className="text-accent italic">At Your Home</span>
 							</h3>
 						</motion.div>
 
-						{/* Paragraphs */}
 						{[
-							`Need professional help around the house? Zollowup connects you with skilled maids, cleaners, plumbers, electricians, and more — all vetted and ready to serve.`,
-							`Enjoy seamless booking, competitive pricing, and trustworthy professionals at your convenience. With flexible scheduling and safety-first standards, we bring comfort, care, and cleanliness to your doorstep.`,
-							`Join thousands of happy clients who count on Zollowup for hassle-free home service solutions. Book today and experience the difference!`
+							"Need professional help around the house? Zollowup instantly connects you with trusted maids, expert cleaners, skilled technicians, and more — all background-checked and ready to serve.",
+							"Enjoy seamless booking, competitive pricing, and trustworthy professionals at your convenience. We bring comfort, care, and cleanliness to your doorstep — safely and efficiently.",
+							"Join thousands of happy clients who count on Zollowup for hassle-free home service solutions. Book today and experience the difference!"
 						].map((text, index) => (
 							<motion.p
 								key={index}
-								className="text-gray-600 mb-4 leading-6 font-roboto text-base"
+								className="text-gray-600 mb-4 leading-6 font-sans text-base"
 								initial={{ opacity: 0 }}
 								whileInView={{ opacity: 1 }}
 								viewport={{ once: true }}
@@ -115,6 +117,36 @@ const Introduction = () => {
 								{text}
 							</motion.p>
 						))}
+
+						{/* Trust Indicator */}
+						<motion.div
+							className="flex items-center gap-2 mt-4"
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.8, delay: 1.1 }}
+						>
+							<img src="https://img.icons8.com/color/48/000000/star--v1.png" alt="Star" className="h-5" />
+							<p className="text-sm text-gray-600 font-medium">
+								4.9/5 based on 1,200+ reviews
+							</p>
+						</motion.div>
+
+						{/* CTA Button */}
+						<motion.div
+							className="mt-6"
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.8, delay: 1.3 }}
+						>
+							<a
+								href="/maid"
+								className="inline-block bg-accent text-white font-medium px-6 py-3 rounded-full hover:bg-yellow-500 transition duration-300"
+							>
+								Book a Service
+							</a>
+						</motion.div>
 					</div>
 				</div>
 			</div>

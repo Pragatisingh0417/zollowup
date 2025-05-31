@@ -18,16 +18,18 @@ export const AuthProvider = ({ children }) => {
 
   // ✅ Logout: clear cookie and local state
   const logout = useCallback(async () => {
-    try {
-      await axios.post("/users/logout"); // clears cookie
-    } catch (err) {
-      console.error("Logout error:", err);
-    }
+  try {
+    await axios.post("/users/logout"); // 🔁 this will now clear the cookie
+  } catch (err) {
+    console.error("Logout error:", err);
+  }
 
-    setUser(null);
-    setIsAuthenticated(false);
-    navigate("/");
-  }, [navigate]);
+  localStorage.removeItem("user"); // just in case
+  setUser(null);
+  setIsAuthenticated(false);
+  navigate("user-login");
+}, [navigate]);
+
 
   // ✅ Auto-login using cookie on mount
   useEffect(() => {
@@ -50,12 +52,18 @@ export const AuthProvider = ({ children }) => {
 
 
   // ✅ Login by calling API directly (for email/password)
-  const login = async (email, password) => {
+ const login = async (email, password) => {
+  try {
     const res = await axios.post("/users/login", { email, password });
     setUser(res.data.user);
     setIsAuthenticated(true);
     return res;
-  };
+  } catch (err) {
+    // ✅ Re-throw error so it's caught in UserLogin
+    throw err;
+  }
+};
+
 
   return (
     <AuthContext.Provider

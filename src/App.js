@@ -50,6 +50,7 @@ import AdminBookings from "./components/AdminBookings";
 import AdminMaids from "./components/AdminMaids";
 import AdminNurseBookings from "./components/AdminNurseBookings";
 import AdminMaidTable from "./components/AdminMaidTable";
+import UserAuthPage from "./components/UserAuthPage";
 function App() {
   return (
     <Router>
@@ -87,7 +88,7 @@ function App() {
               <Route path="/confirmation" element={<ConfirmationPage />} />
               <Route path="/maid-selection" element={<MaidSelectionPage />} />
               <Route path="/user-signup" element={<UserSignup />} />
-              <Route path="/user-login" element={<UserLogin />} />
+              <Route path="/user-login" element={<UserAuthPage />} />
               <Route path="/review/:bookingId" element={<ReviewPage />} />
               <Route path="/dashboard/account-details" element={<AccountDetails />} />
               <Route path="/employee-login" element={<EmployeeLogin />} />
@@ -118,11 +119,12 @@ function App() {
               <Route
                 path="/dashboard"
                 element={
-                  <PrivateRoute path="/dashboard">
+                  <PrivateRoute>
                     <DashboardLayout />
                   </PrivateRoute>
                 }
               >
+                {/* child routes inside the dashboard layout */}
                 <Route index element={<DashboardPage />} />
                 <Route path="orders" element={<OrderHistory />} />
                 <Route path="addresses" element={<Addresses />} />
@@ -131,6 +133,7 @@ function App() {
                 <Route path="my-reviews" element={<MyReviews />} />
                 <Route path="edit-profile" element={<EditProfile />} />
               </Route>
+
             </Routes>
           </div>
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import HowItWorks from "../components/HowItWorks";
+
 import Herosection from "../components/Herosection";
 import InfoSection from "../components/InfoSection";
 import Cta from "../components/Cta";
@@ -11,7 +13,7 @@ import Testimonial from "../components/Testimonial";
 import CountingNumber from "../components/CountingNumber";
 import Cleaning from "../components/Cleaning";
 
-// 🔁 Import your modal components
+// 🔁 Modals
 import UserLogin from "../components/UserLogin";
 import UserSignup from "../components/UserSignup";
 
@@ -21,17 +23,20 @@ const Home = () => {
   const [showSignup, setShowSignup] = useState(false);
   const location = useLocation();
 
-  // 🔁 Check URL for email verification status
+  // ✅ Handle email verification modal logic
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const verified = params.get("verified");
 
     if (verified === "true" || verified === "expired" || verified === "already") {
       setShowLogin(true);
+      // ✅ Clean up the URL
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, "", cleanUrl);
     }
   }, [location]);
 
-  // 📡 Fetch your homepage data
+  // 📡 Fetch homepage data (optional, depends on your API)
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/your-endpoint`)
@@ -41,7 +46,7 @@ const Home = () => {
 
   return (
     <div className="overflow-x-hidden relative">
-      {/* 👇 Show modals if needed */}
+      {/* Modals */}
       {showLogin && (
         <UserLogin
           onClose={() => setShowLogin(false)}
@@ -56,11 +61,13 @@ const Home = () => {
         />
       )}
 
-      {/* 👇 Page sections */}
+      {/* Page Sections */}
       <Introduction />
       <Herosection />
       <InfoSection />
       <Reasons />
+      <HowItWorks />
+
       <NewAndNoteworthySlider />
       <Cleaning />
       <CountingNumber />

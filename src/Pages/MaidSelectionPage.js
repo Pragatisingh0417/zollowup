@@ -85,17 +85,17 @@ const MaidSelection = () => {
                 <p><span className="font-semibold">Marital Status:</span> {maid.maritalStatus || '—'}</p>
               </div>
 
-             {maid.video && (
-  <button
-    onClick={() => {
-      setSelectedVideoUrl(`http://localhost:5000/uploads/${maid.video}`);
-      setSelectedThumbnail(maid.image);
-    }}
-    className="mb-3 w-full px-4 py-2 bg-gray-100 text-sm rounded-md hover:bg-gray-200 border flex items-center justify-center gap-2"
-  >
-    ▶️ Watch Intro
-  </button>
-)}
+              {maid.video && (
+                <button
+                  onClick={() => {
+                    setSelectedVideoUrl(`http://localhost:5000/uploads/${maid.video}`);
+                    setSelectedThumbnail(maid.image);
+                  }}
+                  className="mb-3 w-full px-4 py-2 bg-gray-100 text-sm rounded-md hover:bg-gray-200 border flex items-center justify-center gap-2"
+                >
+                  ▶️ Watch Intro
+                </button>
+              )}
 
 
 

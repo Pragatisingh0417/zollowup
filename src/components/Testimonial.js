@@ -41,10 +41,7 @@ export default function TestimonialCarousel() {
             bookingId: { service: { name: "Nursing" } },
           },
         ];
-
-        setTestimonials(
-          Array.isArray(data) && data.length > 0 ? data.filter(r => r.rating >= 4) : fallbackData
-        );
+        setTestimonials(Array.isArray(data) && data.length > 0 ? data.filter(r => r.rating >= 4) : fallbackData);
       } catch (err) {
         console.error("Failed to load testimonials:", err);
         setTestimonials([]);
@@ -56,35 +53,30 @@ export default function TestimonialCarousel() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerSlide(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerSlide(2);
-      } else {
-        setItemsPerSlide(3);
-      }
+      if (window.innerWidth < 640) setItemsPerSlide(1);
+      else if (window.innerWidth < 1024) setItemsPerSlide(2);
+      else setItemsPerSlide(3);
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + itemsPerSlide) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(intervalRef.current);
+    if (testimonials.length > 0) {
+      intervalRef.current = setInterval(() => {
+        setIndex((prev) => (prev + itemsPerSlide) % testimonials.length);
+      }, 5000);
+      return () => clearInterval(intervalRef.current);
+    }
   }, [testimonials, itemsPerSlide]);
 
   const nextSlide = () => {
-    setIndex((prevIndex) => (prevIndex + itemsPerSlide) % testimonials.length);
+    setIndex((prev) => (prev + itemsPerSlide) % testimonials.length);
   };
 
   const prevSlide = () => {
-    setIndex((prevIndex) =>
-      (prevIndex - itemsPerSlide + testimonials.length) % testimonials.length
-    );
+    setIndex((prev) => (prev - itemsPerSlide + testimonials.length) % testimonials.length);
   };
 
   const getVisibleTestimonials = () => {
@@ -92,10 +84,7 @@ export default function TestimonialCarousel() {
     if (end <= testimonials.length) {
       return testimonials.slice(index, end);
     } else {
-      return [
-        ...testimonials.slice(index),
-        ...testimonials.slice(0, end - testimonials.length),
-      ];
+      return [...testimonials.slice(index), ...testimonials.slice(0, end - testimonials.length)];
     }
   };
 
@@ -118,16 +107,12 @@ export default function TestimonialCarousel() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center mb-8">
             <FaQuoteLeft className="text-4xl text-primary" />
-            <h2 className="text-3xl font-bold ml-4 font-poppins">
-              What our verified users say
-            </h2>
+            <h2 className="text-3xl font-bold ml-4 font-poppins">What our verified users say</h2>
           </div>
 
           <div className="relative" {...swipeHandlers}>
-            <button
-              onClick={prevSlide}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-100 z-10"
-            >
+            {/* Arrows */}
+            <button onClick={prevSlide} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-100 z-10">
               <FaChevronLeft />
             </button>
 
@@ -136,7 +121,7 @@ export default function TestimonialCarousel() {
                 {getVisibleTestimonials().map((testimonial, i) => (
                   <motion.div
                     key={testimonial._id || i}
-                    className="bg-gray-50 rounded-xl shadow-md p-6 w-full transition duration-300 cursor-pointer"
+                    className="bg-gray-50 rounded-xl shadow-md p-6 w-full cursor-pointer"
                     initial={{ opacity: 0, x: 100 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -100 }}
@@ -158,18 +143,15 @@ export default function TestimonialCarousel() {
                         </p>
                       </div>
                     </div>
-                    <motion.div
-                      className="flex text-yellow-500 mb-3"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
+
+                    <motion.div className="flex text-yellow-500 mb-3">
                       {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <motion.span key={i} whileHover={{ scale: 1.3 }}>
+                        <motion.span key={i} whileHover={{ scale: 1.2 }}>
                           ★
                         </motion.span>
                       ))}
                     </motion.div>
+
                     <p className="text-gray-700 font-roboto line-clamp-4">
                       "{testimonial.review}"
                     </p>
@@ -178,34 +160,30 @@ export default function TestimonialCarousel() {
               </AnimatePresence>
             </div>
 
-            <button
-              onClick={nextSlide}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-100 z-10"
-            >
+            <button onClick={nextSlide} className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-100 z-10">
               <FaChevronRight />
             </button>
           </div>
 
+          {/* Pagination Dots */}
           <div className="flex justify-center mt-6 gap-2">
             {Array.from({ length: Math.ceil(testimonials.length / itemsPerSlide) }).map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setIndex(idx * itemsPerSlide)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index / itemsPerSlide === idx ? "bg-blue-600" : "bg-gray-300"
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index / itemsPerSlide === idx ? "bg-blue-600" : "bg-gray-300"}`}
               />
             ))}
           </div>
         </div>
       </div>
 
+      {/* Fallback when empty */}
       {testimonials.length === 0 && (
-        <p className="text-center text-gray-500 mt-6">
-          No reviews yet. Be the first to leave one!
-        </p>
+        <p className="text-center text-gray-500 mt-6">No reviews yet. Be the first to leave one!</p>
       )}
 
+      {/* Review CTA */}
       <div className="text-center mt-6">
         <a
           href="/dashboard/orders"
@@ -215,7 +193,7 @@ export default function TestimonialCarousel() {
         </a>
       </div>
 
-      {/* Review Modal */}
+      {/* Modal */}
       {modalReview && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl max-w-lg w-full p-6 relative">
@@ -225,9 +203,7 @@ export default function TestimonialCarousel() {
             >
               &times;
             </button>
-            <h3 className="text-xl font-bold mb-2">
-              {modalReview.userId?.name || "Anonymous"}
-            </h3>
+            <h3 className="text-xl font-bold mb-2">{modalReview.userId?.name || "Anonymous"}</h3>
             <p className="text-sm text-gray-500 mb-2">
               {modalReview.bookingId?.service?.name || "Service"}
             </p>

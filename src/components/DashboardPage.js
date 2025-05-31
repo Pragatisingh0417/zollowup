@@ -1,40 +1,52 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../components/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // ✅ import useNavigate
 import { io } from "socket.io-client";
 
 const DashboardPage = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate(); // ✅ redirect hook
 
+  // ✅ Prevent guests from seeing dashboard
   useEffect(() => {
-  // ✅ Create socket connection inside useEffect
-  const socket = io("http://localhost:5000", {
-    withCredentials: true,
-  });
+    if (!loading && !user) {
+      navigate("/user-login");
+    }
+  }, [loading, user, navigate]);
 
-  socket.emit("hello", "Hello from frontend (Dashboard)");
+  // ✅ Setup Socket.IO only once
+  useEffect(() => {
+    const socket = io("http://localhost:5000", {
+      withCredentials: true,
+    });
 
-  socket.on("welcome", (msg) => {
-    console.log("✅ Message from server:", msg);
-  });
+    socket.emit("hello", "Hello from frontend (Dashboard)");
 
-  // ✅ Handle real-time booking update
-  socket.on("booking_update", (data) => {
-    console.log("📢 Real-time booking received:", data);
-    alert("New booking received!\nService: " + data.serviceType);
-  });
+    socket.on("welcome", (msg) => {
+      console.log("✅ Message from server:", msg);
+    });
 
-  return () => {
-    socket.disconnect();
-  };
-}, []);
+    socket.on("booking_update", (data) => {
+      console.log("📢 Real-time booking received:", data);
+      alert("New booking received!\nService: " + data.serviceType);
+    });
 
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
+  // ✅ Show loading first
+  if (loading) {
+    return <h2 className="text-center mt-10">Loading...</h2>;
+  }
+
+  // ✅ Once loaded and authenticated
   return (
     <div className="max-w-3xl mx-auto bg-white p-6 rounded shadow mt-6">
-      <h2 className="text-2xl font-bold mb-4">Welcome, {user?.name || "User"} 👋</h2>
+      <h2>{user ? `Welcome ${user.name}` : "Welcome Guest"}</h2>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mt-4">
         <table className="table-auto w-full border border-gray-200">
           <tbody className="divide-y">
             <tr>
@@ -66,7 +78,6 @@ const DashboardPage = () => {
           Edit Profile
         </Link>
       </div>
-
     </div>
   );
 };

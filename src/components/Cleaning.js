@@ -18,27 +18,27 @@ const Cleaning = () => {
   const services = [
     {
       title: "Kitchen Cleaning",
-      image: "https://img.freepik.com/free-photo/woman-holding-rag-detergent-cleaning-cooker_651396-2881.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+      image: "https://img.freepik.com/free-photo/woman-holding-rag-detergent-cleaning-cooker_651396-2881.jpg",
       path: "/maid",
     },
     {
       title: "Bathroom Cleaning",
-      image: "https://img.freepik.com/free-photo/household-chores-concept_53876-139519.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+      image: "https://img.freepik.com/free-photo/household-chores-concept_53876-139519.jpg",
       path: "/housekeeping",
     },
     {
       title: "Full Home Cleaning",
-      image: "https://img.freepik.com/premium-photo/cleaning-service-team-working-messy-room-after-new-year-party_495423-36368.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+      image: "https://img.freepik.com/premium-photo/cleaning-service-team-working-messy-room-after-new-year-party_495423-36368.jpg",
       path: "/housekeeping",
     },
     {
       title: "Cooking",
-      image: "https://img.freepik.com/premium-photo/young-woman-cook-sweet-cake-kitchen_41471-8748.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+      image: "https://img.freepik.com/premium-photo/young-woman-cook-sweet-cake-kitchen_41471-8748.jpg",
       path: "/cooks",
     },
     {
       title: "Nanny",
-      image: "https://img.freepik.com/premium-photo/beautiful-mother-with-her-cute-baby-blue-background_1215445-5206.jpg?ga=GA1.1.853350676.1718004547&semt=ais_hybrid",
+      image: "https://img.freepik.com/premium-photo/beautiful-mother-with-her-cute-baby-blue-background_1215445-5206.jpg",
       path: "/maid",
     },
   ];
@@ -58,10 +58,7 @@ const Cleaning = () => {
 
   return (
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8" data-aos="fade-up">
-      <h2
-        className="text-4xl font-bold text-center text-gray-900 font-poppins mb-10"
-        data-aos="fade-down"
-      >
+      <h2 className="text-4xl font-bold text-center text-gray-900 font-poppins mb-10" data-aos="fade-down">
         Cleaning & Cooking
       </h2>
 
@@ -87,16 +84,17 @@ const Cleaning = () => {
           ))}
         </Slider>
 
-        {/* Navigation Buttons */}
+        {/* 🎯 Updated Arrow Buttons */}
         <button
-          className="absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 hover:bg-gray-200"
           onClick={() => sliderRef.current.slickPrev()}
+          className="absolute top-1/2 left-[-20px] transform -translate-y-1/2 bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-lg p-2 rounded-full z-10 hover:scale-110 transition"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
+
         <button
-          className="absolute top-1/2 right-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 hover:bg-gray-200"
           onClick={() => sliderRef.current.slickNext()}
+          className="absolute top-1/2 right-[-20px] transform -translate-y-1/2 bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-lg p-2 rounded-full z-10 hover:scale-110 transition"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
